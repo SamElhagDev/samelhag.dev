@@ -1,0 +1,284 @@
+@page "/about"
+@using MudBlazor
+
+<PageTitle>About - Sam Elhag</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-8">
+    <!-- Header -->
+    <MudText Typo="Typo.h2" Align="Align.Center" GutterBottom="true" Class="mb-4" Style="font-weight: 800; color: white;">
+        About Me
+    </MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-12" Style="color: rgba(255,255,255,0.6); font-weight: 400;">
+        Developer, Analyst, Engineer - Building the future one line at a time
+    </MudText>
+
+    <!-- Profile Section with Glass Morphism -->
+    <MudGrid Justify="Justify.Center" Class="mb-12">
+        <MudItem xs="12" md="10">
+            <MudPaper Elevation="0" Class="pa-8" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(102, 126, 234, 0.2); border-radius: 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <MudGrid>
+                    <MudItem xs="12" md="4" Class="d-flex justify-center align-center">
+                        <div Style="position: relative;">
+                            <div Style="position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); border-radius: 50%; opacity: 0.3; filter: blur(20px);"></div>
+                            <MudAvatar Size="Size.Large" Style="width: 220px; height: 220px; border: 4px solid rgba(91, 141, 239, 0.3); position: relative; box-shadow: 0 8px 32px rgba(91, 141, 239, 0.4);">
+                                <MudImage Src="/images/SamElhagProfile.jfif" />
+                            </MudAvatar>
+                        </div>
+                    </MudItem>
+                    <MudItem xs="12" md="8">
+                        <MudText Typo="Typo.h3" GutterBottom="true" Style="font-weight: 700; color: white;">Sam Elhag</MudText>
+                        <MudText Typo="Typo.h5" Class="mb-4" Style="background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 50%, #6FC9D7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">
+                            Developer - Analyst - Engineer
+                        </MudText>
+                        <MudText Typo="Typo.body1" Class="mt-4" Style="color: rgba(255,255,255,0.8); line-height: 1.8; font-size: 1.1rem;">
+                            With over X years of experience in software development, I specialize in building scalable web applications 
+                            and cloud solutions. My passion lies in creating elegant solutions to complex problems and helping teams 
+                            deliver high-quality software.
+                        </MudText>
+                        <MudText Typo="Typo.body1" Class="mt-3" Style="color: rgba(255,255,255,0.8); line-height: 1.8; font-size: 1.1rem;">
+                            Currently working with cutting-edge technologies including .NET, Blazor, Azure, and modern web frameworks. 
+                            I'm committed to continuous learning and sharing knowledge with the developer community.
+                        </MudText>
+                        <MudStack Row="true" Class="mt-6" Spacing="3">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.GitHub"
+                                      Style="background: rgba(91, 141, 239, 0.2); color: white; border: 1px solid rgba(91, 141, 239, 0.3); backdrop-filter: blur(10px); text-transform: none; font-weight: 600;">
+                                GitHub
+                            </MudButton>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.LinkedIn"
+                                      Style="background: rgba(91, 141, 239, 0.2); color: white; border: 1px solid rgba(91, 141, 239, 0.3); backdrop-filter: blur(10px); text-transform: none; font-weight: 600;">
+                                LinkedIn
+                            </MudButton>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Twitter"
+                                      Style="background: rgba(91, 141, 239, 0.2); color: white; border: 1px solid rgba(91, 141, 239, 0.3); backdrop-filter: blur(10px); text-transform: none; font-weight: 600;">
+                                Twitter
+                            </MudButton>
+                        </MudStack>
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Skills Section -->
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="mb-4" Style="font-weight: 700; color: white;">
+        Skills & Expertise
+    </MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-10" Style="color: rgba(255,255,255,0.6); font-weight: 400;">
+        Technologies and tools I work with daily
+    </MudText>
+
+    <MudGrid Spacing="4">
+        <!-- Backend Development -->
+        <MudItem xs="12" md="6">
+                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                        <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.Code" Style="color: white; font-size: 1.8rem;" />
+                        </div>
+                        <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Backend Development</MudText>
+                    </MudStack>
+                    <MudChipSet T="string">
+                        <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">C#</MudChip>
+                        <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">.NET Core</MudChip>
+                        <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">ASP.NET</MudChip>
+                        <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Entity Framework</MudChip>
+                        <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">REST APIs</MudChip>
+                        <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">GraphQL</MudChip>
+                    </MudChipSet>
+                </MudPaper>
+            </MudItem>
+
+                <!-- Frontend Development -->
+                <MudItem xs="12" md="6">
+                    <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                            <div Style="background: linear-gradient(135deg, #6FC9D7 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.Web" Style="color: white; font-size: 1.8rem;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Frontend Development</MudText>
+                        </MudStack>
+                        <MudChipSet T="string">
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Blazor</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">JavaScript</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">TypeScript</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">HTML/CSS</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">React</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">MudBlazor</MudChip>
+                        </MudChipSet>
+                    </MudPaper>
+                </MudItem>
+
+                <!-- Cloud & DevOps -->
+                <MudItem xs="12" md="6">
+                    <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                            <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.Cloud" Style="color: white; font-size: 1.8rem;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Cloud & DevOps</MudText>
+                        </MudStack>
+                        <MudChipSet T="string">
+                            <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Azure</MudChip>
+                            <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Docker</MudChip>
+                            <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Kubernetes</MudChip>
+                            <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">GitHub Actions</MudChip>
+                            <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Azure DevOps</MudChip>
+                            <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Terraform</MudChip>
+                        </MudChipSet>
+                    </MudPaper>
+                </MudItem>
+
+                <!-- Database & Storage -->
+                <MudItem xs="12" md="6">
+                    <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                            <div Style="background: linear-gradient(135deg, #6FC9D7 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.Storage" Style="color: white; font-size: 1.8rem;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Database & Storage</MudText>
+                        </MudStack>
+                        <MudChipSet T="string">
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">SQL Server</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">PostgreSQL</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">MongoDB</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Redis</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Cosmos DB</MudChip>
+                            <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Blob Storage</MudChip>
+                        </MudChipSet>
+                    </MudPaper>
+                </MudItem>
+
+               <!-- Project Management -->
+               <MudItem xs="12" md="6">
+                    <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                            <div Style="background: linear-gradient(135deg, #C0C0C0 0%, #8B0000 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.Assessment" Style="color: white; font-size: 1.8rem;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Project Management</MudText>
+                        </MudStack>
+                        <MudChipSet T="string">
+                            <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Jira</MudChip>
+                            <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Azure Boards</MudChip>
+                            <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Scrum</MudChip>
+                            <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Agile</MudChip>
+                            <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Confluence</MudChip>
+                            <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Monday.com</MudChip>
+                        </MudChipSet>
+                    </MudPaper>
+                </MudItem>
+
+               <!-- Engineering/CAD -->
+               <MudItem xs="12" md="6">
+                    <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(139, 0, 0, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                            <div Style="background: linear-gradient(135deg, #8B0000 0%, #C0C0C0 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.Architecture" Style="color: white; font-size: 1.8rem;" />
+                            </div>
+                            <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Engineering/CAD</MudText>
+                        </MudStack>
+                        <MudChipSet T="string">
+                            <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">AutoCAD</MudChip>
+                            <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">SolidWorks</MudChip>
+                            <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">Revit</MudChip>
+                            <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">Fusion 360</MudChip>
+                            <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">CATIA</MudChip>
+                            <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">Inventor</MudChip>
+                        </MudChipSet>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+
+    <!-- Experience Timeline -->
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="mt-16 mb-4" Style="font-weight: 700; color: white;">
+        Experience
+    </MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-10" Style="color: rgba(255,255,255,0.6); font-weight: 400;">
+        My professional journey
+    </MudText>
+
+    <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelinePosition="TimelinePosition.Alternate">
+        <MudTimelineItem Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
+            <ItemOpposite>
+                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">2023 - Present</MudText>
+            </ItemOpposite>
+            <ItemContent>
+                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Senior Software Engineer</MudText>
+                    <MudText Typo="Typo.body1" Style="color: rgba(192, 192, 192, 0.9); font-weight: 600;">Tech Company Inc.</MudText>
+                    <MudText Typo="Typo.body1" Class="mt-3" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
+                        Leading development of cloud-native applications and mentoring junior developers.
+                    </MudText>
+                </MudPaper>
+            </ItemContent>
+        </MudTimelineItem>
+
+        <MudTimelineItem Color="Color.Secondary" Variant="Variant.Filled" Size="Size.Large">
+            <ItemOpposite>
+                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">2021 - 2023</MudText>
+            </ItemOpposite>
+            <ItemContent>
+                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(139, 0, 0, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Software Developer</MudText>
+                    <MudText Typo="Typo.body1" Style="color: rgba(220, 20, 60, 0.9); font-weight: 600;">Innovation Labs</MudText>
+                    <MudText Typo="Typo.body1" Class="mt-3" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
+                        Developed full-stack web applications using .NET and modern JavaScript frameworks.
+                    </MudText>
+                </MudPaper>
+            </ItemContent>
+        </MudTimelineItem>
+
+        <MudTimelineItem Color="Color.Info" Variant="Variant.Filled" Size="Size.Large">
+            <ItemOpposite>
+                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">2019 - 2021</MudText>
+            </ItemOpposite>
+            <ItemContent>
+                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Junior Developer</MudText>
+                    <MudText Typo="Typo.body1" Style="color: rgba(192, 192, 192, 0.9); font-weight: 600;">StartUp Co.</MudText>
+                    <MudText Typo="Typo.body1" Class="mt-3" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
+                        Contributed to building scalable web applications and learned industry best practices.
+                    </MudText>
+                </MudPaper>
+            </ItemContent>
+        </MudTimelineItem>
+    </MudTimeline>
+
+    <!-- Certifications -->
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="mt-16 mb-4" Style="font-weight: 700; color: white;">
+        Certifications
+    </MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-10" Style="color: rgba(255,255,255,0.6); font-weight: 400;">
+        Professional credentials and achievements
+    </MudText>
+
+    <MudGrid Justify="Justify.Center" Spacing="4">
+        <MudItem xs="12" sm="6" md="4">
+            <MudPaper Elevation="0" Class="pa-6 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <div Style="background: linear-gradient(135deg, #C0C0C0 0%, #8B0000 100%); padding: 20px; border-radius: 50%; display: inline-flex; margin-bottom: 16px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Verified" Style="color: white; font-size: 2.5rem;" />
+                </div>
+                <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;" GutterBottom="true">Azure Solutions Architect</MudText>
+                <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.7);">Microsoft Certified</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudPaper Elevation="0" Class="pa-6 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(139, 0, 0, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <div Style="background: linear-gradient(135deg, #8B0000 0%, #C0C0C0 100%); padding: 20px; border-radius: 50%; display: inline-flex; margin-bottom: 16px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Verified" Style="color: white; font-size: 2.5rem;" />
+                </div>
+                <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;" GutterBottom="true">Azure Developer Associate</MudText>
+                <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.7);">Microsoft Certified</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudPaper Elevation="0" Class="pa-6 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <div Style="background: linear-gradient(135deg, #C0C0C0 0%, #DC143C 100%); padding: 20px; border-radius: 50%; display: inline-flex; margin-bottom: 16px;">
+                    <MudIcon Icon="@Icons.Material.Filled.Verified" Style="color: white; font-size: 2.5rem;" />
+                </div>
+                <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;" GutterBottom="true">AWS Certified Developer</MudText>
+                <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.7);">Amazon Web Services</MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

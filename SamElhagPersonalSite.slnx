@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SamElhagPersonalSite.AppHost/SamElhagPersonalSite.AppHost.csproj" />
+  <Project Path="SamElhagPersonalSite.ServiceDefaults/SamElhagPersonalSite.ServiceDefaults.csproj" />
+  <Project Path="SamElhagPersonalSite/SamElhagPersonalSite.csproj" />
+</Solution>

@@ -1,0 +1,345 @@
+@page "/HeatSimulation"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@using MudBlazor
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="mt-4">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">
+        Transient Heat Transfer Analysis
+    </MudText>
+    
+    <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-4">
+        NACA 0012 Airfoil At Mach 0.3 | Forced Convection with Thermal Diffusion
+    </MudText>
+
+    <!-- Heat Transfer Canvas -->
+    <MudPaper Elevation="4" Class="pa-4 mb-4">
+        <canvas id="simulationCanvas" width="2800" height="1200"
+                style="width: 100%; max-width: 1400px; height: auto; display: block;
+        margin: 0 auto; border-radius: 8px; background: #000;
+        cursor: crosshair;"></canvas>
+        
+        <!-- Temperature display on hover -->
+        <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-2" Style="font-family: 'JetBrains Mono', monospace; color: #5B8DEF;">
+            <span id="hoverTemp">Hover over canvas to see temperature</span>
+        </MudText>
+    </MudPaper>
+
+    <!-- Controls in MudBlazor Cards -->
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudText Typo="Typo.subtitle2" Class="mb-2">
+                    Thermal Diffusivity (α): <span id="alphaValue">0.50</span>
+                </MudText>
+                <input type="range" id="alphaSlider" min="0.1" max="2.0" 
+                       step="0.05" value="0.5" style="width: 100%;">
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudText Typo="Typo.subtitle2" Class="mb-2">
+                    Airspeed (m/s): <span id="airspeedValue">100</span>
+                </MudText>
+                <input type="range" id="airspeedSlider" min="20" max="300" 
+                       step="10" value="100" style="width: 100%;">
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudText Typo="Typo.subtitle2" Class="mb-2">
+                    Surface Temp (K): <span id="tempValue">500</span>
+                </MudText>
+                <input type="range" id="tempSlider" min="300" max="800" 
+                       step="10" value="500" style="width: 100%;">
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3">
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudText Typo="Typo.subtitle2" Class="mb-2">
+                    Angle of Attack (°): <span id="aoaValue">5</span>
+                </MudText>
+                <input type="range" id="aoaSlider" min="-10" max="15" 
+                       step="1" value="5" style="width: 100%;">
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Action Buttons -->
+    <MudPaper Class="pa-4 mt-4" Elevation="2">
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
+            <MudButton id="pauseBtn">Pause</MudButton>
+            <MudButton id="resetBtn">Reset</MudButton>
+            <MudButton id="toggleMathBtn" Class="active">Toggle Math</MudButton>
+            <MudButton id="toggleStreamBtn" Class="active">Toggle Streamlines</MudButton>
+        </MudButtonGroup>
+    </MudPaper>
+
+    <!-- Statistics -->
+    <MudGrid Class="mt-4">
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard Elevation="2">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Average Heat Flux</MudText>
+                    <MudText Typo="Typo.h5" id="heatFlux">0 W/m²</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard Elevation="2">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Reynolds Number</MudText>
+                    <MudText Typo="Typo.h5" id="reynolds">0</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard Elevation="2">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Prandtl Number</MudText>
+                    <MudText Typo="Typo.h5" id="prandtl">0.71</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3">
+            <MudCard Elevation="2">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Nusselt Number</MudText>
+                    <MudText Typo="Typo.h5" id="nusselt">0</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Mathematical Equations with KaTeX -->
+    <MudPaper Class="pa-6 mt-4" Elevation="0" Style="background: rgba(10, 15, 30, 0.95); color: #E8F0FF; font-family: 'Segoe UI', sans-serif; border-radius: 12px; border: 1px solid rgba(91, 141, 239, 0.15);">
+
+        <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Style="color: #7CB8FF; font-weight: 700; letter-spacing: 1px;">
+            Mathematical Formulation
+        </MudText>
+
+        <!-- Equation 1: Transient Heat Conduction -->
+        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">1. Transient Heat Conduction Equation</MudText>
+        <div class="katex-container mb-3">
+            <div class="katex-formula">$$\underbrace{\frac{\partial T}{\partial t}}_{\text{Rate of temperature change}} = \underbrace{\alpha}_{\text{Thermal diffusivity}} \left( \underbrace{\frac{\partial^2 T}{\partial x^2}}_{\text{Diffusion in } x} + \underbrace{\frac{\partial^2 T}{\partial y^2}}_{\text{Diffusion in } y} \right) + \underbrace{\dot{Q}}_{\text{Heat source}}$$</div>
+        </div>
+        <div class="eq-legend mb-4">
+            <table class="eq-legend-table">
+                <tr><td class="eq-sym">T</td><td>Temperature field [K]</td></tr>
+                <tr><td class="eq-sym">t</td><td>Time [s]</td></tr>
+                <tr><td class="eq-sym">α = k / (ρ · c<sub>p</sub>)</td><td>Thermal diffusivity [m²/s]</td></tr>
+                <tr><td class="eq-sym">k</td><td>Thermal conductivity [W/(m·K)]</td></tr>
+                <tr><td class="eq-sym">ρ</td><td>Density [kg/m³]</td></tr>
+                <tr><td class="eq-sym">c<sub>p</sub></td><td>Specific heat capacity [J/(kg·K)]</td></tr>
+                <tr><td class="eq-sym">∂T/∂t</td><td>Partial derivative of temperature with respect to time — how fast the temperature changes at a fixed point</td></tr>
+                <tr><td class="eq-sym">∂²T/∂x²</td><td>Second partial derivative in x — curvature of the temperature profile in the horizontal direction</td></tr>
+                <tr><td class="eq-sym">∂²T/∂y²</td><td>Second partial derivative in y — curvature of the temperature profile in the vertical direction</td></tr>
+                <tr><td class="eq-sym">Q̇</td><td>Volumetric heat generation rate [W/m³]</td></tr>
+            </table>
+        </div>
+
+        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+
+        <!-- Equation 2: Forced Convection -->
+        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">2. Forced Convection Heat Transfer (Energy Equation)</MudText>
+        <div class="katex-container mb-3">
+            <div class="katex-formula">$$\underbrace{\frac{\partial T}{\partial t}}_{\text{Local rate of change}} + \underbrace{u \frac{\partial T}{\partial x}}_{\text{Convection in } x} + \underbrace{v \frac{\partial T}{\partial y}}_{\text{Convection in } y} = \underbrace{\alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} \right)}_{\text{Thermal diffusion } (\alpha \nabla^2 T)}$$</div>
+        </div>
+        <div class="eq-legend mb-4">
+            <table class="eq-legend-table">
+                <tr><td class="eq-sym">u</td><td>Velocity component in the x-direction (horizontal) [m/s]</td></tr>
+                <tr><td class="eq-sym">v</td><td>Velocity component in the y-direction (vertical) [m/s]</td></tr>
+                <tr><td class="eq-sym">u · ∂T/∂x</td><td>Convective heat transport in x — rate at which the flow carries heat horizontally</td></tr>
+                <tr><td class="eq-sym">v · ∂T/∂y</td><td>Convective heat transport in y — rate at which the flow carries heat vertically</td></tr>
+                <tr><td class="eq-sym">α · ∇²T</td><td>Thermal diffusion (Laplacian) — heat spreading from hot to cold regions via molecular conduction</td></tr>
+            </table>
+        </div>
+
+        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+
+        <!-- Equation 3: Finite Difference Discretization -->
+        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">3. Finite Difference Discretization (Explicit Euler)</MudText>
+        <div class="katex-container mb-3">
+            <div class="katex-formula">$$\underbrace{T_{i,j}^{\,n+1}}_{\text{New temperature}} = \underbrace{T_{i,j}^{\,n}}_{\text{Current temperature}} + \Delta t \left\{ \underbrace{\alpha \left[ \frac{T_{i+1,j}^n - 2T_{i,j}^n + T_{i-1,j}^n}{\Delta x^2} \right]}_{\text{Diffusion in } x \text{ (central difference)}} + \underbrace{\alpha \left[ \frac{T_{i,j+1}^n - 2T_{i,j}^n + T_{i,j-1}^n}{\Delta y^2} \right]}_{\text{Diffusion in } y \text{ (central difference)}} - \underbrace{u \frac{\Delta_x T}{\Delta x}}_{\text{Upwind convection } x} - \underbrace{v \frac{\Delta_y T}{\Delta y}}_{\text{Upwind convection } y} \right\}$$</div>
+        </div>
+        <div class="eq-legend mb-4">
+            <table class="eq-legend-table">
+                <tr><td class="eq-sym">T<sup>n+1</sup><sub>i,j</sub></td><td>Temperature at grid point (i, j) at the next time step</td></tr>
+                <tr><td class="eq-sym">T<sup>n</sup><sub>i,j</sub></td><td>Temperature at grid point (i, j) at the current time step</td></tr>
+                <tr><td class="eq-sym">Δt</td><td>Time step size [s]</td></tr>
+                <tr><td class="eq-sym">Δx, Δy</td><td>Grid spacing in the x and y directions [m]</td></tr>
+                <tr><td class="eq-sym">T<sub>i+1,j</sub>, T<sub>i−1,j</sub></td><td>Temperatures at neighboring grid points in x (right, left)</td></tr>
+                <tr><td class="eq-sym">T<sub>i,j+1</sub>, T<sub>i,j−1</sub></td><td>Temperatures at neighboring grid points in y (above, below)</td></tr>
+                <tr><td class="eq-sym">Central difference</td><td>Second-order approximation of ∂²T/∂x² using three grid points</td></tr>
+                <tr><td class="eq-sym">Upwind scheme</td><td>First-order approximation of ∂T/∂x that uses the upstream direction based on flow velocity sign</td></tr>
+            </table>
+        </div>
+
+        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+
+        <!-- Equation 4: Dimensionless Numbers -->
+        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">4. Key Dimensionless Numbers</MudText>
+        <div class="katex-container mb-3">
+            <div class="katex-formula">$$\underbrace{Re = \frac{\rho \, U_\infty \, L}{\mu}}_{\text{Reynolds number}} \qquad \underbrace{Pr = \frac{\mu \, c_p}{k}}_{\text{Prandtl number}} \qquad \underbrace{Nu = \frac{h \, L}{k}}_{\text{Nusselt number}}$$</div>
+        </div>
+        <div class="eq-legend mb-4">
+            <table class="eq-legend-table">
+                <tr><td class="eq-sym">Re</td><td>Reynolds number — ratio of inertial forces to viscous forces; indicates laminar vs. turbulent flow</td></tr>
+                <tr><td class="eq-sym">U<sub>∞</sub></td><td>Freestream airspeed [m/s]</td></tr>
+                <tr><td class="eq-sym">L</td><td>Characteristic length (chord length) [m]</td></tr>
+                <tr><td class="eq-sym">μ</td><td>Dynamic viscosity of air [Pa·s]</td></tr>
+                <tr><td class="eq-sym">Pr</td><td>Prandtl number — ratio of momentum diffusivity to thermal diffusivity</td></tr>
+                <tr><td class="eq-sym">Nu</td><td>Nusselt number — ratio of convective to conductive heat transfer at the surface</td></tr>
+                <tr><td class="eq-sym">h</td><td>Convective heat transfer coefficient [W/(m²·K)]</td></tr>
+            </table>
+        </div>
+
+        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+
+        <!-- Equation 5: Nusselt Correlations -->
+        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">5. Nusselt Number Correlations</MudText>
+        <div class="katex-container mb-3">
+            <div class="katex-formula" id="nusseltFormula"></div>
+        </div>
+        <div class="eq-legend mb-4">
+            <table class="eq-legend-table">
+                <tr><td class="eq-sym">Re &lt; 5×10⁵</td><td>Laminar flow regime — smooth, ordered flow</td></tr>
+                <tr><td class="eq-sym">Re ≥ 5×10⁵</td><td>Turbulent flow regime — chaotic, enhanced mixing</td></tr>
+                <tr><td class="eq-sym">Re<sup>1/2</sup></td><td>Square-root dependence on Reynolds number (laminar boundary layer scaling)</td></tr>
+                <tr><td class="eq-sym">Re<sup>4/5</sup></td><td>Near-linear dependence on Reynolds number (turbulent boundary layer scaling)</td></tr>
+                <tr><td class="eq-sym">Pr<sup>1/3</sup></td><td>Cube-root dependence on Prandtl number (thermal boundary layer ratio)</td></tr>
+            </table>
+        </div>
+
+        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+
+        <!-- Equation 6: NACA 0012 -->
+        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">6. NACA 0012 Airfoil Geometry</MudText>
+        <div class="katex-container mb-3">
+            <div class="katex-formula">$$\underbrace{y_t}_{\text{Half-thickness}} = \underbrace{5t}_{\text{Scaling factor}} \left[ \underbrace{0.2969\sqrt{x}}_{\text{Leading edge}} - \underbrace{0.1260\,x}_{\text{Linear term}} - \underbrace{0.3516\,x^2}_{\text{Quadratic}} + \underbrace{0.2843\,x^3}_{\text{Cubic}} - \underbrace{0.1015\,x^4}_{\text{Trailing edge}} \right]$$</div>
+        </div>
+        <div class="eq-legend mb-4">
+            <table class="eq-legend-table">
+                <tr><td class="eq-sym">y<sub>t</sub></td><td>Half-thickness of the airfoil at chordwise position x [m]</td></tr>
+                <tr><td class="eq-sym">t</td><td>Maximum thickness ratio = 0.12 (12% of chord for NACA 0012)</td></tr>
+                <tr><td class="eq-sym">x</td><td>Normalized chordwise coordinate (0 = leading edge, 1 = trailing edge)</td></tr>
+                <tr><td class="eq-sym">0.2969√x</td><td>Dominant term at leading edge — produces the characteristic rounded nose</td></tr>
+                <tr><td class="eq-sym">−0.1015x⁴</td><td>Dominant term at trailing edge — tapers the profile to a point</td></tr>
+            </table>
+        </div>
+
+    </MudPaper>
+</MudContainer>
+
+<!-- KaTeX CSS and JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+    window.renderKatexInDocument = function() {
+        if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError: false
+            });
+            return true;
+        }
+        return false;
+    };
+</script>
+
+<style>
+    .katex-container {
+        background: rgba(20, 30, 50, 0.5);
+        padding: 20px 24px;
+        border-radius: 8px;
+        border-left: 4px solid #5B8DEF;
+        overflow-x: auto;
+    }
+
+    .katex-formula {
+        font-size: 1.3em;
+        color: #E8F0FF;
+        text-align: center;
+    }
+
+    .katex {
+        font-size: 1.1em !important;
+    }
+
+    .katex-display {
+        margin: 0 !important;
+    }
+
+    .eq-legend {
+        padding: 12px 16px;
+        background: rgba(15, 22, 40, 0.4);
+        border-radius: 6px;
+        border: 1px solid rgba(91, 141, 239, 0.1);
+    }
+
+    .eq-legend-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        color: #C8D8E8;
+    }
+
+    .eq-legend-table tr + tr td {
+        border-top: 1px solid rgba(91, 141, 239, 0.08);
+    }
+
+    .eq-legend-table td {
+        padding: 6px 8px;
+        vertical-align: top;
+    }
+
+    .eq-sym {
+        font-family: 'Courier New', monospace;
+        color: #9FD4FF;
+        white-space: nowrap;
+        width: 140px;
+        font-weight: 600;
+    }
+</style>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check if this is the first time loading (not a reload)
+            var hasLoaded = await JS.InvokeAsync<bool>("eval", "sessionStorage.getItem('katexLoaded') === 'true'");
+
+            if (!hasLoaded)
+            {
+                // Mark as loaded and reload the page
+                await JS.InvokeVoidAsync("eval", "sessionStorage.setItem('katexLoaded', 'true')");
+                await JS.InvokeVoidAsync("eval", "location.reload()");
+            }
+            else
+            {
+                // After reload, initialize normally
+                await JS.InvokeVoidAsync("HeatSimulation.init");
+                await JS.InvokeVoidAsync("renderKatexInDocument");
+            }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("HeatSimulation.dispose");
+        }
+        catch (JSDisconnectedException) { }
+        catch (InvalidOperationException) { }
+    }
+}

@@ -1,0 +1,242 @@
+@page "/blog"
+@using MudBlazor
+
+<PageTitle>Blog - Sam Elhag</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-8">
+    <!-- Header -->
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">
+        Blog
+    </MudText>
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8">
+        Thoughts on software development, tutorials, and lessons learned along the way.
+    </MudText>
+
+    <!-- Search and Filter -->
+    <MudGrid Class="mb-6">
+        <MudItem xs="12" md="8">
+            <MudTextField @bind-Value="searchText" Label="Search articles..." Variant="Variant.Outlined" 
+                          Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" />
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudSelect T="string" Label="Category" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                <MudSelectItem Value="@("all")">All Posts</MudSelectItem>
+                <MudSelectItem Value="@("dotnet")">.NET</MudSelectItem>
+                <MudSelectItem Value="@("blazor")">Blazor</MudSelectItem>
+                <MudSelectItem Value="@("azure")">Azure</MudSelectItem>
+                <MudSelectItem Value="@("architecture")">Architecture</MudSelectItem>
+                <MudSelectItem Value="@("devops")">DevOps</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Blog Posts -->
+    <MudGrid>
+        <!-- Featured Post -->
+        <MudItem xs="12">
+            <MudCard Elevation="4">
+                <MudCardMedia Image="https://via.placeholder.com/1200x400/5c6bc0/ffffff?text=Featured+Post" Height="300" />
+                <MudCardContent>
+                    <MudChip T="string" Size="Size.Small" Color="Color.Primary">Featured</MudChip>
+                    <MudText Typo="Typo.h4" Class="mt-3" GutterBottom="true">
+                        Building Modern Web Applications with Blazor and .NET 10
+                    </MudText>
+                    <MudText Typo="Typo.body1" Class="mb-4">
+                        A comprehensive guide to building production-ready web applications using the latest features 
+                        in Blazor and .NET 10. Learn about performance optimization, state management, and best practices.
+                    </MudText>
+                    <MudStack Row="true" Spacing="3" AlignItems="AlignItems.Center">
+                        <MudAvatar Size="Size.Small" Color="Color.Primary">SE</MudAvatar>
+                        <MudText Typo="Typo.body2">Sam Elhag</MudText>
+                        <MudDivider Vertical="true" FlexItem="true" />
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">December 15, 2024</MudText>
+                        <MudDivider Vertical="true" FlexItem="true" />
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">15 min read</MudText>
+                    </MudStack>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">Read Article</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <!-- Regular Blog Posts -->
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="2" Class="d-flex flex-column" Style="height: 100%;">
+                <MudCardMedia Image="https://via.placeholder.com/600x300/26a69a/ffffff?text=Clean+Architecture" Height="200" />
+                <MudCardContent Class="flex-grow-1">
+                    <MudChipSet T="string">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary">Architecture</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Info">.NET</MudChip>
+                    </MudChipSet>
+                    <MudText Typo="Typo.h5" Class="mt-3" GutterBottom="true">
+                        Implementing Clean Architecture in ASP.NET Core
+                    </MudText>
+                    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">December 10, 2024 • 12 min read</MudText>
+                    <MudText Typo="Typo.body2">
+                        Learn how to structure your .NET applications using Clean Architecture principles for better 
+                        maintainability, testability, and scalability.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                    <MudSpacer />
+                    <MudIconButton Icon="@Icons.Material.Filled.Bookmark" Color="Color.Default" />
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="2" Class="d-flex flex-column" Style="height: 100%;">
+                <MudCardMedia Image="https://via.placeholder.com/600x300/ff7043/ffffff?text=Azure+DevOps" Height="200" />
+                <MudCardContent Class="flex-grow-1">
+                    <MudChipSet T="string">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Warning">DevOps</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Info">Azure</MudChip>
+                    </MudChipSet>
+                    <MudText Typo="Typo.h5" Class="mt-3" GutterBottom="true">
+                        Deploying to Azure with GitHub Actions
+                    </MudText>
+                    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">December 5, 2024 • 10 min read</MudText>
+                    <MudText Typo="Typo.body2">
+                        A step-by-step guide to setting up CI/CD pipelines for Azure deployments using GitHub Actions. 
+                        Includes security best practices and optimization tips.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                    <MudSpacer />
+                    <MudIconButton Icon="@Icons.Material.Filled.Bookmark" Color="Color.Default" />
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="2" Class="d-flex flex-column" Style="height: 100%;">
+                <MudCardMedia Image="https://via.placeholder.com/600x300/ab47bc/ffffff?text=Blazor+Tips" Height="200" />
+                <MudCardContent Class="flex-grow-1">
+                    <MudChipSet T="string">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Primary">Blazor</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Success">Tips</MudChip>
+                    </MudChipSet>
+                    <MudText Typo="Typo.h5" Class="mt-3" GutterBottom="true">
+                        10 Blazor Performance Tips You Need to Know
+                    </MudText>
+                    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">November 28, 2024 • 8 min read</MudText>
+                    <MudText Typo="Typo.body2">
+                        Discover essential performance optimization techniques for Blazor applications, from render optimization 
+                        to efficient state management.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                    <MudSpacer />
+                    <MudIconButton Icon="@Icons.Material.Filled.Bookmark" Color="Color.Default" />
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="2" Class="d-flex flex-column" Style="height: 100%;">
+                <MudCardMedia Image="https://via.placeholder.com/600x300/66bb6a/ffffff?text=Entity+Framework" Height="200" />
+                <MudCardContent Class="flex-grow-1">
+                    <MudChipSet T="string">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Success">Database</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Info">.NET</MudChip>
+                    </MudChipSet>
+                    <MudText Typo="Typo.h5" Class="mt-3" GutterBottom="true">
+                        Advanced Entity Framework Core Patterns
+                    </MudText>
+                    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">November 20, 2024 • 14 min read</MudText>
+                    <MudText Typo="Typo.body2">
+                        Explore advanced patterns and techniques for working with Entity Framework Core, including 
+                        performance optimization and complex queries.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                    <MudSpacer />
+                    <MudIconButton Icon="@Icons.Material.Filled.Bookmark" Color="Color.Default" />
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="2" Class="d-flex flex-column" Style="height: 100%;">
+                <MudCardMedia Image="https://via.placeholder.com/600x300/42a5f5/ffffff?text=Microservices" Height="200" />
+                <MudCardContent Class="flex-grow-1">
+                    <MudChipSet T="string">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary">Architecture</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Error">Kubernetes</MudChip>
+                    </MudChipSet>
+                    <MudText Typo="Typo.h5" Class="mt-3" GutterBottom="true">
+                        Microservices with .NET and Kubernetes
+                    </MudText>
+                    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">November 15, 2024 • 18 min read</MudText>
+                    <MudText Typo="Typo.body2">
+                        Building and deploying microservices using .NET and Kubernetes. Learn about service mesh, 
+                        observability, and scaling strategies.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                    <MudSpacer />
+                    <MudIconButton Icon="@Icons.Material.Filled.Bookmark" Color="Color.Default" />
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudCard Elevation="2" Class="d-flex flex-column" Style="height: 100%;">
+                <MudCardMedia Image="https://via.placeholder.com/600x300/ffa726/ffffff?text=Testing" Height="200" />
+                <MudCardContent Class="flex-grow-1">
+                    <MudChipSet T="string">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Warning">Testing</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="Color.Info">.NET</MudChip>
+                    </MudChipSet>
+                    <MudText Typo="Typo.h5" Class="mt-3" GutterBottom="true">
+                        Unit Testing Best Practices in .NET
+                    </MudText>
+                    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">November 8, 2024 • 11 min read</MudText>
+                    <MudText Typo="Typo.body2">
+                        Comprehensive guide to writing effective unit tests in .NET using xUnit, Moq, and best practices 
+                        for test-driven development.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                    <MudSpacer />
+                    <MudIconButton Icon="@Icons.Material.Filled.Bookmark" Color="Color.Default" />
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Pagination -->
+    <MudStack Row="true" Justify="Justify.Center" Class="mt-8">
+        <MudPagination Count="5" Selected="1" Color="Color.Primary" />
+    </MudStack>
+
+    <!-- Newsletter Signup -->
+    <MudPaper Elevation="3" Class="pa-6 mt-12" Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <MudStack AlignItems="AlignItems.Center" Spacing="4">
+            <MudIcon Icon="@Icons.Material.Filled.Email" Size="Size.Large" Color="Color.Surface" />
+            <MudText Typo="Typo.h4" Align="Align.Center" Color="Color.Surface">
+                Subscribe to my newsletter
+            </MudText>
+            <MudText Typo="Typo.body1" Align="Align.Center" Color="Color.Surface">
+                Get the latest posts delivered right to your inbox
+            </MudText>
+            <MudStack Row="true" Spacing="2" Style="max-width: 500px; width: 100%;">
+                <MudTextField @bind-Value="email" Label="Your email" Variant="Variant.Filled" 
+                             Style="background-color: white;" Class="flex-grow-1" />
+                <MudButton Variant="Variant.Filled" Color="Color.Surface" Size="Size.Large">Subscribe</MudButton>
+            </MudStack>
+        </MudStack>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private string searchText = "";
+    private string email = "";
+}

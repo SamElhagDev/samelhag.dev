@@ -1,0 +1,19 @@
+﻿@using MudBlazor
+
+<MudHidden Breakpoint="Breakpoint.MdAndUp">
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.End" OnClick="@ToggleDrawer" />
+</MudHidden>
+
+<MudHidden Breakpoint="Breakpoint.SmAndDown">
+    <MudStack Row="true" Spacing="2">
+        <MudButton Href="/" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Filled.Home">Home</MudButton>
+        <MudButton Href="/counter" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Filled.Add">Counter</MudButton>
+        <MudButton Href="/weather" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Filled.List">Weather</MudButton>
+    </MudStack>
+</MudHidden>
+
+@code {
+    [CascadingParameter]
+    public required Action ToggleDrawer { get; set; }
+}
+

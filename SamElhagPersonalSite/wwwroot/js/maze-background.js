@@ -1,0 +1,362 @@
+function initMazeBackground() {
+  console.log('🎨 Initializing maze background...');
+  var canvas = document.getElementById('bg');
+  if (!canvas) {
+    console.log('⏳ Canvas not found, retrying in 100ms...');
+    setTimeout(initMazeBackground, 100);
+    return;
+  }
+  console.log('✅ Canvas found, starting animation');
+
+  var ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.error('❌ Failed to get canvas 2D context');
+    return;
+  }
+  
+  var ctx = canvas.getContext('2d');
+  var W, H, time = 0;
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var CELL = 50;
+
+  var palette = {
+    bg: '#080c18',
+    gridNode: 'rgba(70, 110, 170, 0.1)',
+    particle: ['#5b9cf5','#a78bfa','#34d399','#f472b6','#60a5fa','#c084fc','#38bdf8','#818cf8'],
+    symbol: '#a0c4f0',
+    glow: ['rgba(91,156,245,0.12)','rgba(167,139,250,0.09)','rgba(52,211,153,0.08)'],
+  };
+
+  var cols = 0, rows = 0;
+  var maze = null;
+  var adj = {};
+  var particles = [];
+  var pulses = [];
+  var symbols = [];
+
+  function doResize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  function nodeKey(r, c) { return r + ',' + c; }
+  function parseKey(k) { var p = k.split(','); return [parseInt(p[0]), parseInt(p[1])]; }
+
+  function buildMaze() {
+    cols = Math.ceil(W / CELL) + 2;
+    rows = Math.ceil(H / CELL) + 2;
+    maze = [];
+    for (var r = 0; r < rows; r++) {
+      maze[r] = [];
+      for (var c = 0; c < cols; c++) {
+        maze[r][c] = { right: false, down: false, visited: false };
+      }
+    }
+    var stack = [];
+    var sr = Math.floor(rows / 2), sc = Math.floor(cols / 2);
+    maze[sr][sc].visited = true;
+    stack.push([sr, sc]);
+    while (stack.length) {
+      var cur = stack[stack.length - 1];
+      var cr = cur[0], cc = cur[1];
+      var neighbors = [];
+      if (cr > 0 && !maze[cr-1][cc].visited) neighbors.push([cr-1, cc, 'up']);
+      if (cr < rows-1 && !maze[cr+1][cc].visited) neighbors.push([cr+1, cc, 'down']);
+      if (cc > 0 && !maze[cr][cc-1].visited) neighbors.push([cr, cc-1, 'left']);
+      if (cc < cols-1 && !maze[cr][cc+1].visited) neighbors.push([cr, cc+1, 'right']);
+      if (neighbors.length === 0) { stack.pop(); continue; }
+      var pick = neighbors[Math.floor(Math.random() * neighbors.length)];
+      var nr = pick[0], nc = pick[1], dir = pick[2];
+      if (dir === 'right') maze[cr][cc].right = true;
+      if (dir === 'left')  maze[nr][nc].right = true;
+      if (dir === 'down')  maze[cr][cc].down = true;
+      if (dir === 'up')    maze[nr][nc].down = true;
+      maze[nr][nc].visited = true;
+      stack.push([nr, nc]);
+    }
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        if (c < cols - 1 && !maze[r][c].right && Math.random() < 0.3) maze[r][c].right = true;
+        if (r < rows - 1 && !maze[r][c].down && Math.random() < 0.3) maze[r][c].down = true;
+      }
+    }
+    adj = {};
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var k = nodeKey(r, c);
+        adj[k] = [];
+        if (maze[r][c].right && c < cols - 1) adj[k].push(nodeKey(r, c+1));
+        if (maze[r][c].down && r < rows - 1)  adj[k].push(nodeKey(r+1, c));
+        if (c > 0 && maze[r][c-1] && maze[r][c-1].right) adj[k].push(nodeKey(r, c-1));
+        if (r > 0 && maze[r-1] && maze[r-1][c] && maze[r-1][c].down) adj[k].push(nodeKey(r-1, c));
+      }
+    }
+  }
+
+  function drawMaze() {
+    if (!maze) return;
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(60, 110, 180, 0.07)';
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var x = c * CELL, y = r * CELL;
+        if (maze[r][c].right) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + CELL, y); ctx.stroke(); }
+        if (maze[r][c].down)  { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + CELL); ctx.stroke(); }
+      }
+    }
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var conns = (adj[nodeKey(r,c)] || []).length;
+        if (conns >= 2) {
+          ctx.fillStyle = palette.gridNode;
+          ctx.beginPath(); ctx.arc(c * CELL, r * CELL, 1.5, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+    }
+  }
+
+  function drawCorridorArrows() {
+    if (!maze) return;
+    ctx.globalAlpha = 0.06;
+    var phase = time * 1.5;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var x = c * CELL, y = r * CELL;
+        if (maze[r][c].right) {
+          var t = ((phase + r * 0.5 + c * 0.3) % 2) / 2;
+          var ax = x + CELL * t;
+          ctx.fillStyle = '#5b9cf5';
+          ctx.beginPath(); ctx.moveTo(ax + 4, y); ctx.lineTo(ax - 2, y - 2.5); ctx.lineTo(ax - 2, y + 2.5); ctx.closePath(); ctx.fill();
+        }
+        if (maze[r][c].down) {
+          var t2 = ((phase + r * 0.3 + c * 0.5) % 2) / 2;
+          var ay = y + CELL * t2;
+          ctx.fillStyle = '#a78bfa';
+          ctx.beginPath(); ctx.moveTo(x, ay + 4); ctx.lineTo(x - 2.5, ay - 2); ctx.lineTo(x + 2.5, ay - 2); ctx.closePath(); ctx.fill();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function drawGlows() {
+    var glows = [
+      { x: W * 0.2, y: H * 0.3, r: 350, color: palette.glow[0] },
+      { x: W * 0.78, y: H * 0.65, r: 400, color: palette.glow[1] },
+      { x: W * 0.5, y: H * 0.08, r: 280, color: palette.glow[2] },
+    ];
+    for (var i = 0; i < glows.length; i++) {
+      var g = glows[i];
+      var ox = Math.sin(time * 0.12 + g.x * 0.01) * 40;
+      var oy = Math.cos(time * 0.1 + g.y * 0.01) * 30;
+      var grad = ctx.createRadialGradient(g.x + ox, g.y + oy, 0, g.x + ox, g.y + oy, g.r);
+      grad.addColorStop(0, g.color); grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+    }
+  }
+
+  function drawAxesHint() {
+    var ox = 45, oy = H - 45, len = 35;
+    ctx.save(); ctx.globalAlpha = 0.1; ctx.lineWidth = 1.5; ctx.lineCap = 'round';
+    ctx.strokeStyle = '#f87171';
+    ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + len, oy); ctx.stroke();
+    ctx.fillStyle = '#f87171'; ctx.font = '12px serif'; ctx.fillText('x', ox + len + 5, oy + 4);
+    ctx.strokeStyle = '#34d399';
+    ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - len); ctx.stroke();
+    ctx.fillStyle = '#34d399'; ctx.fillText('y', ox - 4, oy - len - 8);
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(ox, oy, 2, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawBasisVectors() {
+    var cx = W * 0.88, cy = H * 0.12, rad = 45, angle = time * 0.35;
+    ctx.save(); ctx.globalAlpha = 0.1; ctx.translate(cx, cy); ctx.lineWidth = 2; ctx.lineCap = 'round';
+    var ix = Math.cos(angle) * rad, iy = Math.sin(angle) * rad * 0.35;
+    ctx.strokeStyle = '#f87171'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(ix, iy); ctx.stroke();
+    ctx.fillStyle = '#f87171'; ctx.font = '13px serif'; ctx.fillText('î', ix + 7, iy);
+    var jx = Math.cos(angle + Math.PI/2) * rad, jy = Math.sin(angle + Math.PI/2) * rad * 0.35;
+    ctx.strokeStyle = '#34d399'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(jx, jy); ctx.stroke();
+    ctx.fillStyle = '#34d399'; ctx.fillText('ĵ', jx + 7, jy);
+    var ky = -Math.abs(Math.sin(angle * 0.6)) * rad;
+    ctx.strokeStyle = '#60a5fa'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, ky); ctx.stroke();
+    ctx.fillStyle = '#60a5fa'; ctx.fillText('k̂', 7, ky - 5);
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, 0, 2, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+
+  function makeParticle() {
+    var r = Math.floor(Math.random() * rows);
+    var c = Math.floor(Math.random() * cols);
+    return {
+      r: r, c: c, x: c * CELL, y: r * CELL,
+      targetX: c * CELL, targetY: r * CELL,
+      moving: false,
+      speed: 1.2 + Math.random() * 2.5,
+      color: palette.particle[Math.floor(Math.random() * palette.particle.length)],
+      size: 1.2 + Math.random() * 1.8,
+      trail: [], trailMax: 20 + Math.floor(Math.random() * 30),
+      life: 0, maxLife: 500 + Math.random() * 800,
+      prevDir: null, glowSize: 6 + Math.random() * 8,
+    };
+  }
+
+  function pickNext(p) {
+    var k = nodeKey(p.r, p.c);
+    var nb = adj[k];
+    if (!nb || nb.length === 0) { var np = makeParticle(); for (var key in np) p[key] = np[key]; pickNext(p); return; }
+    var choices = nb.slice();
+    if (p.prevDir && choices.length > 1) {
+      var pref = nodeKey(p.r + p.prevDir.dr, p.c + p.prevDir.dc);
+      if (choices.indexOf(pref) !== -1 && Math.random() < 0.65) choices = [pref];
+    }
+    var next = choices[Math.floor(Math.random() * choices.length)];
+    var parts = parseKey(next);
+    p.prevDir = { dr: parts[0] - p.r, dc: parts[1] - p.c };
+    p.r = parts[0]; p.c = parts[1];
+    p.targetX = p.c * CELL; p.targetY = p.r * CELL;
+    p.moving = true;
+  }
+
+  function tickParticle(p) {
+    p.life++;
+    if (p.life > p.maxLife) { var np = makeParticle(); for (var key in np) p[key] = np[key]; pickNext(p); return; }
+    if (p.moving) {
+      var dx = p.targetX - p.x, dy = p.targetY - p.y;
+      if (Math.abs(dx) + Math.abs(dy) < p.speed) {
+        p.x = p.targetX; p.y = p.targetY; p.moving = false; pickNext(p);
+      } else {
+        if (Math.abs(dx) > 0.1) p.x += (dx > 0 ? 1 : -1) * p.speed;
+        else p.y += (dy > 0 ? 1 : -1) * p.speed;
+      }
+    }
+    p.trail.push({ x: p.x, y: p.y });
+    if (p.trail.length > p.trailMax) p.trail.shift();
+  }
+
+  function renderParticle(p) {
+    var fadeIn = Math.min(1, p.life / 30);
+    var fadeOut = Math.min(1, (p.maxLife - p.life) / 60);
+    var alpha = fadeIn * fadeOut;
+    if (p.trail.length > 2) {
+      for (var i = 1; i < p.trail.length; i++) {
+        var t = i / p.trail.length;
+        ctx.beginPath(); ctx.moveTo(p.trail[i-1].x, p.trail[i-1].y); ctx.lineTo(p.trail[i].x, p.trail[i].y);
+        ctx.strokeStyle = p.color; ctx.globalAlpha = alpha * t * 0.5;
+        ctx.lineWidth = p.size * (0.3 + t * 0.7); ctx.lineCap = 'round'; ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = alpha * 0.95;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.fill();
+    ctx.globalAlpha = alpha * 0.2;
+    var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glowSize);
+    grad.addColorStop(0, p.color); grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(p.x, p.y, p.glowSize, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  function makePulse() {
+    var r = Math.floor(Math.random() * rows), c = Math.floor(Math.random() * cols);
+    var segs = [{ x: c * CELL, y: r * CELL }];
+    var cr = r, cc = c, maxSeg = 8 + Math.floor(Math.random() * 15);
+    for (var i = 0; i < maxSeg; i++) {
+      var k = nodeKey(cr, cc), nb = adj[k];
+      if (!nb || nb.length === 0) break;
+      var next = nb[Math.floor(Math.random() * nb.length)];
+      var parts = parseKey(next);
+      segs.push({ x: parts[1] * CELL, y: parts[0] * CELL });
+      cr = parts[0]; cc = parts[1];
+    }
+    return { segments: segs, progress: Math.random(), speed: 0.008 + Math.random() * 0.012,
+      color: palette.particle[Math.floor(Math.random() * palette.particle.length)],
+      alpha: 0.08 + Math.random() * 0.12, width: 0.8 + Math.random() * 0.5 };
+  }
+
+  function tickPulse(p) { p.progress += p.speed; if (p.progress >= 1) { var np = makePulse(); for (var k in np) p[k] = np[k]; } }
+
+  function renderPulse(p) {
+    if (p.segments.length < 2) return;
+    var tot = p.segments.length - 1, head = p.progress * tot, tail = 4;
+    for (var i = 0; i < tot; i++) {
+      var ls = Math.max(0, Math.min(1, head - tail - i)), le = Math.max(0, Math.min(1, head - i));
+      if (le <= 0 || ls >= 1) continue;
+      var s = p.segments[i], e = p.segments[i+1];
+      ctx.beginPath(); ctx.moveTo(s.x + (e.x-s.x)*ls, s.y + (e.y-s.y)*ls);
+      ctx.lineTo(s.x + (e.x-s.x)*le, s.y + (e.y-s.y)*le);
+      ctx.strokeStyle = p.color; ctx.globalAlpha = p.alpha * Math.max(0, 1 - (head - (i+1)) / tail);
+      ctx.lineWidth = p.width; ctx.lineCap = 'round'; ctx.stroke();
+    }
+    var hs = Math.min(Math.floor(head), tot - 1), ht = head - hs;
+    var a = p.segments[hs], b = p.segments[Math.min(hs+1, p.segments.length-1)];
+    ctx.globalAlpha = p.alpha * 1.5;
+    ctx.beginPath(); ctx.arc(a.x + (b.x-a.x)*ht, a.y + (b.y-a.y)*ht, 2, 0, Math.PI*2);
+    ctx.fillStyle = p.color; ctx.fill(); ctx.globalAlpha = 1;
+  }
+
+  var mathSymbols = ['∇','×','·','∂','∫','→','⟨v⟩','λ','Σ','θ','φ','ω','∞','Δ','∈','⊗','‖v‖','det','curl','div','grad','∠','⊥','∥'];
+  function makeSymbol() {
+    return { x: Math.random()*W, y: Math.random()*H,
+      symbol: mathSymbols[Math.floor(Math.random()*mathSymbols.length)],
+      size: 14+Math.random()*22, vy: -0.08-Math.random()*0.15,
+      maxAlpha: 0.035+Math.random()*0.045, life: Math.random()*800,
+      maxLife: 700+Math.random()*900, rotation: Math.random()*Math.PI*2,
+      rotSpeed: (Math.random()-0.5)*0.002 };
+  }
+  function tickSymbol(s) { s.y += s.vy; s.rotation += s.rotSpeed; s.life++; if (s.life > s.maxLife) { var ns = makeSymbol(); for (var k in ns) s[k] = ns[k]; } }
+  function renderSymbol(s) {
+    var fi = Math.min(1, s.life/120), fo = Math.min(1, (s.maxLife-s.life)/120);
+    ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.rotation);
+    ctx.globalAlpha = s.maxAlpha * fi * fo;
+    ctx.font = s.size + "px 'Cambria Math', 'Latin Modern Math', serif";
+    ctx.fillStyle = palette.symbol; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(s.symbol, 0, 0); ctx.restore();
+  }
+
+  doResize();
+  buildMaze();
+
+  var pCount = Math.min(200, Math.floor((W * H) / 6000));
+  for (var i = 0; i < pCount; i++) { var p = makeParticle(); pickNext(p); particles.push(p); }
+  var plCount = Math.min(40, Math.floor((W * H) / 25000));
+  for (var i = 0; i < plCount; i++) { pulses.push(makePulse()); }
+  var sCount = Math.min(25, Math.floor((W * H) / 50000));
+  for (var i = 0; i < sCount; i++) { symbols.push(makeSymbol()); }
+
+  console.log(`🚀 Maze initialized: ${pCount} particles, ${plCount} pulses, ${sCount} symbols`);
+
+  function animate() {
+    time += 0.016;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = palette.bg; ctx.fillRect(0, 0, W, H);
+    drawGlows(); drawMaze(); drawCorridorArrows();
+    for (var i = 0; i < symbols.length; i++) { tickSymbol(symbols[i]); renderSymbol(symbols[i]); }
+    for (var i = 0; i < pulses.length; i++) { tickPulse(pulses[i]); renderPulse(pulses[i]); }
+    for (var i = 0; i < particles.length; i++) { tickParticle(particles[i]); renderParticle(particles[i]); }
+    drawBasisVectors(); drawAxesHint();
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  setInterval(function() {
+    buildMaze();
+    for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
+    for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
+  }, 25000);
+
+  window.addEventListener('resize', function() {
+    doResize(); buildMaze();
+    for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
+    for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
+  });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMazeBackground);
+} else {
+  initMazeBackground();
+}
