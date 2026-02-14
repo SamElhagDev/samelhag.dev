@@ -14,16 +14,28 @@
     <link rel="icon" type="image/png" href="favicon.png" />
     <HeadOutlet />
 
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
     <!-- Modern Engineering Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="@Assets["app.css"]" as="style">
+    <link rel="preload" href="@Assets["js/maze-background.js"]" as="script">
 </head>
 
-<body>
-    <MudThemeProvider />
+<body style="background: #080c18; margin: 0; padding: 0; overflow-x: hidden;">
+    <!-- Persistent maze background canvas - outside Blazor routing -->
+    <canvas id="bg" style="display:block;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;background:#080c18;"></canvas>
+
+    <MudThemeProvider IsDarkMode="true" />
     <MudPopoverProvider />
     <MudDialogProvider />
     <MudSnackbarProvider />
@@ -33,6 +45,13 @@
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <script src="@Assets["js/heatSimulation.js"]"></script>
     <script src="@Assets["js/maze-background.js"]"></script>
+
+    <!-- Initialize maze background after scripts load -->
+    <script>
+        if (typeof initMazeBackground === 'function' && !window._mazeBackgroundInitialized) {
+            initMazeBackground();
+        }
+    </script>
 </body>
 
 </html>

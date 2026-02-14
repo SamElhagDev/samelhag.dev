@@ -1,4 +1,14 @@
+// Global state to track if maze is already running
+window._mazeBackgroundInitialized = window._mazeBackgroundInitialized || false;
+window._mazeAnimationId = window._mazeAnimationId || null;
+
 function initMazeBackground() {
+  // Prevent re-initialization if already running
+  if (window._mazeBackgroundInitialized) {
+    console.log('🎨 Maze background already running, skipping re-init');
+    return;
+  }
+
   console.log('🎨 Initializing maze background...');
   var canvas = document.getElementById('bg');
   if (!canvas) {
@@ -13,8 +23,9 @@ function initMazeBackground() {
     console.error('❌ Failed to get canvas 2D context');
     return;
   }
-  
-  var ctx = canvas.getContext('2d');
+
+  window._mazeBackgroundInitialized = true;
+
   var W, H, time = 0;
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
   var CELL = 50;
@@ -34,15 +45,64 @@ function initMazeBackground() {
   var pulses = [];
   var symbols = [];
 
-  function doResize() {
-    W = window.innerWidth;
-    H = window.innerHeight;
+  // Track last known dimensions to prevent unnecessary resizes
+  var lastW = 0, lastH = 0;
+  var isNavigating = false;
+  var navigationLockTimeout = null;
+
+  function doResize(force) {
+    // If we're in the middle of navigation, block all resizes
+    if (isNavigating && !force) {
+      console.log('🚫 Resize blocked during navigation');
+      return false;
+    }
+
+    var newW = window.innerWidth;
+    var newH = window.innerHeight;
+
+    // Only resize if dimensions actually changed or forced
+    // Add 2px tolerance for sub-pixel rounding differences
+    if (!force && Math.abs(newW - lastW) <= 2 && Math.abs(newH - lastH) <= 2) {
+      return false;
+    }
+
+    // Additional check: if change is minimal (< 10px), ignore it
+    // This prevents image loading or scrollbar changes from triggering resize
+    if (!force && Math.abs(newW - lastW) < 10 && Math.abs(newH - lastH) < 10) {
+      return false;
+    }
+
+    lastW = newW;
+    lastH = newH;
+    W = newW;
+    H = newH;
     canvas.width = W * DPR;
     canvas.height = H * DPR;
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    return true;
   }
+
+  // Lock resizing during Blazor navigation
+  function lockNavigationResize() {
+    isNavigating = true;
+    if (navigationLockTimeout) {
+      clearTimeout(navigationLockTimeout);
+    }
+    // Release lock after 1 second
+    navigationLockTimeout = setTimeout(function() {
+      isNavigating = false;
+      console.log('🔓 Navigation lock released');
+    }, 1000);
+  }
+
+  // Listen for Blazor navigation events
+  if (window.Blazor) {
+    window.Blazor.addEventListener('enhancednavigationstart', lockNavigationResize);
+  }
+  // Also listen for standard navigation
+  window.addEventListener('popstate', lockNavigationResize);
 
   function nodeKey(r, c) { return r + ',' + c; }
   function parseKey(k) { var p = k.split(','); return [parseInt(p[0]), parseInt(p[1])]; }
@@ -100,8 +160,8 @@ function initMazeBackground() {
 
   function drawMaze() {
     if (!maze) return;
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = 'rgba(60, 110, 180, 0.07)';
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'rgba(91, 156, 245, 0.8)'; // Bright blue, very visible
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
         var x = c * CELL, y = r * CELL;
@@ -113,8 +173,8 @@ function initMazeBackground() {
       for (var c = 0; c < cols; c++) {
         var conns = (adj[nodeKey(r,c)] || []).length;
         if (conns >= 2) {
-          ctx.fillStyle = palette.gridNode;
-          ctx.beginPath(); ctx.arc(c * CELL, r * CELL, 1.5, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = 'rgba(167, 139, 250, 0.8)'; // Bright purple
+          ctx.beginPath(); ctx.arc(c * CELL, r * CELL, 3, 0, Math.PI * 2); ctx.fill();
         }
       }
     }
@@ -122,7 +182,7 @@ function initMazeBackground() {
 
   function drawCorridorArrows() {
     if (!maze) return;
-    ctx.globalAlpha = 0.06;
+    ctx.globalAlpha = 0.15;
     var phase = time * 1.5;
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
@@ -316,30 +376,52 @@ function initMazeBackground() {
     ctx.fillText(s.symbol, 0, 0); ctx.restore();
   }
 
-  doResize();
+  doResize(true); // Force initial resize
   buildMaze();
 
-  var pCount = Math.min(200, Math.floor((W * H) / 6000));
+  var pCount = Math.min(100, Math.floor((W * H) / 10000)); // Reduced from 200
   for (var i = 0; i < pCount; i++) { var p = makeParticle(); pickNext(p); particles.push(p); }
-  var plCount = Math.min(40, Math.floor((W * H) / 25000));
+  var plCount = Math.min(20, Math.floor((W * H) / 40000)); // Reduced from 40
   for (var i = 0; i < plCount; i++) { pulses.push(makePulse()); }
-  var sCount = Math.min(25, Math.floor((W * H) / 50000));
+  var sCount = Math.min(15, Math.floor((W * H) / 80000)); // Reduced from 25
   for (var i = 0; i < sCount; i++) { symbols.push(makeSymbol()); }
 
-  console.log(`🚀 Maze initialized: ${pCount} particles, ${plCount} pulses, ${sCount} symbols`);
+  console.log(`🚀 Maze initialized: ${pCount} particles, ${plCount} pulses, ${sCount} symbols (optimized)`);
+  console.log(`📐 Grid size: ${cols}x${rows}, Cell: ${CELL}px, Canvas: ${W}x${H}`);
 
-  function animate() {
+  var frameCount = 0;
+  var lastFrameTime = 0;
+  var targetFPS = 30; // Reduced from 60fps for better performance
+  var frameInterval = 1000 / targetFPS;
+
+  function animate(currentTime) {
+    // Throttle to target FPS
+    if (currentTime - lastFrameTime < frameInterval) {
+      requestAnimationFrame(animate);
+      return;
+    }
+    lastFrameTime = currentTime;
+
     time += 0.016;
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = palette.bg; ctx.fillRect(0, 0, W, H);
+
     drawGlows(); drawMaze(); drawCorridorArrows();
     for (var i = 0; i < symbols.length; i++) { tickSymbol(symbols[i]); renderSymbol(symbols[i]); }
     for (var i = 0; i < pulses.length; i++) { tickPulse(pulses[i]); renderPulse(pulses[i]); }
     for (var i = 0; i < particles.length; i++) { tickParticle(particles[i]); renderParticle(particles[i]); }
     drawBasisVectors(); drawAxesHint();
+
+    // Log first frame to confirm animation is running
+    if (frameCount === 0) {
+      console.log('🎬 First frame rendered');
+      console.log('🖼️ Drawing maze with', rows, 'rows and', cols, 'cols');
+    }
+    frameCount++;
+
     requestAnimationFrame(animate);
   }
-  animate();
+  requestAnimationFrame(animate);
 
   setInterval(function() {
     buildMaze();
@@ -348,10 +430,34 @@ function initMazeBackground() {
   }, 25000);
 
   window.addEventListener('resize', function() {
-    doResize(); buildMaze();
-    for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
-    for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
+    // Debounce resize events to prevent rapid firing during navigation
+    if (window._resizeTimeout) {
+      clearTimeout(window._resizeTimeout);
+    }
+
+    window._resizeTimeout = setTimeout(function() {
+      // Only rebuild if dimensions actually changed
+      if (doResize(false)) {
+        console.log('🔄 Window resized, rebuilding maze');
+        buildMaze();
+        for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
+        for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
+      }
+    }, 500); // Wait 500ms after resize stops before rebuilding (prevents image load triggers)
   });
+
+  // Lock resizing when any navigation link is clicked
+  document.addEventListener('click', function(e) {
+    var target = e.target;
+    // Check if clicked element or its parent is a link
+    while (target && target !== document) {
+      if (target.tagName === 'A' || target.tagName === 'BUTTON') {
+        lockNavigationResize();
+        break;
+      }
+      target = target.parentElement;
+    }
+  }, true);
 }
 
 // Initialize when DOM is ready
