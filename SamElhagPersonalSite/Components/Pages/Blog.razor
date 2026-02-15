@@ -216,24 +216,6 @@
     <MudStack Row="true" Justify="Justify.Center" Class="mt-8">
         <MudPagination Count="5" Selected="1" Color="Color.Primary" />
     </MudStack>
-
-    <!-- Newsletter Signup -->
-    <MudPaper Elevation="3" Class="pa-6 mt-12" Style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        <MudStack AlignItems="AlignItems.Center" Spacing="4">
-            <MudIcon Icon="@Icons.Material.Filled.Email" Size="Size.Large" Color="Color.Surface" />
-            <MudText Typo="Typo.h4" Align="Align.Center" Color="Color.Surface">
-                Subscribe to my newsletter
-            </MudText>
-            <MudText Typo="Typo.body1" Align="Align.Center" Color="Color.Surface">
-                Get the latest posts delivered right to your inbox
-            </MudText>
-            <MudStack Row="true" Spacing="2" Style="max-width: 500px; width: 100%;">
-                <MudTextField @bind-Value="email" Label="Your email" Variant="Variant.Filled" 
-                             Style="background-color: white;" Class="flex-grow-1" />
-                <MudButton Variant="Variant.Filled" Color="Color.Surface" Size="Size.Large">Subscribe</MudButton>
-            </MudStack>
-        </MudStack>
-    </MudPaper>
 </MudContainer>
 
 @code {

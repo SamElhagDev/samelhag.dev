@@ -155,60 +155,6 @@
 
 <!-- Featured Projects Section -->
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="my-16">
-    <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-3" Style="font-weight: 700; color: rgba(255,255,255,0.95);">
-        Featured Projects
-    </MudText>
-    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="color: rgba(255,255,255,0.5); font-weight: 400;">
-        Some of my recent work and side projects
-    </MudText>
-    <MudGrid Spacing="4">
-        <MudItem xs="12" md="6">
-            <MudCard Elevation="0" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.2); border-radius: 20px; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
-                <div Style="position: relative;">
-                    <MudCardMedia Image="https://via.placeholder.com/600x250/5B8DEF/ffffff?text=Project+1" Height="250" />
-                    <div Style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 20, 0.8) 100%);"></div>
-                </div>
-                <MudCardContent Class="pa-5">
-                    <MudText Typo="Typo.h5" GutterBottom="true" Style="font-weight: 700; color: rgba(255,255,255,0.95);">E-Commerce Platform</MudText>
-                    <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.6); line-height: 1.7;">
-                        A full-stack e-commerce solution built with .NET, Blazor, and Azure. Features real-time inventory, payment processing, and admin dashboard.
-                    </MudText>
-                    <MudChipSet T="string" Class="mt-3">
-                        <MudChip T="string" Size="Size.Small" Style="background: rgba(91, 141, 239, 0.2); color: rgba(255,255,255,0.9); border: 1px solid rgba(91, 141, 239, 0.3);">.NET</MudChip>
-                        <MudChip T="string" Size="Size.Small" Style="background: rgba(124, 184, 255, 0.2); color: rgba(255,255,255,0.9); border: 1px solid rgba(124, 184, 255, 0.3);">Blazor</MudChip>
-                        <MudChip T="string" Size="Size.Small" Style="background: rgba(111, 201, 215, 0.2); color: rgba(255,255,255,0.9); border: 1px solid rgba(111, 201, 215, 0.3);">Azure</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions Class="pa-5 pt-0">
-                    <MudButton Variant="Variant.Text" Style="color: #5B8DEF; font-weight: 600; text-transform: none;" StartIcon="@Icons.Material.Filled.Launch">View Project</MudButton>
-                    <MudButton Variant="Variant.Text" Style="color: #5B8DEF; font-weight: 600; text-transform: none;" StartIcon="@Icons.Custom.Brands.GitHub">GitHub</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <MudItem xs="12" md="6">
-            <MudCard Elevation="0" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.2); border-radius: 20px; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
-                <div Style="position: relative;">
-                    <MudCardMedia Image="https://via.placeholder.com/600x250/6FC9D7/ffffff?text=Project+2" Height="250" />
-                    <div Style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 20, 0.8) 100%);"></div>
-                </div>
-                <MudCardContent Class="pa-5">
-                    <MudText Typo="Typo.h5" GutterBottom="true" Style="font-weight: 700; color: rgba(255,255,255,0.95);">Task Management System</MudText>
-                    <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.6); line-height: 1.7;">
-                        A collaborative task management app with real-time updates, team collaboration features, and advanced analytics.
-                    </MudText>
-                    <MudChipSet T="string" Class="mt-3">
-                        <MudChip T="string" Size="Size.Small" Style="background: rgba(91, 141, 239, 0.2); color: rgba(255,255,255,0.9); border: 1px solid rgba(91, 141, 239, 0.3);">ASP.NET Core</MudChip>
-                        <MudChip T="string" Size="Size.Small" Style="background: rgba(124, 184, 255, 0.2); color: rgba(255,255,255,0.9); border: 1px solid rgba(124, 184, 255, 0.3);">SignalR</MudChip>
-                        <MudChip T="string" Size="Size.Small" Style="background: rgba(111, 201, 215, 0.2); color: rgba(255,255,255,0.9); border: 1px solid rgba(111, 201, 215, 0.3);">PostgreSQL</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions Class="pa-5 pt-0">
-                    <MudButton Variant="Variant.Text" Style="color: #5B8DEF; font-weight: 600; text-transform: none;" StartIcon="@Icons.Material.Filled.Launch">View Project</MudButton>
-                    <MudButton Variant="Variant.Text" Style="color: #5B8DEF; font-weight: 600; text-transform: none;" StartIcon="@Icons.Custom.Brands.GitHub">GitHub</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
     <MudStack Row="true" Justify="Justify.Center" Class="mt-8">
         <MudButton Variant="Variant.Outlined" Size="Size.Medium" Href="/projects" EndIcon="@Icons.Material.Filled.ArrowForward"
                    Style="border: 2px solid rgba(91, 141, 239, 0.5); color: #E8F0FF; background: rgba(91, 141, 239, 0.1); backdrop-filter: blur(10px); padding: 12px 32px; font-weight: 600; border-radius: 10px; text-transform: none; transition: all 0.3s;">
