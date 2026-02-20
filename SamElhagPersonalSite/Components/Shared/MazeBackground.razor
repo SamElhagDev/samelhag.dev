@@ -21,8 +21,7 @@
     {
         if (firstRender)
         {
-            await JS.InvokeVoidAsync("eval", "console.log('🔍 MazeBackground component rendered');");
-            await JS.InvokeVoidAsync("eval", "if (typeof initMazeBackground === 'function') { initMazeBackground(); console.log('✅ Called initMazeBackground'); } else { console.error('❌ initMazeBackground function not found'); }");
+            await JS.InvokeVoidAsync("initMazeBackground");
         }
     }
 }

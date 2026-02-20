@@ -239,11 +239,11 @@
     {
         if (firstRender)
         {
-            var hasLoaded = await JS.InvokeAsync<bool>("eval", "sessionStorage.getItem('showcaseKatexLoaded') === 'true'");
+            var hasLoaded = await JS.InvokeAsync<bool>("siteInterop.getSessionFlag", "showcaseKatexLoaded");
             if (!hasLoaded)
             {
-                await JS.InvokeVoidAsync("eval", "sessionStorage.setItem('showcaseKatexLoaded', 'true')");
-                await JS.InvokeVoidAsync("eval", "location.reload()");
+                await JS.InvokeVoidAsync("siteInterop.setSessionFlag", "showcaseKatexLoaded");
+                await JS.InvokeVoidAsync("siteInterop.reloadPage");
             }
             else
             {
