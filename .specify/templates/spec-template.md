@@ -1,44 +1,45 @@
-# Feature Specification — [FEATURE_NAME]
+# Feature Specification: [FEATURE NAME]
 
-**Feature ID:** [FEATURE_ID]
-**Spec Version:** [SPEC_VERSION]
-**Created:** [SPEC_DATE]
-**Status:** Draft / Under Review / Approved
-**Author:** Sam Elhag
+**Feature Branch**: `[###-feature-name]`  
+**Created**: [DATE]  
+**Status**: Draft  
+**Input**: User description: "$ARGUMENTS"
 
----
+## User Scenarios & Testing *(mandatory)*
 
-## 1. Summary
+<!--
+  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
+  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
+  you should still have a viable MVP (Minimum Viable Product) that delivers value.
+  
+  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
+  Think of each story as a standalone slice of functionality that can be:
+  - Developed independently
+  - Tested independently
+  - Deployed independently
+  - Demonstrated to users independently
+-->
 
-[One-paragraph description of what this feature is and what problem it solves for
-the site's visitors or owner.]
+### User Story 1 - [Brief Title] (Priority: P1)
 
----
+[Describe this user journey in plain language]
 
-## 2. Goals
+**Why this priority**: [Explain the value and why it has this priority level]
 
-- [Goal 1 — measurable outcome]
-- [Goal 2]
+**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
 
-## 3. Non-Goals
-
-- [Explicit exclusion 1 — what this feature intentionally does NOT do]
-- [Explicit exclusion 2]
+**Acceptance Scenarios**:
 
 1. **Given** [initial state], **When** [action], **Then** [expected outcome]
 2. **Given** [initial state], **When** [action], **Then** [expected outcome]
 
 ---
 
-## 4. Constraints (from Constitution)
+### User Story 2 - [Brief Title] (Priority: P2)
 
-The following constraints from the Project Constitution apply to this feature:
+[Describe this user journey in plain language]
 
-- **P1 (Blazor-First):** All UI implemented as .razor components; no JS UI frameworks.
-- **P2 (Performance):** FCP ≤ 1.5 s, TTI ≤ 2 s; animations ≤ 30 fps.
-- **P3 (Single Showcase):** [Applicable / N/A — reason]
-- **P4 (Authenticity):** No placeholder content in production.
-- **P5 (Simplicity):** Components ≤ 300 lines; no dead code.
+**Why this priority**: [Explain the value and why it has this priority level]
 
 **Independent Test**: [Describe how this can be tested independently]
 
@@ -48,68 +49,67 @@ The following constraints from the Project Constitution apply to this feature:
 
 ---
 
-## 5. User Stories
+### User Story 3 - [Brief Title] (Priority: P3)
 
-### Story 1 — [Short Title]
+[Describe this user journey in plain language]
 
-**As a** [visitor / recruiter / Sam],
-**I want** [capability],
-**So that** [value delivered].
+**Why this priority**: [Explain the value and why it has this priority level]
 
-**Acceptance Criteria:**
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
+**Independent Test**: [Describe how this can be tested independently]
 
----
+**Acceptance Scenarios**:
 
-## 6. Functional Requirements
-
-| ID | Requirement | Priority |
-|---|---|---|
-| FR-01 | [Requirement description] | Must Have |
-| FR-02 | [Requirement description] | Should Have |
-| FR-03 | [Requirement description] | Nice to Have |
+1. **Given** [initial state], **When** [action], **Then** [expected outcome]
 
 ---
 
-## 7. Non-Functional Requirements
+[Add more user stories as needed, each with an assigned priority]
 
-| ID | Requirement | Measure |
-|---|---|---|
-| NFR-01 | Page load performance | FCP ≤ 1.5 s (Lighthouse) |
-| NFR-02 | Accessibility | WCAG 2.1 AA — no critical violations |
-| NFR-03 | [Additional NFR] | [Measure] |
+### Edge Cases
 
----
+<!--
+  ACTION REQUIRED: The content in this section represents placeholders.
+  Fill them out with the right edge cases.
+-->
 
-## 8. UI / UX Notes
+- What happens when [boundary condition]?
+- How does system handle [error scenario]?
 
-[Description of the intended look and feel, referencing MudBlazor components
-where applicable. Mention glass-morphism theme, Inter/Space Grotesk fonts, dark
-palette as defaults.]
+## Requirements *(mandatory)*
 
----
+<!--
+  ACTION REQUIRED: The content in this section represents placeholders.
+  Fill them out with the right functional requirements.
+-->
 
-## 9. Out of Scope
+### Functional Requirements
 
-Per the Constitution's Non-Goals (§4), the following are explicitly excluded:
+- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
+- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
+- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
+- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
+- **FR-005**: System MUST [behavior, e.g., "log all security events"]
 
-- Authentication / user accounts
-- Database-backed dynamic content
-- Payment or e-commerce flows
+*Example of marking unclear requirements:*
 
----
+- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
+- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
-## 10. Open Questions
+### Key Entities *(include if feature involves data)*
 
-| # | Question | Owner | Due |
-|---|---|---|---|
-| 1 | [Question] | Sam | [date] |
+- **[Entity 1]**: [What it represents, key attributes without implementation]
+- **[Entity 2]**: [What it represents, relationships to other entities]
 
----
+## Success Criteria *(mandatory)*
 
-## 11. Revision History
+<!--
+  ACTION REQUIRED: Define measurable success criteria.
+  These must be technology-agnostic and measurable.
+-->
 
-| Version | Date | Summary |
-|---|---|---|
-| 1.0.0 | [date] | Initial draft |
+### Measurable Outcomes
+
+- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
+- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
+- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
+- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
