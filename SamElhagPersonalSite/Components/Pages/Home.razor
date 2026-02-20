@@ -155,7 +155,36 @@
 
 <!-- Featured Projects Section -->
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="my-16">
-    <MudStack Row="true" Justify="Justify.Center" Class="mt-8">
+    <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-3" Style="font-weight: 700; color: rgba(255,255,255,0.95);">
+        Featured Project
+    </MudText>
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="color: rgba(255,255,255,0.5);">
+        Computational physics meets modern web development
+    </MudText>
+
+    <MudGrid Justify="Justify.Center" Class="mb-8">
+        <MudItem xs="12" md="9">
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.4); border-radius: 20px;">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="4">
+                    <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 100%); padding: 16px; border-radius: 12px; flex-shrink: 0; display: inline-flex;">
+                        <MudIcon Icon="@Icons.Material.Filled.Air" Style="color: white; font-size: 2.5rem;" />
+                    </div>
+                    <div Style="flex: 1;">
+                        <MudText Typo="Typo.h6" Style="color: white; font-weight: 700; margin-bottom: 6px;">NACA 0012 Heat Transfer Simulation</MudText>
+                        <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.65); line-height: 1.7;">
+                            Real-time CFD — 134,400-node finite difference grid running live in the browser.
+                        </MudText>
+                    </div>
+                    <MudButton Variant="Variant.Filled" Href="/projects/heat-transfer"
+                               Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; font-weight: 600; border-radius: 10px; text-transform: none; white-space: nowrap; flex-shrink: 0; padding: 10px 24px;">
+                        Learn More
+                    </MudButton>
+                </MudStack>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <MudStack Row="true" Justify="Justify.Center">
         <MudButton Variant="Variant.Outlined" Size="Size.Medium" Href="/projects" EndIcon="@Icons.Material.Filled.ArrowForward"
                    Style="border: 2px solid rgba(91, 141, 239, 0.5); color: #E8F0FF; background: rgba(91, 141, 239, 0.1); backdrop-filter: blur(10px); padding: 12px 32px; font-weight: 600; border-radius: 10px; text-transform: none; transition: all 0.3s;">
             View All Projects
