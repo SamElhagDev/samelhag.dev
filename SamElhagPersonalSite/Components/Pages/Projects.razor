@@ -4,196 +4,49 @@
 <PageTitle>Projects - Sam Elhag</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-8">
-    <!-- Header -->
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Style="font-weight: 700; color: white;">
         My Projects
     </MudText>
-    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8">
-        A collection of projects I've worked on, showcasing different technologies and problem-solving approaches.
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-10" Style="color: rgba(255,255,255,0.6);">
+        Engineering software that bridges domains. More projects in progress.
     </MudText>
 
-    <!-- Projects Grid -->
-    <MudGrid>
-        <!-- Project 1 -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Elevation="3" Class="d-flex flex-column" Style="height: 100%;">
-                <MudCardMedia Image="https://via.placeholder.com/400x250/5c6bc0/ffffff?text=E-Commerce" Height="250" />
-                <MudCardContent Class="flex-grow-1">
-                    <MudText Typo="Typo.h5" GutterBottom="true">E-Commerce Platform</MudText>
-                    <MudText Typo="Typo.body2" Class="mb-4">
-                        A comprehensive e-commerce solution with real-time inventory management, secure payment processing, 
-                        and an intuitive admin dashboard. Built with modern web technologies for optimal performance.
-                    </MudText>
-                    <MudChipSet T="string">
-                        <MudChip T="string" Size="Size.Small" Color="Color.Primary">.NET 10</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary">Blazor</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Info">Azure</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Success">SQL Server</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Launch">Live Demo</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Custom.Brands.GitHub">Source Code</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-
-        <!-- Project 2 -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Elevation="3" Class="d-flex flex-column" Style="height: 100%;">
-                <MudCardMedia Image="https://via.placeholder.com/400x250/26a69a/ffffff?text=Task+Manager" Height="250" />
-                <MudCardContent Class="flex-grow-1">
-                    <MudText Typo="Typo.h5" GutterBottom="true">Task Management System</MudText>
-                    <MudText Typo="Typo.body2" Class="mb-4">
-                        Collaborative task management application with real-time updates using SignalR. 
-                        Features include team workspaces, kanban boards, and advanced analytics.
-                    </MudText>
-                    <MudChipSet T="string">
-                        <MudChip T="string" Size="Size.Small" Color="Color.Primary">ASP.NET Core</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary">SignalR</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Info">PostgreSQL</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Warning">React</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Launch">Live Demo</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Custom.Brands.GitHub">Source Code</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-
-        <!-- Project 3 -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Elevation="3" Class="d-flex flex-column" Style="height: 100%;">
-                <MudCardMedia Image="https://via.placeholder.com/400x250/ff7043/ffffff?text=API+Gateway" Height="250" />
-                <MudCardContent Class="flex-grow-1">
-                    <MudText Typo="Typo.h5" GutterBottom="true">Microservices API Gateway</MudText>
-                    <MudText Typo="Typo.body2" Class="mb-4">
-                        A scalable API gateway for microservices architecture with authentication, rate limiting, 
-                        and comprehensive monitoring. Deployed on Kubernetes with CI/CD pipelines.
-                    </MudText>
-                    <MudChipSet T="string">
-                        <MudChip T="string" Size="Size.Small" Color="Color.Primary">.NET</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Info">Docker</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Error">Kubernetes</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Success">Redis</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Launch">Documentation</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Custom.Brands.GitHub">Source Code</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-
-        <!-- Project 4 -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Elevation="3" Class="d-flex flex-column" Style="height: 100%;">
-                <MudCardMedia Image="https://via.placeholder.com/400x250/ab47bc/ffffff?text=Analytics" Height="250" />
-                <MudCardContent Class="flex-grow-1">
-                    <MudText Typo="Typo.h5" GutterBottom="true">Real-Time Analytics Dashboard</MudText>
-                    <MudText Typo="Typo.body2" Class="mb-4">
-                        Interactive dashboard for visualizing business metrics and KPIs in real-time. 
-                        Includes customizable widgets, data export, and automated reporting features.
-                    </MudText>
-                    <MudChipSet T="string">
-                        <MudChip T="string" Size="Size.Small" Color="Color.Primary">Blazor Server</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary">Chart.js</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Info">Azure Functions</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Success">Cosmos DB</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Launch">Live Demo</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Custom.Brands.GitHub">Source Code</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-
-        <!-- Project 5 -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Elevation="3" Class="d-flex flex-column" Style="height: 100%;">
-                <MudCardMedia Image="https://via.placeholder.com/400x250/66bb6a/ffffff?text=CMS" Height="250" />
-                <MudCardContent Class="flex-grow-1">
-                    <MudText Typo="Typo.h5" GutterBottom="true">Headless CMS</MudText>
-                    <MudText Typo="Typo.body2" Class="mb-4">
-                        A flexible headless CMS built with .NET for managing content across multiple platforms. 
-                        Features include multi-language support, version control, and RESTful API.
-                    </MudText>
-                    <MudChipSet T="string">
-                        <MudChip T="string" Size="Size.Small" Color="Color.Primary">.NET 10</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary">GraphQL</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Info">MongoDB</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Success">JWT</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Launch">Live Demo</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Custom.Brands.GitHub">Source Code</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-
-        <!-- Project 6 -->
-        <MudItem xs="12" md="6" lg="4">
-            <MudCard Elevation="3" Class="d-flex flex-column" Style="height: 100%;">
-                <MudCardMedia Image="https://via.placeholder.com/400x250/42a5f5/ffffff?text=DevOps" Height="250" />
-                <MudCardContent Class="flex-grow-1">
-                    <MudText Typo="Typo.h5" GutterBottom="true">DevOps Automation Toolkit</MudText>
-                    <MudText Typo="Typo.body2" Class="mb-4">
-                        Collection of tools and scripts for automating deployment pipelines, infrastructure provisioning, 
-                        and monitoring. Supports multiple cloud providers and CI/CD platforms.
-                    </MudText>
-                    <MudChipSet T="string">
-                        <MudChip T="string" Size="Size.Small" Color="Color.Primary">PowerShell</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary">Terraform</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Info">Azure DevOps</MudChip>
-                        <MudChip T="string" Size="Size.Small" Color="Color.Warning">GitHub Actions</MudChip>
-                    </MudChipSet>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Launch">Documentation</MudButton>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Custom.Brands.GitHub">Source Code</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
-    <!-- Open Source Contributions -->
-    <MudDivider Class="my-8" />
-    
-    <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true" Class="mt-8 mb-6">
-        Open Source Contributions
-    </MudText>
-
-    <MudGrid>
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="2" Class="pa-4">
-                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Start">
-                    <div>
-                        <MudText Typo="Typo.h6">MudBlazor</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Blazor Component Library</MudText>
-                        <MudText Typo="Typo.body2" Class="mt-2">
-                            Contributing bug fixes and new component features to the popular MudBlazor component library.
-                        </MudText>
-                    </div>
-                    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary" />
+    <!-- Featured Project -->
+    <MudPaper Elevation="0" Class="pa-8" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.4); border-radius: 20px; box-shadow: 0 8px 40px rgba(91,141,239,0.15);">
+        <MudGrid AlignItems="AlignItems.Center" Spacing="4">
+            <MudItem xs="12" md="2" Class="text-center">
+                <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 100%); padding: 24px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center;">
+                    <MudIcon Icon="@Icons.Material.Filled.Air" Style="color: white; font-size: 3.5rem;" />
+                </div>
+            </MudItem>
+            <MudItem xs="12" md="7">
+                <MudText Typo="Typo.overline" Style="color: #6FC9D7; letter-spacing: 2px; font-family: 'JetBrains Mono', monospace;">FEATURED</MudText>
+                <MudText Typo="Typo.h5" Class="mt-1 mb-2" Style="color: white; font-weight: 700;">NACA 0012 Airfoil Heat Transfer Simulation</MudText>
+                <MudText Typo="Typo.body1" Class="mb-4" Style="color: rgba(255,255,255,0.75); line-height: 1.8;">
+                    Real-time computational fluid dynamics and transient heat transfer simulation.
+                    Built with .NET 10, Blazor Server, and the Canvas API. Uses finite difference methods
+                    on a 560×240 grid with 134,400 nodes, running live in the browser.
+                </MudText>
+                <MudChipSet T="string">
+                    <MudChip T="string" Size="Size.Small" Style="background: rgba(91,141,239,0.2); color: #7CB8FF; border: 1px solid rgba(91,141,239,0.3);">.NET 10</MudChip>
+                    <MudChip T="string" Size="Size.Small" Style="background: rgba(91,141,239,0.2); color: #7CB8FF; border: 1px solid rgba(91,141,239,0.3);">Blazor Server</MudChip>
+                    <MudChip T="string" Size="Size.Small" Style="background: rgba(111,201,215,0.2); color: #6FC9D7; border: 1px solid rgba(111,201,215,0.3);">Canvas API</MudChip>
+                    <MudChip T="string" Size="Size.Small" Style="background: rgba(159,212,255,0.2); color: #9FD4FF; border: 1px solid rgba(159,212,255,0.3);">KaTeX</MudChip>
+                    <MudChip T="string" Size="Size.Small" Style="background: rgba(91,141,239,0.2); color: #7CB8FF; border: 1px solid rgba(91,141,239,0.3);">CFD</MudChip>
+                </MudChipSet>
+            </MudItem>
+            <MudItem xs="12" md="3">
+                <MudStack Spacing="2">
+                    <MudButton Variant="Variant.Filled" Href="/projects/heat-transfer" FullWidth="true"
+                               Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; font-weight: 600; border-radius: 10px; text-transform: none; padding: 10px;">
+                        View Showcase
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" Href="/HeatSimulation" FullWidth="true"
+                               Style="border: 1px solid rgba(91,141,239,0.5); color: #E8F0FF; border-radius: 10px; text-transform: none; padding: 10px;">
+                        Launch Simulation
+                    </MudButton>
                 </MudStack>
-            </MudPaper>
-        </MudItem>
-
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="2" Class="pa-4">
-                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Start">
-                    <div>
-                        <MudText Typo="Typo.h6">ASP.NET Core</MudText>
-                        <MudText Typo="Typo.body2" Color="Color.Secondary">Microsoft Web Framework</MudText>
-                        <MudText Typo="Typo.body2" Class="mt-2">
-                            Documentation improvements and sample code contributions to the ASP.NET Core repository.
-                        </MudText>
-                    </div>
-                    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary" />
-                </MudStack>
-            </MudPaper>
-        </MudItem>
-    </MudGrid>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
 </MudContainer>
