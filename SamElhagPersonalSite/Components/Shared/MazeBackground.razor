@@ -1,5 +1,28 @@
-@* 
-    MazeBackground component is deprecated.
-    The canvas is now placed directly in App.razor to prevent re-rendering on navigation.
-    This file is kept for reference only.
-*@
+@inject IJSRuntime JS
+
+<canvas id="bg"></canvas>
+
+<style>
+    #bg {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        background: #080c18;
+    }
+</style>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("eval", "console.log('🔍 MazeBackground component rendered');");
+            await JS.InvokeVoidAsync("eval", "if (typeof initMazeBackground === 'function') { initMazeBackground(); console.log('✅ Called initMazeBackground'); } else { console.error('❌ initMazeBackground function not found'); }");
+        }
+    }
+}

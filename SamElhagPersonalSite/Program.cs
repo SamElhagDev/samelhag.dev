@@ -1,22 +1,10 @@
 using MudBlazor.Services;
 using SamElhagPersonalSite.Components;
-using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
 
 builder.AddServiceDefaults();
-
-// Add Response Compression
-builder.Services.AddResponseCompression(options =>
-{
-    options.EnableForHttps = true;
-    options.Providers.Add<BrotliCompressionProvider>();
-    options.Providers.Add<GzipCompressionProvider>();
-});
-
-// Add Response Caching
-builder.Services.AddResponseCaching();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -25,12 +13,6 @@ builder.Services.AddRazorComponents()
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
-
-// Use Response Compression
-app.UseResponseCompression();
-
-// Use Response Caching
-app.UseResponseCaching();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -41,16 +23,6 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
-
-// Add static file caching headers
-app.UseStaticFiles(new StaticFileOptions
-{
-    OnPrepareResponse = ctx =>
-    {
-        const int durationInSeconds = 60 * 60 * 24 * 365; // 1 year
-        ctx.Context.Response.Headers["Cache-Control"] = $"public,max-age={durationInSeconds}";
-    }
-});
 
 app.UseAntiforgery();
 
