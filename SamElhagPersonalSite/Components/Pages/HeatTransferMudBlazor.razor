@@ -316,13 +316,13 @@
         if (firstRender)
         {
             // Check if this is the first time loading (not a reload)
-            var hasLoaded = await JS.InvokeAsync<bool>("eval", "sessionStorage.getItem('katexLoaded') === 'true'");
+            var hasLoaded = await JS.InvokeAsync<bool>("siteInterop.getSessionFlag", "katexLoaded");
 
             if (!hasLoaded)
             {
                 // Mark as loaded and reload the page
-                await JS.InvokeVoidAsync("eval", "sessionStorage.setItem('katexLoaded', 'true')");
-                await JS.InvokeVoidAsync("eval", "location.reload()");
+                await JS.InvokeVoidAsync("siteInterop.setSessionFlag", "katexLoaded");
+                await JS.InvokeVoidAsync("siteInterop.reloadPage");
             }
             else
             {

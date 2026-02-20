@@ -5,18 +5,14 @@ window._mazeAnimationId = window._mazeAnimationId || null;
 function initMazeBackground() {
   // Prevent re-initialization if already running
   if (window._mazeBackgroundInitialized) {
-    console.log('🎨 Maze background already running, skipping re-init');
     return;
   }
 
-  console.log('🎨 Initializing maze background...');
   var canvas = document.getElementById('bg');
   if (!canvas) {
-    console.log('⏳ Canvas not found, retrying in 100ms...');
     setTimeout(initMazeBackground, 100);
     return;
   }
-  console.log('✅ Canvas found, starting animation');
 
   var ctx = canvas.getContext('2d');
   if (!ctx) {
@@ -53,7 +49,6 @@ function initMazeBackground() {
   function doResize(force) {
     // If we're in the middle of navigation, block all resizes
     if (isNavigating && !force) {
-      console.log('🚫 Resize blocked during navigation');
       return false;
     }
 
