@@ -1,59 +1,44 @@
-# Feature Specification: [FEATURE NAME]
+# Feature Specification — [FEATURE_NAME]
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
-**Input**: User description: "$ARGUMENTS"
+**Feature ID:** [FEATURE_ID]
+**Spec Version:** [SPEC_VERSION]
+**Created:** [SPEC_DATE]
+**Status:** Draft / Under Review / Approved
+**Author:** Sam Elhag
 
-## User Scenarios & Testing *(mandatory)*
+---
 
-<!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
--->
+## 1. Summary
 
-### User Story 1 - [Brief Title] (Priority: P1)
+[One-paragraph description of what this feature is and what problem it solves for
+the site's visitors or owner.]
 
-[Describe this user journey in plain language]
+---
 
-**Why this priority**: [Explain the value and why it has this priority level]
+## 2. Goals
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+- [Goal 1 — measurable outcome]
+- [Goal 2]
 
-**Acceptance Scenarios**:
+## 3. Non-Goals
+
+- [Explicit exclusion 1 — what this feature intentionally does NOT do]
+- [Explicit exclusion 2]
 
 1. **Given** [initial state], **When** [action], **Then** [expected outcome]
 2. **Given** [initial state], **When** [action], **Then** [expected outcome]
 
 ---
 
-### User Story 2 - [Brief Title] (Priority: P2)
+## 4. Constraints (from Constitution)
 
-[Describe this user journey in plain language]
+The following constraints from the Project Constitution apply to this feature:
 
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-### User Story 3 - [Brief Title] (Priority: P3)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
+- **P1 (Blazor-First):** All UI implemented as .razor components; no JS UI frameworks.
+- **P2 (Performance):** FCP ≤ 1.5 s, TTI ≤ 2 s; animations ≤ 30 fps.
+- **P3 (Single Showcase):** [Applicable / N/A — reason]
+- **P4 (Authenticity):** No placeholder content in production.
+- **P5 (Simplicity):** Components ≤ 300 lines; no dead code.
 
 **Independent Test**: [Describe how this can be tested independently]
 
@@ -63,53 +48,68 @@
 
 ---
 
-[Add more user stories as needed, each with an assigned priority]
+## 5. User Stories
 
-### Edge Cases
+### Story 1 — [Short Title]
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
+**As a** [visitor / recruiter / Sam],
+**I want** [capability],
+**So that** [value delivered].
 
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+**Acceptance Criteria:**
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
 
-## Requirements *(mandatory)*
+---
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
+## 6. Functional Requirements
 
-### Functional Requirements
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-01 | [Requirement description] | Must Have |
+| FR-02 | [Requirement description] | Should Have |
+| FR-03 | [Requirement description] | Nice to Have |
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+---
 
-*Example of marking unclear requirements:*
+## 7. Non-Functional Requirements
 
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+| ID | Requirement | Measure |
+|---|---|---|
+| NFR-01 | Page load performance | FCP ≤ 1.5 s (Lighthouse) |
+| NFR-02 | Accessibility | WCAG 2.1 AA — no critical violations |
+| NFR-03 | [Additional NFR] | [Measure] |
 
-### Key Entities *(include if feature involves data)*
+---
 
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+## 8. UI / UX Notes
 
-## Success Criteria *(mandatory)*
+[Description of the intended look and feel, referencing MudBlazor components
+where applicable. Mention glass-morphism theme, Inter/Space Grotesk fonts, dark
+palette as defaults.]
 
-<!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
--->
+---
 
-### Measurable Outcomes
+## 9. Out of Scope
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+Per the Constitution's Non-Goals (§4), the following are explicitly excluded:
+
+- Authentication / user accounts
+- Database-backed dynamic content
+- Payment or e-commerce flows
+
+---
+
+## 10. Open Questions
+
+| # | Question | Owner | Due |
+|---|---|---|---|
+| 1 | [Question] | Sam | [date] |
+
+---
+
+## 11. Revision History
+
+| Version | Date | Summary |
+|---|---|---|
+| 1.0.0 | [date] | Initial draft |
