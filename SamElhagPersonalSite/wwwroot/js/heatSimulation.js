@@ -13,8 +13,7 @@ window.HeatSimulation = {
 
         const canvas = document.getElementById('simulationCanvas');
         const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
+        ctx.imageSmoothingEnabled = false; // Not applicable with putImageData; disable to avoid overhead
 
         const width = canvas.width;
         const height = canvas.height;
@@ -43,11 +42,17 @@ window.HeatSimulation = {
         const mu = 1.81e-5;
         const Pr = 0.71;
 
-        let T = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(params.ambientTemp));
-        let Tnew = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(params.ambientTemp));
-        let u = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(0));
-        let v = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(0));
-        let airfoilMask = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(false));
+        const N = gridWidth * gridHeight;
+        let T        = new Float64Array(N).fill(params.ambientTemp);
+        let Tnew     = new Float64Array(N).fill(params.ambientTemp);
+        let u        = new Float64Array(N);
+        let v        = new Float64Array(N);
+        let airfoilMask = new Uint8Array(N); // 0 = air, 1 = airfoil
+
+        // Pixel buffer — allocated once, reused every frame
+        const imageData = ctx.createImageData(width, height);
+        const pixels    = imageData.data; // Uint8ClampedArray, length = width * height * 4 (RGBA)
+
         let particles = [];
 
         // Add mouse tracking for temperature display
@@ -64,10 +69,11 @@ window.HeatSimulation = {
                 const j = Math.floor(mouseX / dx);
                 const i = Math.floor(mouseY / dy);
 
-                if (i >= 0 && i < gridHeight && j >= 0 && j < gridWidth && T[i] && T[i][j] !== undefined) {
-                    const temp = T[i][j].toFixed(1);
+                if (i >= 0 && i < gridHeight && j >= 0 && j < gridWidth) {
+                    const idx = i * gridWidth + j;
+                    const temp = T[idx].toFixed(1);
                     const tempC = (temp - 273.15).toFixed(1);
-                    const isAirfoil = airfoilMask[i][j] ? ' (Airfoil Surface)' : '(Air)';
+                    const isAirfoil = airfoilMask[idx] ? ' (Airfoil Surface)' : '(Air)';
                     hoverTempElement.textContent = `Temperature: ${temp} K (${tempC} °C Cordinates: ${Math.round(mouseX)},${Math.round(mouseY)})${isAirfoil}`;
                     hoverTempElement.style.display = 'block';
                 }
@@ -102,15 +108,17 @@ window.HeatSimulation = {
 
             for (let i = 0; i < gridHeight; i++) {
                 for (let j = 0; j < gridWidth; j++) {
-                    T[i][j] = params.ambientTemp;
-                    airfoilMask[i][j] = false;
-                    u[i][j] = params.airspeed;
-                    v[i][j] = 0;
+                    const idx = i * gridWidth + j;
+                    T[idx] = params.ambientTemp;
+                    airfoilMask[idx] = 0;
+                    u[idx] = params.airspeed;
+                    v[idx] = 0;
                 }
             }
 
             for (let i = 0; i < gridHeight; i++) {
                 for (let j = 0; j < gridWidth; j++) {
+                    const idx = i * gridWidth + j;
                     const xLocal = (j - chordStart) * dx;
                     const yLocal = (i - centerY) * dy;
                     const xRot = xLocal * Math.cos(-angleRad) - yLocal * Math.sin(-angleRad);
@@ -118,15 +126,16 @@ window.HeatSimulation = {
                     const thickness = nacaAirfoil(xRot, chordLength * dx);
 
                     if (xRot >= 0 && xRot <= chordLength * dx && Math.abs(yRot) <= thickness) {
-                        airfoilMask[i][j] = true;
-                        T[i][j] = params.surfaceTemp;
+                        airfoilMask[idx] = 1;
+                        T[idx] = params.surfaceTemp;
                     }
                 }
             }
 
             for (let i = 0; i < gridHeight; i++) {
                 for (let j = 0; j < gridWidth; j++) {
-                    if (!airfoilMask[i][j]) {
+                    const idx = i * gridWidth + j;
+                    if (!airfoilMask[idx]) {
                         const xLocal = (j - chordStart) * dx;
                         const yLocal = (i - centerY) * dy;
                         const xRot = xLocal * Math.cos(-angleRad) - yLocal * Math.sin(-angleRad);
@@ -138,8 +147,8 @@ window.HeatSimulation = {
                         if (r > 0.01) {
                             const vr = params.airspeed * (1 - (chordLength * dx * 0.25) / (r * r)) * Math.cos(theta);
                             const vtheta = -params.airspeed * (1 + (chordLength * dx * 0.25) / (r * r)) * Math.sin(theta) + circulation / r;
-                            u[i][j] = vr * Math.cos(theta) - vtheta * Math.sin(theta);
-                            v[i][j] = vr * Math.sin(theta) + vtheta * Math.cos(theta);
+                            u[idx] = vr * Math.cos(theta) - vtheta * Math.sin(theta);
+                            v[idx] = vr * Math.sin(theta) + vtheta * Math.cos(theta);
                         }
                     }
                 }
@@ -158,20 +167,22 @@ window.HeatSimulation = {
         function updateHeatTransfer() {
             for (let i = 1; i < gridHeight - 1; i++) {
                 for (let j = 1; j < gridWidth - 1; j++) {
-                    if (airfoilMask[i][j]) {
-                        Tnew[i][j] = params.surfaceTemp;
-                    } else {
-                        const d2Tdx2 = (T[i][j + 1] - 2 * T[i][j] + T[i][j - 1]) / (dx * dx);
-                        const d2Tdy2 = (T[i + 1][j] - 2 * T[i][j] + T[i - 1][j]) / (dy * dy);
-                        const dTdx = u[i][j] > 0 ? (T[i][j] - T[i][j - 1]) / dx : (T[i][j + 1] - T[i][j]) / dx;
-                        const dTdy = v[i][j] > 0 ? (T[i][j] - T[i - 1][j]) / dy : (T[i + 1][j] - T[i][j]) / dy;
-                        const diffusion = params.alpha * (d2Tdx2 + d2Tdy2);
-                        const convection = -u[i][j] * dTdx - v[i][j] * dTdy;
-                        Tnew[i][j] = T[i][j] + params.dt * (diffusion + convection * 0.1);
+                    const idx  = i * gridWidth + j;
+                    const idxL = idx - 1;
+                    const idxR = idx + 1;
+                    const idxU = idx - gridWidth;
+                    const idxD = idx + gridWidth;
 
-                        if (i === 0 || i === gridHeight - 1 || j === 0 || j === gridWidth - 1) {
-                            Tnew[i][j] = params.ambientTemp;
-                        }
+                    if (airfoilMask[idx]) {
+                        Tnew[idx] = params.surfaceTemp;
+                    } else {
+                        const d2Tdx2 = (T[idxR] - 2 * T[idx] + T[idxL]) / (dx * dx);
+                        const d2Tdy2 = (T[idxD] - 2 * T[idx] + T[idxU]) / (dy * dy);
+                        const dTdx = u[idx] > 0 ? (T[idx] - T[idxL]) / dx : (T[idxR] - T[idx]) / dx;
+                        const dTdy = v[idx] > 0 ? (T[idx] - T[idxU]) / dy : (T[idxD] - T[idx]) / dy;
+                        const diffusion = params.alpha * (d2Tdx2 + d2Tdy2);
+                        const convection = -u[idx] * dTdx - v[idx] * dTdy;
+                        Tnew[idx] = T[idx] + params.dt * (diffusion + convection * 0.1);
                     }
                 }
             }
@@ -183,11 +194,12 @@ window.HeatSimulation = {
                 const i = Math.floor(p.y / dy);
                 const j = Math.floor(p.x / dx);
 
-                if (i >= 0 && i < gridHeight && j >= 0 && j < gridWidth && !airfoilMask[i][j]) {
+                if (i >= 0 && i < gridHeight && j >= 0 && j < gridWidth && !airfoilMask[i * gridWidth + j]) {
+                    const idx = i * gridWidth + j;
                     p.trail.push({ x: p.x, y: p.y });
                     if (p.trail.length > 40) p.trail.shift();
-                    p.x += u[i][j] * 0.15;
-                    p.y += v[i][j] * 0.15;
+                    p.x += u[idx] * 0.15;
+                    p.y += v[idx] * 0.15;
                 } else {
                     p.trail = [];
                 }
@@ -201,10 +213,13 @@ window.HeatSimulation = {
         }
 
         function render() {
+            // Build pixel buffer — one pass over grid cells, write directly to RGBA array
             for (let i = 0; i < gridHeight; i++) {
                 for (let j = 0; j < gridWidth; j++) {
-                    const temp = T[i][j];
-                    const normalized = (temp - params.ambientTemp) / (params.surfaceTemp - params.ambientTemp);
+                    const temp       = T[i * gridWidth + j];
+                    const normalized = Math.max(0, Math.min(1,
+                        (temp - params.ambientTemp) / (params.surfaceTemp - params.ambientTemp)
+                    ));
                     let r, g, b;
 
                     if (normalized < 0.25) {
@@ -221,10 +236,24 @@ window.HeatSimulation = {
                         r = 255; g = Math.floor((1 - t) * 255); b = 0;
                     }
 
-                    ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
-                    ctx.fillRect(j * dx, i * dy, Math.ceil(dx) + 1, Math.ceil(dy) + 1);
+                    // Each grid cell covers a dx×dy block of canvas pixels (5×5 here)
+                    const px = Math.floor(j * dx);
+                    const py = Math.floor(i * dy);
+                    const bw = Math.min(Math.ceil(dx) + 1, width  - px);
+                    const bh = Math.min(Math.ceil(dy) + 1, height - py);
+
+                    for (let by = 0; by < bh; by++) {
+                        for (let bx = 0; bx < bw; bx++) {
+                            const pidx = ((py + by) * width + (px + bx)) * 4;
+                            pixels[pidx]     = r;
+                            pixels[pidx + 1] = g;
+                            pixels[pidx + 2] = b;
+                            pixels[pidx + 3] = 255;
+                        }
+                    }
                 }
             }
+            ctx.putImageData(imageData, 0, 0); // One GPU upload instead of 134,400 fillRect calls
 
             if (params.showStreamlines) {
                 particles.forEach(function (p) {
@@ -254,10 +283,11 @@ window.HeatSimulation = {
             ctx.beginPath();
             for (let i = 0; i < gridHeight; i++) {
                 for (let j = 0; j < gridWidth - 1; j++) {
-                    if (airfoilMask[i][j] && (!airfoilMask[i][j + 1] ||
-                        (i > 0 && !airfoilMask[i - 1][j]) ||
-                        (i < gridHeight - 1 && !airfoilMask[i + 1][j]) ||
-                        !airfoilMask[i][j - 1])) {
+                    const idx = i * gridWidth + j;
+                    if (airfoilMask[idx] && (!airfoilMask[idx + 1] ||
+                        (i > 0 && !airfoilMask[idx - gridWidth]) ||
+                        (i < gridHeight - 1 && !airfoilMask[idx + gridWidth]) ||
+                        !airfoilMask[idx - 1])) {
                         ctx.moveTo(j * dx, i * dy);
                         ctx.lineTo((j + 1) * dx, i * dy);
                     }
@@ -327,9 +357,10 @@ window.HeatSimulation = {
 
             for (let i = 1; i < gridHeight - 1; i++) {
                 for (let j = 1; j < gridWidth - 1; j++) {
-                    if (!airfoilMask[i][j] && (airfoilMask[i + 1][j] || airfoilMask[i - 1][j] ||
-                        airfoilMask[i][j + 1] || airfoilMask[i][j - 1])) {
-                        const dT = params.surfaceTemp - T[i][j];
+                    const idx = i * gridWidth + j;
+                    if (!airfoilMask[idx] && (airfoilMask[idx + gridWidth] || airfoilMask[idx - gridWidth] ||
+                        airfoilMask[idx + 1] || airfoilMask[idx - 1])) {
+                        const dT = params.surfaceTemp - T[idx];
                         totalFlux += k * dT / dx;
                         count++;
                     }
