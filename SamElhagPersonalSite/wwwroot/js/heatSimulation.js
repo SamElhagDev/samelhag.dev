@@ -50,6 +50,35 @@ window.HeatSimulation = {
         let airfoilMask = Array(gridHeight).fill(null).map(() => Array(gridWidth).fill(false));
         let particles = [];
 
+        // Add mouse tracking for temperature display
+        const hoverTempElement = document.getElementById('hoverTemp');
+        if (canvas && hoverTempElement) {
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+
+                const mouseX = (e.clientX - rect.left) * scaleX;
+                const mouseY = (e.clientY - rect.top) * scaleY;
+
+                const j = Math.floor(mouseX / dx);
+                const i = Math.floor(mouseY / dy);
+
+                if (i >= 0 && i < gridHeight && j >= 0 && j < gridWidth && T[i] && T[i][j] !== undefined) {
+                    const temp = T[i][j].toFixed(1);
+                    const tempC = (temp - 273.15).toFixed(1);
+                    const isAirfoil = airfoilMask[i][j] ? ' (Airfoil Surface)' : '(Air)';
+                    hoverTempElement.textContent = `Temperature: ${temp} K (${tempC} °C Cordinates: ${Math.round(mouseX)},${Math.round(mouseY)})${isAirfoil}`;
+                    hoverTempElement.style.display = 'block';
+                }
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                hoverTempElement.textContent = 'Hover over canvas to see temperature';
+                hoverTempElement.style.display = 'block';
+            });
+        }
+
         function nacaAirfoil(x, c) {
             c = c || 1.0;
             const t = 0.12;
