@@ -191,83 +191,71 @@
         The Path So Far: 
     </MudText>
 
-    <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelinePosition="TimelinePosition.Alternate">
-        <MudTimelineItem Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
-            <ItemOpposite>
-                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">Jul/2019 => Current</MudText>
-            </ItemOpposite>
-            <ItemContent>
-                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Software Engineer / Analyst</MudText>
-                    <MudText Typo="Typo.body1" Style="color: rgba(192, 192, 192, 0.9); font-weight: 600;">Steel Dynamics</MudText>
-                    <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Justify" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
-                        I leverage knowledge of object oriented design patterns to write clean and maintainable code to enhance SDI Flat Roll systems,
-                        work is primarily done in C#, with heavy emphasis on Entity Framework, Prism (WPF), SQL,WebAPI, IIS, and MVVM.
-                    </MudText>
-                </MudPaper>
-            </ItemContent>
-        </MudTimelineItem>
+    <div class="conveyor-section">
+        <div class="conveyor-wrapper">
+            <div class="conveyor-track">
+                @for (int idx = 0; idx < _milestones.Count; idx++)
+                {
+                    var milestone = _milestones[idx];
+                    var isLast = idx == _milestones.Count - 1;
 
-        <MudTimelineItem Color="Color.Secondary" Variant="Variant.Filled" Size="Size.Large">
-            <ItemOpposite>
-                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">July/2019</MudText>
-            </ItemOpposite>
-            <ItemContent>
-                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(139, 0, 0, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Student</MudText>
-                    <MudText Typo="Typo.body1" Style="color: rgba(220, 20, 60, 0.9); font-weight: 600;">West Virginia University</MudText>
-                    <MudText Typo="Typo.body1" Class="mt-3" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
-                        Graduated (B.S. in Mechanical Engineering)
-                    </MudText>
-                </MudPaper>
-            </ItemContent>
-        </MudTimelineItem>
+                    <div class="conveyor-tile">
+                        <MudPaper Elevation="0"
+                                  Class="@($"conveyor-tile-paper{(milestone.IsCurrent ? " is-current" : "")}")"
+                                  Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px);">
 
-        
-        <MudTimelineItem Color="Color.Secondary" Variant="Variant.Filled" Size="Size.Large">
-            <ItemOpposite>
-                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">Oct/2018 => Apr/2019</MudText>
-            </ItemOpposite>
-            <ItemContent>
-                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(139, 0, 0, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Application Developer (Contract)</MudText>
-                    <MudText Typo="Typo.body1" Style="color: rgba(220, 20, 60, 0.9); font-weight: 600;">Agile5 Technologies, Inc.</MudText>
-                    <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Justify" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
-                        Created and tested clean and maintainable code for client dashboards, work was primarily done in java, with a heavy emphasis on object-oriented design patterns and the integration of API Modules. Our team utilized agile methodologies to meet dynamic client requirements.
-                    </MudText>
-                </MudPaper>
-            </ItemContent>
-        </MudTimelineItem>
+                            @* Top row: category chip + optional Current chip *@
+                            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-2">
+                                <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                         Class="conveyor-chip-category">
+                                    @milestone.Category
+                                </MudChip>
+                                @if (milestone.IsCurrent)
+                                {
+                                    <MudChip T="string" Size="Size.Small" Color="Color.Success"
+                                             Variant="Variant.Filled" Class="conveyor-chip-current">
+                                        CURRENT
+                                    </MudChip>
+                                }
+                            </MudStack>
 
-        <MudTimelineItem Color="Color.Info" Variant="Variant.Filled" Size="Size.Large">
-            <ItemOpposite>
-                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">Jul/2017 => Jun/2018</MudText>
-            </ItemOpposite>
-            <ItemContent>
-                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Application Developer (CO-OP)</MudText>
-                    <MudText Typo="Typo.body1" Style="color: rgba(192, 192, 192, 0.9); font-weight: 600;">Core10</MudText>
-                    <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Justify" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
-                        I leveraged knowledge of object-oriented design patterns  to write clean and maintainable code for client reporting, work was primarily done in C#, with a heavy emphasis on interfacing with various API Modules. Our team utilized agile methodologies to meet dynamic client requirements.
-                    </MudText>
-                </MudPaper>
-            </ItemContent>
-        </MudTimelineItem>
+                            @* Role title *@
+                            <MudText Typo="Typo.h6" Class="conveyor-tile-title">
+                                @milestone.Role
+                            </MudText>
 
-        <MudTimelineItem Color="Color.Info" Variant="Variant.Filled" Size="Size.Large">
-            <ItemOpposite>
-                <MudText Typo="Typo.h6" Style="color: white; font-weight: 600;">Aug/2015</MudText>
-            </ItemOpposite>
-            <ItemContent>
-                <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Student</MudText>
-                    <MudText Typo="Typo.body1" Style="color: rgba(192, 192, 192, 0.9); font-weight: 600;">West Virginia University</MudText>
-                    <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Justify" Style="color: rgba(255,255,255,0.8); line-height: 1.8;">
-                        Started (B.S. in Mechanical Engineering)
-                    </MudText>
-                </MudPaper>
-            </ItemContent>
-        </MudTimelineItem>
+                            <MudDivider Class="conveyor-tile-divider" />
 
-    </MudTimeline>
+                            @* Organisation *@
+                            <MudText Typo="Typo.body2" Class="conveyor-tile-org">
+                                @milestone.Organisation
+                            </MudText>
+
+                            @* Date range *@
+                            <MudText Typo="Typo.caption" Class="conveyor-tile-date">
+                                @milestone.DateRange
+                            </MudText>
+
+                            @* Description — grows to fill remaining height *@
+                            <MudText Typo="Typo.body2" Class="conveyor-tile-description">
+                                @milestone.Description
+                            </MudText>
+
+                        </MudPaper>
+                    </div>
+
+                    @* Chevron connector — rendered between tiles, not after the last *@
+                    @if (!isLast)
+                    {
+                        <div class="conveyor-connector">
+                            <svg class="conveyor-chevron" viewBox="0 0 24 24"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </MudContainer>
