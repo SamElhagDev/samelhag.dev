@@ -1,0 +1,213 @@
+/* Conveyor belt timeline styles — scoped to About.razor */
+/* All rules here are automatically scoped by Blazor CSS isolation */
+
+
+/* ── Conveyor section wrapper ─────────────────────────────────────────── */
+.conveyor-section {
+    position: relative;
+    margin: 3rem 0 2rem;
+}
+
+/* ── Scroll container ─────────────────────────────────────────────────── */
+.conveyor-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+}
+
+/* ── Tile row + rail pseudo-element ───────────────────────────────────── */
+.conveyor-track {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;                        /* gap handled by connector divs */
+    padding: 3rem 2rem;
+    position: relative;
+    min-width: max-content;
+    scroll-snap-type: x mandatory;
+}
+
+.conveyor-track::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    right: 2rem;
+    height: 3px;
+    transform: translateY(-50%);
+    z-index: 0;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(91, 141, 239, 0.5) 10%,
+        rgba(91, 141, 239, 0.5) 90%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+/* ── Individual tile ──────────────────────────────────────────────────── */
+.conveyor-tile {
+    flex: 0 0 300px;
+    position: relative;
+    z-index: 1;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: stretch;
+}
+
+/* Top-right industrial notch accent */
+.conveyor-tile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    border-left: 2px solid rgba(91, 141, 239, 0.35);
+    border-bottom: 2px solid rgba(91, 141, 239, 0.35);
+    border-radius: 0 8px 0 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ── Tile surface ─────────────────────────────────────────────────────── */
+.conveyor-tile-paper {
+    border: 1px solid rgba(91, 141, 239, 0.2) !important;
+    border-radius: 8px !important;       /* SC-003: ≤ 8px — industrial geometry */
+    border-left: 3px solid rgba(91, 141, 239, 0.4) !important;
+    padding: 1.25rem !important;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.conveyor-tile-paper.is-current {
+    border-left-color: rgba(192, 192, 192, 0.65) !important;
+    box-shadow: 0 4px 30px rgba(192, 192, 192, 0.12) !important;
+}
+
+.conveyor-tile-paper:hover {
+    border-color: rgba(91, 141, 239, 0.45) !important;
+    box-shadow: 0 8px 36px rgba(91, 141, 239, 0.2) !important;
+}
+
+/* ── Chevron connector (between tiles) ────────────────────────────────── */
+.conveyor-connector {
+    flex: 0 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    position: relative;
+}
+
+.conveyor-chevron {
+    width: 20px;
+    height: 20px;
+    stroke: rgba(91, 141, 239, 0.45);
+    stroke-width: 2.5;
+    transition: stroke 0.25s ease;
+}
+
+.conveyor-tile:hover ~ .conveyor-connector .conveyor-chevron,
+.conveyor-connector:hover .conveyor-chevron {
+    stroke: rgba(91, 141, 239, 0.9);
+}
+
+
+/* ── Tile content typography ──────────────────────────────────────────── */
+.conveyor-tile-title {
+    color: white !important;
+    font-weight: 700 !important;
+    line-height: 1.3;
+    font-size: 1rem !important;
+}
+
+.conveyor-tile-divider {
+    margin: 0.35rem 0 !important;
+    border-color: rgba(91, 141, 239, 0.15) !important;
+}
+
+.conveyor-tile-org {
+    background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+}
+
+.conveyor-tile-date {
+    color: rgba(91, 141, 239, 0.75) !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.02em;
+}
+
+.conveyor-tile-description {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 0.85rem !important;
+    line-height: 1.6;
+    flex-grow: 1;           /* fills remaining tile height */
+    margin-top: 0.25rem;
+}
+
+
+/* ── Chips ────────────────────────────────────────────────────────────── */
+.conveyor-chip-category {
+    background: rgba(91, 141, 239, 0.12) !important;
+    color: rgba(124, 184, 255, 0.9) !important;
+    border-color: rgba(91, 141, 239, 0.3) !important;
+    font-size: 0.7rem !important;
+    height: 22px !important;
+}
+
+.conveyor-chip-current {
+    font-size: 0.7rem !important;
+    height: 22px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em;
+}
+
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+
+/* Tablet (≤ 960px): tiles slightly narrower, horizontal scroll retained */
+@media (max-width: 960px) {
+    .conveyor-tile {
+        flex: 0 0 280px;
+    }
+}
+
+/* Mobile (≤ 600px): narrower tiles, thinner rail */
+@media (max-width: 600px) {
+    .conveyor-tile {
+        flex: 0 0 240px;
+    }
+
+    .conveyor-track::before {
+        height: 2px;
+    }
+
+    .conveyor-track {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Reduced motion: disable transitions and scroll smoothing */
+@media (prefers-reduced-motion: reduce) {
+    .conveyor-tile-paper,
+    .conveyor-chevron {
+        transition: none !important;
+    }
+
+    .conveyor-wrapper {
+        scroll-behavior: auto;
+    }
+}
