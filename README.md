@@ -7,8 +7,7 @@
 ![MudBlazor](https://img.shields.io/badge/MudBlazor-8.0-7B68EE?style=for-the-badge)
 ![Azure](https://img.shields.io/badge/Azure-Ready-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white)
 
-**A modern, performant personal website built with cutting-edge .NET technologies**
-
+**A modern, performant personal website built with cutting-edge .NET technologies. Supported by Spec-Kit and .NET Aspire**
 </div>
 
 ---
@@ -18,7 +17,6 @@
 ### 🎨 Interactive Animated Background
 - **Procedurally generated maze** with animated particles
 - **Real-time signal pulses** traveling through corridors
-- **Floating mathematical symbols** (∇, ×, ·, ∂, ∫, etc.)
 - **Rotating basis vectors** and coordinate axes visualization
 - **Optimized rendering** at 30fps for smooth performance
 
@@ -32,7 +30,6 @@
 ### 💼 Portfolio Sections
 - **About Me** - Professional background and skills
 - **Projects** - Showcase of work with tech stacks
-- **Blog** - Technical articles and insights
 - **Contact** - Get in touch form
 
 ### ⚡ Performance Optimized
@@ -64,38 +61,6 @@
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 - [Visual Studio 2022/2026](https://visualstudio.microsoft.com/) or [VS Code](https://code.visualstudio.com/)
-
-## 📁 Project Structure
-
-```
-SamElhagPersonalSite/
-├── Components/
-│   ├── Layout/
-│   │   ├── MainLayout.razor       # Main application layout
-│   │   ├── NavMenu.razor          # Navigation component
-│   │   └── ReconnectModal.razor   # SignalR reconnection UI
-│   ├── Pages/
-│   │   ├── Home.razor             # Landing page
-│   │   ├── About.razor            # About me section
-│   │   ├── Projects.razor         # Portfolio projects
-│   │   ├── Blog.razor             # Blog articles
-│   │   ├── Contact.razor          # Contact form
-│   │   └── HeatTransferMudBlazor.razor  # Heat simulation
-│   └── Shared/
-│       ├── OptimizedImage.razor   # Lazy-loaded images
-│       └── PerformanceMonitor.razor # Dev performance stats
-├── wwwroot/
-│   ├── css/
-│   │   └── app.css                # Global styles
-│   ├── js/
-│   │   ├── maze-background.js     # Animated background
-│   │   └── heatSimulation.js      # Heat transfer sim
-│   └── images/                    # Static images
-├── Program.cs                     # Application entry point
-└── App.razor                      # Root component
-```
-
----
 
 ## 🎯 Key Components
 
@@ -140,8 +105,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 🌐 Website: [samelhag.dev](https://samelhag.dev)
 - 📧 Email: sami.eltaj.elhag@gmail.com
 - 💼 LinkedIn: [Sam Elhag](https://linkedin.com/in/samelhag)
-- 🐙 GitHub: [@SamElhagDev](https://github.com/SamElhagDev)
-
 ---
 
 <div align="center">
