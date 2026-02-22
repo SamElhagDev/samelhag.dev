@@ -6,6 +6,8 @@
 ![Blazor](https://img.shields.io/badge/Blazor-Server-512BD4?style=for-the-badge&logo=blazor&logoColor=white)
 ![MudBlazor](https://img.shields.io/badge/MudBlazor-8.0-7B68EE?style=for-the-badge)
 ![Azure](https://img.shields.io/badge/Azure-Ready-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white)
+ <h1>🌱 Spec Kit</h1>
+
 
 **A modern, performant personal website built with cutting-edge .NET technologies. Supported by Spec-Kit and .NET Aspire**
 </div>
