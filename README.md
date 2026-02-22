@@ -1,4 +1,4 @@
-# Sam Elhag - Personal Portfolio Website
+# Sam Elhag - Personal Website
 
 <div align="center">
 
@@ -7,7 +7,7 @@
 ![MudBlazor](https://img.shields.io/badge/MudBlazor-8.0-7B68EE?style=for-the-badge)
 ![Azure](https://img.shields.io/badge/Azure-Ready-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white)
 
-**A modern, performant personal portfolio website built with cutting-edge .NET technologies**
+**A modern, performant personal website built with cutting-edge .NET technologies**
 
 </div>
 
