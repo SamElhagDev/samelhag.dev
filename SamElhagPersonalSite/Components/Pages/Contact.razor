@@ -1,6 +1,9 @@
 @page "/contact"
 @using MudBlazor
 @using System.ComponentModel.DataAnnotations
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <PageTitle>Contact - Sam Elhag</PageTitle>
 
@@ -183,4 +186,6 @@
         public string Subject { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;
     }
+
+    public void Dispose() { }
 }

@@ -1,5 +1,9 @@
 @page "/projects"
 @using MudBlazor
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
 
 <PageTitle>Projects - Sam Elhag</PageTitle>
 
@@ -50,3 +54,8 @@
         </MudGrid>
     </MudPaper>
 </MudContainer>
+
+@code {
+
+    public void Dispose() { }
+}

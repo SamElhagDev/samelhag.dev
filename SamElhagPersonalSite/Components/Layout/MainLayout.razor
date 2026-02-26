@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @using MudBlazor
+@inject IJSRuntime JS
+@inject NavigationManager Nav
 
 <MudLayout>
     <MudAppBar Elevation="0" Dense="false" Style="background: rgba(10, 15, 30, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(91, 141, 239, 0.2);">
@@ -134,3 +136,10 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+       
+    }
+}
