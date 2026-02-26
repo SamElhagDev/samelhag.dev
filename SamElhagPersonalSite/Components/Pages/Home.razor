@@ -1,5 +1,10 @@
 @page "/"
 @using MudBlazor
+@inject IJSRuntime JS
+@implements IDisposable
+@inject NavigationManager Nav
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
 
 <PageTitle>Sam Elhag - Software Developer</PageTitle>
 
@@ -10,7 +15,7 @@
             <MudText Typo="Typo.h1" Class="mb-6" Style="font-weight: 800; font-size: 2.75rem; line-height: 1.2; color: rgba(255,255,255,0.95); text-shadow: 0 0 40px rgba(139, 0, 0, 0.3);">
                 Hi, I'm Sam Elhag 🚀
             </MudText>
-            <MudText Typo="Typo.h4" Class="mb-6" Style="background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 50%, #6FC9D7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">
+            <MudText Typo="Typo.h4" Class="mb-6" Style="background: linear-gradient(135deg, #ffffff  0%, #ffffff  50%, #ffffff  100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">
                 Developer - Analyst - Engineer
             </MudText>
             <MudText Typo="Typo.h6" Class="mb-10" Style="color: rgba(255,255,255,0.65); font-weight: 400; line-height: 1.8; max-width: 800px; margin-left: auto; margin-right: auto;">
@@ -35,10 +40,10 @@
 <MudPaper Elevation="0" Class="pa-8" Style="background: rgba(22, 33, 62, 0.4); backdrop-filter: blur(20px); border-top: 1px solid rgba(192, 192, 192, 0.1); border-bottom: 1px solid rgba(192, 192, 192, 0.1);">
     <MudContainer MaxWidth="MaxWidth.Large">
         <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-3" Style="font-weight: 700; color: rgba(255,255,255,0.95);">
-            Technologies I Work With
+            Technologies & Tools
         </MudText>
         <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="color: rgba(255,255,255,0.5); font-weight: 400;">
-            Modern tools and frameworks for building exceptional solutions
+            Modern tools and frameworks that underpin my personal and professional projects
         </MudText>
         <MudGrid Justify="Justify.Center" Spacing="4">
         <MudItem xs="6" sm="4" md="2">
@@ -77,6 +82,78 @@
                 <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">APIs</MudText>
             </MudPaper>
         </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftAzure" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET Aspire</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Cloud" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Azure</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Javascript" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Javascript</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Size="Size.Large" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">WPF</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Storage" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">SQL Lite</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftWindows" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">IIS</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftVisualStudio" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Cloud" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Azure</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Code" Size="Size.Large" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Rust</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Web" Size="Size.Large" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Razor</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Storage" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Redis</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Api" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">APIs</MudText>
+                </MudPaper>
+            </MudItem>
     </MudGrid>
     </MudContainer>
 </MudPaper>
@@ -119,3 +196,8 @@
         </MudButton>
     </MudStack>
 </MudContainer>
+
+@code {
+
+    public void Dispose() { }
+}

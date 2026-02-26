@@ -3,11 +3,6 @@ window._mazeBackgroundInitialized = window._mazeBackgroundInitialized || false;
 window._mazeAnimationId = window._mazeAnimationId || null;
 
 function initMazeBackground() {
-  // Prevent re-initialization if already running
-  if (window._mazeBackgroundInitialized) {
-    return;
-  }
-
   var canvas = document.getElementById('bg');
   if (!canvas) {
     setTimeout(initMazeBackground, 100);
@@ -441,18 +436,6 @@ function initMazeBackground() {
     }, 500); // Wait 500ms after resize stops before rebuilding (prevents image load triggers)
   });
 
-  // Lock resizing when any navigation link is clicked
-  document.addEventListener('click', function(e) {
-    var target = e.target;
-    // Check if clicked element or its parent is a link
-    while (target && target !== document) {
-      if (target.tagName === 'A' || target.tagName === 'BUTTON') {
-        lockNavigationResize();
-        break;
-      }
-      target = target.parentElement;
-    }
-  }, true);
 }
 
 // Initialize when DOM is ready
