@@ -30,6 +30,12 @@ jobs:
     - name: Publish
       run: dotnet publish ./SamElhagPersonalSite/SamElhagPersonalSite.csproj --configuration Release --output ./publish
 
+    - name: Stop IIS Site
+      run: |
+        Import-Module WebAdministration
+        Stop-WebSite -Name "SamElhagDev"
+      shell: powershell
+
     - name: Stop IIS App Pool
       run: |
         Import-Module WebAdministration
@@ -44,25 +50,19 @@ jobs:
         Write-Host "App pool stopped after $elapsed second(s)"
       shell: powershell
 
-    - name: Stop IIS Site
-      run: |
-        Import-Module WebAdministration
-        Stop-WebSite -Name "SamElhagDev"
-      shell: powershell
-
     - name: Deploy to IIS
       run: |
         Copy-Item -Path "./publish/*" -Destination "C:\inetpub\sites\SamElhagDev" -Recurse -Force
-      shell: powershell
-
-    - name: Start IIS Site
-      run: |
-        Import-Module WebAdministration
-        Start-WebSite -Name "SamElhagDev"
       shell: powershell
 
     - name: Start IIS App Pool
       run: |
         Import-Module WebAdministration
         Start-WebAppPool -Name "SamElhag.Dev"
+      shell: powershell
+
+    - name: Start IIS Site
+      run: |
+        Import-Module WebAdministration
+        Start-WebSite -Name "SamElhagDev"
       shell: powershell
