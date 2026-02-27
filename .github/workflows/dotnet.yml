@@ -34,6 +34,14 @@ jobs:
       run: |
         Import-Module WebAdministration
         Stop-WebAppPool -Name "SamElhag.Dev"
+        $timeout = 120
+        $elapsed = 0
+        while ((Get-WebAppPoolState -Name "SamElhag.Dev").Value -ne "Stopped") {
+          if ($elapsed -ge $timeout) { throw "App pool did not stop within $timeout seconds" }
+          Start-Sleep -Seconds 1
+          $elapsed++
+        }
+        Write-Host "App pool stopped after $elapsed second(s)"
       shell: powershell
 
     - name: Stop IIS Site
