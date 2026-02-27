@@ -30,6 +30,12 @@ jobs:
     - name: Publish
       run: dotnet publish ./SamElhagPersonalSite/SamElhagPersonalSite.csproj --configuration Release --output ./publish
 
+    - name: Stop IIS App Pool
+      run: |
+        Import-Module WebAdministration
+        Stop-WebAppPool -Name "SamElhag.Dev"
+      shell: powershell
+
     - name: Stop IIS Site
       run: |
         Import-Module WebAdministration
@@ -45,4 +51,10 @@ jobs:
       run: |
         Import-Module WebAdministration
         Start-WebSite -Name "SamElhagDev"
+      shell: powershell
+
+    - name: Start IIS App Pool
+      run: |
+        Import-Module WebAdministration
+        Start-WebAppPool -Name "SamElhag.Dev"
       shell: powershell
