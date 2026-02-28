@@ -2,17 +2,28 @@
 window._mazeBackgroundInitialized = window._mazeBackgroundInitialized || false;
 window._mazeAnimationId = window._mazeAnimationId || null;
 window._mazeIntervalId = window._mazeIntervalId || null;
+window._mazeCanvas = window._mazeCanvas || null;
 
 function initMazeBackground() {
-  // Prevent multiple animation loops from stacking up
-  if (window._mazeBackgroundInitialized) {
-    return;
-  }
-
   var canvas = document.getElementById('bg');
   if (!canvas) {
     setTimeout(initMazeBackground, 100);
     return;
+  }
+
+  // If already running on this exact canvas element, skip
+  if (window._mazeBackgroundInitialized && window._mazeCanvas === canvas) {
+    return;
+  }
+
+  // Canvas was replaced by Blazor navigation — tear down old instance
+  if (window._mazeAnimationId) {
+    cancelAnimationFrame(window._mazeAnimationId);
+    window._mazeAnimationId = null;
+  }
+  if (window._mazeIntervalId) {
+    clearInterval(window._mazeIntervalId);
+    window._mazeIntervalId = null;
   }
 
   var ctx = canvas.getContext('2d');
@@ -21,6 +32,7 @@ function initMazeBackground() {
     return;
   }
 
+  window._mazeCanvas = canvas;
   window._mazeBackgroundInitialized = true;
 
   var W, H, time = 0;
@@ -388,6 +400,12 @@ function initMazeBackground() {
   var targetFPS = 30; // Reduced from 60fps for better performance
   var frameInterval = 1000 / targetFPS;
 
+  function rebuildAll() {
+    buildMaze();
+    for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
+    for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
+  }
+
   function animate(currentTime) {
     // Throttle to target FPS
     if (currentTime - lastFrameTime < frameInterval) {
@@ -395,6 +413,29 @@ function initMazeBackground() {
       return;
     }
     lastFrameTime = currentTime;
+
+    // Self-heal: detect if Blazor replaced the canvas element
+    var liveCanvas = document.getElementById('bg');
+    if (liveCanvas && liveCanvas !== canvas) {
+      canvas = liveCanvas;
+      ctx = canvas.getContext('2d');
+      window._mazeCanvas = canvas;
+      doResize(true);
+      rebuildAll();
+    }
+
+    // Self-heal: detect if canvas dimensions were reset (e.g. by Blazor DOM merge)
+    var expectedW = Math.floor(W * DPR);
+    var expectedH = Math.floor(H * DPR);
+    if (canvas.width !== expectedW || canvas.height !== expectedH) {
+      canvas.width = expectedW;
+      canvas.height = expectedH;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+    }
+
+    // Always re-apply transform (setting canvas.width resets context state)
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
     time += 0.016;
     ctx.clearRect(0, 0, W, H);
@@ -446,4 +487,23 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initMazeBackground);
 } else {
   initMazeBackground();
+}
+
+// Re-initialize after Blazor enhanced navigation if canvas was replaced
+function _mazeCheckAfterNavigation() {
+  var canvas = document.getElementById('bg');
+  if (canvas && canvas !== window._mazeCanvas) {
+    window._mazeBackgroundInitialized = false;
+    initMazeBackground();
+  }
+}
+if (window.Blazor) {
+  window.Blazor.addEventListener('enhancednavigationend', _mazeCheckAfterNavigation);
+} else {
+  // Blazor may not be ready yet — wait for it
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Blazor) {
+      window.Blazor.addEventListener('enhancednavigationend', _mazeCheckAfterNavigation);
+    }
+  });
 }
