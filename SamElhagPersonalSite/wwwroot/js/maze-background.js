@@ -1,8 +1,14 @@
 // Global state to track if maze is already running
 window._mazeBackgroundInitialized = window._mazeBackgroundInitialized || false;
 window._mazeAnimationId = window._mazeAnimationId || null;
+window._mazeIntervalId = window._mazeIntervalId || null;
 
 function initMazeBackground() {
+  // Prevent multiple animation loops from stacking up
+  if (window._mazeBackgroundInitialized) {
+    return;
+  }
+
   var canvas = document.getElementById('bg');
   if (!canvas) {
     setTimeout(initMazeBackground, 100);
@@ -11,7 +17,7 @@ function initMazeBackground() {
 
   var ctx = canvas.getContext('2d');
   if (!ctx) {
-    console.error('❌ Failed to get canvas 2D context');
+    console.error('Failed to get canvas 2D context');
     return;
   }
 
@@ -150,8 +156,8 @@ function initMazeBackground() {
 
   function drawMaze() {
     if (!maze) return;
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = 'rgba(91, 156, 245, 0.8)'; // Bright blue, very visible
+    ctx.lineWidth = 0.8;
+    ctx.strokeStyle = 'rgba(91, 156, 245, 0.12)';
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
         var x = c * CELL, y = r * CELL;
@@ -163,8 +169,8 @@ function initMazeBackground() {
       for (var c = 0; c < cols; c++) {
         var conns = (adj[nodeKey(r,c)] || []).length;
         if (conns >= 2) {
-          ctx.fillStyle = 'rgba(167, 139, 250, 0.8)'; // Bright purple
-          ctx.beginPath(); ctx.arc(c * CELL, r * CELL, 3, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = 'rgba(167, 139, 250, 0.15)';
+          ctx.beginPath(); ctx.arc(c * CELL, r * CELL, 2, 0, Math.PI * 2); ctx.fill();
         }
       }
     }
@@ -376,8 +382,6 @@ function initMazeBackground() {
   var sCount = Math.min(15, Math.floor((W * H) / 80000)); // Reduced from 25
   for (var i = 0; i < sCount; i++) { symbols.push(makeSymbol()); }
 
-  console.log(`🚀 Maze initialized: ${pCount} particles, ${plCount} pulses, ${sCount} symbols (optimized)`);
-  console.log(`📐 Grid size: ${cols}x${rows}, Cell: ${CELL}px, Canvas: ${W}x${H}`);
 
   var frameCount = 0;
   var lastFrameTime = 0;
@@ -387,7 +391,7 @@ function initMazeBackground() {
   function animate(currentTime) {
     // Throttle to target FPS
     if (currentTime - lastFrameTime < frameInterval) {
-      requestAnimationFrame(animate);
+      window._mazeAnimationId = requestAnimationFrame(animate);
       return;
     }
     lastFrameTime = currentTime;
@@ -402,18 +406,17 @@ function initMazeBackground() {
     for (var i = 0; i < particles.length; i++) { tickParticle(particles[i]); renderParticle(particles[i]); }
     drawBasisVectors(); drawAxesHint();
 
-    // Log first frame to confirm animation is running
-    if (frameCount === 0) {
-      console.log('🎬 First frame rendered');
-      console.log('🖼️ Drawing maze with', rows, 'rows and', cols, 'cols');
-    }
     frameCount++;
 
-    requestAnimationFrame(animate);
+    window._mazeAnimationId = requestAnimationFrame(animate);
   }
-  requestAnimationFrame(animate);
+  window._mazeAnimationId = requestAnimationFrame(animate);
 
-  setInterval(function() {
+  // Store interval ID so it can be cleared if needed
+  if (window._mazeIntervalId) {
+    clearInterval(window._mazeIntervalId);
+  }
+  window._mazeIntervalId = setInterval(function() {
     buildMaze();
     for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
     for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
@@ -433,7 +436,7 @@ function initMazeBackground() {
         for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
         for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
       }
-    }, 500); // Wait 500ms after resize stops before rebuilding (prevents image load triggers)
+    }, 1000); // Wait 500ms after resize stops before rebuilding (prevents image load triggers)
   });
 
 }
