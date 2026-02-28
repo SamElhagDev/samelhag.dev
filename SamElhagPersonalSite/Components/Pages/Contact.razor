@@ -3,6 +3,7 @@
 @using System.ComponentModel.DataAnnotations
 @inject IJSRuntime JS
 @inject NavigationManager Nav
+@inject ISnackbar Snackbar
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <PageTitle>Contact - Sam Elhag</PageTitle>
@@ -46,9 +47,14 @@
                                         Lines="6" Required="true" RequiredError="Message is required" />
                         </MudItem>
                         <MudItem xs="12">
-                            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" 
-                                     Size="Size.Large" OnClick="SubmitForm" StartIcon="@Icons.Material.Filled.Send">
-                                Send Message
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       FullWidth="true"
+                                       Size="Size.Large"
+                                       Disabled="@isSubmitting"
+                                       OnClick="SubmitForm"
+                                       StartIcon="@Icons.Material.Filled.Send">
+                                @(isSubmitting ? "Sending…" : "Send Message")
                             </MudButton>
                         </MudItem>
                     </MudGrid>
@@ -164,17 +170,40 @@
 
 @code {
     private MudForm? form;
+    private bool isSubmitting;
     private ContactFormModel model = new();
 
     private async Task SubmitForm()
     {
         await form!.Validate();
 
-        if (form.IsValid)
+        if (!form.IsValid)
         {
-            // TODO: Implement form submission logic
-            // For now, just show a success message
-            Console.WriteLine($"Form submitted: {model.FirstName} {model.LastName} - {model.Email}");
+            Snackbar.Add("Please fix the validation errors.", Severity.Warning);
+            return;
+        }
+
+        isSubmitting = true;
+        try
+        {
+            // simulate server call
+            await Task.Delay(800);
+
+            Snackbar.Add("Submission successful — I'll get back to you shortly.", Severity.Success);
+
+            // reset model and form
+            model = new ContactFormModel();
+            await form.ResetAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("An error occurred. Please try again.", Severity.Error);
+            Console.Error.WriteLine(ex);
+        }
+        finally
+        {
+            isSubmitting = false;
+            StateHasChanged();
         }
     }
 

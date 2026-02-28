@@ -3,10 +3,15 @@
 @inject IJSRuntime JS
 @inject NavigationManager Nav
 
+<MudThemeProvider IsDarkMode="true" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
 <MudLayout>
     <MudAppBar Elevation="0" Dense="false" Style="background: rgba(10, 15, 30, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(91, 141, 239, 0.2);">
         <MudText Typo="Typo.h6" Class="ml-3" Style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.03em; background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 50%, #6FC9D7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            Sam.E
+            [Sam Elhag] / [Sam.E]
         </MudText>
         <MudSpacer />
         <MudStack Row="true" Spacing="1" Class="mr-3">
@@ -36,11 +41,10 @@
                 <MudGrid Spacing="6">
                     <MudItem xs="12" md="5">
                         <MudText Typo="Typo.h4" Style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.03em; background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 50%, #6FC9D7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px;">
-                            Sam.E
+                             [Sam Elhag] / [Sam.E]
                         </MudText>
                         <MudText Typo="Typo.body1" Style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; font-weight: 400;">
-                            Crafting modern web applications and cloud solutions with passion and precision. 
-                            Always learning, always building.
+                            Always learning, Always building.
                         </MudText>
                         <MudStack Row="true" Spacing="3" Class="mt-6">
                             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" 
@@ -123,7 +127,7 @@
                 </MudGrid>
                 <MudDivider Class="my-8" Style="background: rgba(192, 192, 192, 0.2);" />
                 <MudText Typo="Typo.body1" Align="Align.Center" Style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.5); font-size: 0.95rem; font-weight: 400;">
-                    © @DateTime.Now.Year Sam Elhag. All rights reserved. Built with ❤️ using Blazor & MudBlazor.
+                    © @DateTime.Now.Year Sam Elhag. All rights reserved.
                 </MudText>
             </MudContainer>
         </MudPaper>
