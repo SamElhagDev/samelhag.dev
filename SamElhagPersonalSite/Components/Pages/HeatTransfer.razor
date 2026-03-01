@@ -327,14 +327,14 @@
             if (!hasLoaded)
             {
                 // Mark as loaded and reload the page
-                await JS.InvokeVoidAsync("siteInterop.setSessionFlag", "katexLoaded");
                 await JS.InvokeVoidAsync("siteInterop.reloadPage");
+                await JS.InvokeVoidAsync("siteInterop.setSessionFlag", "katexLoaded");
             }
             else
             {
                 // After reload, initialize normally
                 await JS.InvokeVoidAsync("HeatSimulation.init");
-            await JS.InvokeVoidAsync("renderKatexInDocument");
+                await JS.InvokeVoidAsync("renderKatexInDocument");
             }
         }
     }

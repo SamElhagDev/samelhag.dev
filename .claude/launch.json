@@ -10,7 +10,7 @@
     {
       "name": "SamElhagPersonalSite (HTTPS)",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite/SamElhagPersonalSite.csproj"],
+      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite/SamElhagPersonalSite.csproj", "--launch-profile", "https"],
       "port": 7063
     },
     {
@@ -22,14 +22,8 @@
     {
       "name": "SamElhagPersonalSite.AppHost (HTTPS)",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite.AppHost/SamElhagPersonalSite.AppHost.csproj"],
+      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite.AppHost/SamElhagPersonalSite.AppHost.csproj", "--launch-profile", "https"],
       "port": 17296
-    },
-    {
-      "name": "inheritance-preview",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["C:/Program Files/nodejs/node_modules/npm/bin/npx-cli.js", "http-server", ".", "-p", "8765", "-c-1"],
-      "port": 8765
     }
   ]
 }
