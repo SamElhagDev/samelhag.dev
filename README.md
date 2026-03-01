@@ -26,7 +26,7 @@
 - **NACA 0012 Airfoil** transient heat analysis
 - **Finite difference method** visualization
 - **Interactive parameters**: thermal diffusivity, airspeed, temperature
-- **Real-time statistics**: Reynolds, Prandtl, Nusselt numbers
+- **Dimensionless Numbers**: Reynolds, Prandtl, Nusselt numbers
 - **KaTeX** rendered mathematical equations
 
 ### 💼 Portfolio Sections
@@ -96,7 +96,7 @@ See [PERFORMANCE.md](PERFORMANCE.md) for detailed optimization documentation.
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU AFFERO GENERALLicense - see the [LICENSE](LICENSE) file for details.
 
 ---
 
