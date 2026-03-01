@@ -8,18 +8,18 @@
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-8">
     <!-- Header -->
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Style="font-weight: 700; color: rgba(255,255,255,0.95);">
         Get In Touch
     </MudText>
-    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8">
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="color: rgba(255,255,255,0.5); font-weight: 400;">
         Have a project in mind or want to collaborate? I'd love to hear from you!
     </MudText>
 
     <MudGrid Justify="Justify.Center">
         <!-- Contact Form -->
         <MudItem xs="12" md="7">
-            <MudPaper Elevation="3" Class="pa-6">
-                <MudText Typo="Typo.h5" GutterBottom="true" Class="mb-4">Send me a message</MudText>
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 20px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <MudText Typo="Typo.h5" GutterBottom="true" Class="mb-4" Style="color: white; font-weight: 700;">Send me a message</MudText>
                 
                 <MudForm @ref="form">
                     <MudGrid>
@@ -46,12 +46,12 @@
                         </MudItem>
                         <MudItem xs="12">
                             <MudButton Variant="Variant.Filled"
-                                       Color="Color.Primary"
                                        FullWidth="true"
                                        Size="Size.Large"
                                        Disabled="@isSubmitting"
                                        OnClick="SubmitForm"
-                                       StartIcon="@Icons.Material.Filled.Send">
+                                       StartIcon="@Icons.Material.Filled.Send"
+                                       Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; font-weight: 600; border-radius: 10px; text-transform: none; box-shadow: 0 8px 32px rgba(91, 141, 239, 0.5); transition: all 0.3s;">
                                 @(isSubmitting ? "Sending…" : "Send Message")
                             </MudButton>
                         </MudItem>
@@ -64,51 +64,60 @@
         <MudItem xs="12" md="5">
             <MudStack Spacing="4">
                 <!-- Contact Details -->
-                <MudPaper Elevation="2" Class="pa-4">
-                    <MudText Typo="Typo.h6" GutterBottom="true" Class="mb-4">Contact Information</MudText>
-                    
+                <MudPaper Elevation="0" Class="pa-4" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 20px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudText Typo="Typo.h6" GutterBottom="true" Class="mb-4" Style="color: white; font-weight: 700;">Contact Information</MudText>
+
                     <MudStack Spacing="3">
-                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
-                            <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Primary" />
+                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                            <div style="background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 100%); padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: white; font-size: 1.2rem;" />
+                            </div>
                             <div>
-                                <MudText Typo="Typo.body2" Color="Color.Secondary">Email</MudText>
-                                <MudText Typo="Typo.body1">sami.eltaj.elhag@gmail.com</MudText>
+                                <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.5);">Email</MudText>
+                                <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.95);">sami.eltaj.elhag@gmail.com</MudText>
                             </div>
                         </MudStack>
 
-                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
-                            <MudIcon Icon="@Icons.Material.Filled.Phone" Color="Color.Primary" />
+                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                            <div style="background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 100%); padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.Phone" Style="color: white; font-size: 1.2rem;" />
+                            </div>
                             <div>
-                                <MudText Typo="Typo.body2" Color="Color.Secondary">Phone</MudText>
-                                <MudText Typo="Typo.body1">+1 (304) 435-8767</MudText>
+                                <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.5);">Phone</MudText>
+                                <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.95);">+1 (304) 435-8767</MudText>
                             </div>
                         </MudStack>
 
-                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
-                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" Color="Color.Primary" />
+                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                            <div style="background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 100%); padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="color: white; font-size: 1.2rem;" />
+                            </div>
                             <div>
-                                <MudText Typo="Typo.body2" Color="Color.Secondary">Location</MudText>
-                                <MudText Typo="Typo.body1">Pittsburgh, PA</MudText>
+                                <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.5);">Location</MudText>
+                                <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.95);">Pittsburgh, PA</MudText>
                             </div>
                         </MudStack>
                     </MudStack>
                 </MudPaper>
 
                 <!-- Social Links -->
-                <MudPaper Elevation="2" Class="pa-4">
-                    <MudText Typo="Typo.h6" GutterBottom="true" Class="mb-4">Connect with me</MudText>
-                    
+                <MudPaper Elevation="0" Class="pa-4" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 20px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudText Typo="Typo.h6" GutterBottom="true" Class="mb-4" Style="color: white; font-weight: 700;">Connect with me</MudText>
+
                     <MudStack Spacing="2">
-                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" FullWidth="true"
-                                 StartIcon="@Icons.Custom.Brands.GitHub" Href="https://github.com/SamElhagDev" Target="_blank">
+                        <MudButton Variant="Variant.Outlined" FullWidth="true"
+                                 StartIcon="@Icons.Custom.Brands.GitHub" Href="https://github.com/SamElhagDev" Target="_blank"
+                                 Style="border: 2px solid rgba(91, 141, 239, 0.5); color: #E8F0FF; background: rgba(91, 141, 239, 0.1); backdrop-filter: blur(10px); border-radius: 10px; text-transform: none; font-weight: 600; transition: all 0.3s;">
                             GitHub
                         </MudButton>
-                        <MudButton Variant="Variant.Outlined" Color="Color.Info" FullWidth="true"
-                                 StartIcon="@Icons.Custom.Brands.LinkedIn" Href="https://www.linkedin.com/in/sam-elhag-b82312102/" Target="_blank">
+                        <MudButton Variant="Variant.Outlined" FullWidth="true"
+                                 StartIcon="@Icons.Custom.Brands.LinkedIn" Href="https://www.linkedin.com/in/sam-elhag-b82312102/" Target="_blank"
+                                 Style="border: 2px solid rgba(111, 201, 215, 0.5); color: #E8F0FF; background: rgba(111, 201, 215, 0.1); backdrop-filter: blur(10px); border-radius: 10px; text-transform: none; font-weight: 600; transition: all 0.3s;">
                             LinkedIn
                         </MudButton>
-                        <MudButton Variant="Variant.Outlined" Color="Color.Secondary" FullWidth="true"
-                                 StartIcon="@Icons.Custom.Brands.Twitter" Href="https://x.com/SamEElhag" Target="_blank">
+                        <MudButton Variant="Variant.Outlined" FullWidth="true"
+                                 StartIcon="@Icons.Custom.Brands.Twitter" Href="https://x.com/SamEElhag" Target="_blank"
+                                 Style="border: 2px solid rgba(91, 141, 239, 0.5); color: #E8F0FF; background: rgba(91, 141, 239, 0.1); backdrop-filter: blur(10px); border-radius: 10px; text-transform: none; font-weight: 600; transition: all 0.3s;">
                             Twitter
                         </MudButton>
                     </MudStack>
