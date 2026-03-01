@@ -1,4 +1,4 @@
-# samelhag.dev - Personal Website
+# Personal Website (samelhag.dev)
 
 <div align="center">
 
