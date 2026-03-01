@@ -101,7 +101,6 @@ function initMazeBackground() {
     // Release lock after 1 second
     navigationLockTimeout = setTimeout(function() {
       isNavigating = false;
-      console.log('🔓 Navigation lock released');
     }, 1000);
   }
 
@@ -472,12 +471,11 @@ function initMazeBackground() {
     window._resizeTimeout = setTimeout(function() {
       // Only rebuild if dimensions actually changed
       if (doResize(false)) {
-        console.log('🔄 Window resized, rebuilding maze');
         buildMaze();
         for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
         for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
       }
-    }, 1000); // Wait 500ms after resize stops before rebuilding (prevents image load triggers)
+    }, 1000); // Debounce: wait 1s after resize stops before rebuilding
   });
 
 }

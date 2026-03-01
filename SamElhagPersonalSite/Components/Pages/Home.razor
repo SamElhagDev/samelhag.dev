@@ -1,8 +1,5 @@
 @page "/"
 @using MudBlazor
-@inject IJSRuntime JS
-@implements IDisposable
-@inject NavigationManager Nav
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 
@@ -45,187 +42,192 @@
             Modern tools and frameworks that underpin my personal and professional projects
         </MudText>
         <MudGrid Justify="Justify.Center" Spacing="4">
-        <MudItem xs="6" sm="4" md="2">
-            <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                <MudIcon Icon="@Icons.Custom.Brands.MicrosoftVisualStudio" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET</MudText>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="6" sm="4" md="2">
-            <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                <MudIcon Icon="@Icons.Material.Filled.Cloud" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Azure</MudText>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="6" sm="4" md="2">
-            <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                <MudIcon Icon="@Icons.Material.Filled.Code" Size="Size.Large" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
-                <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">C#</MudText>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="6" sm="4" md="2">
-            <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                <MudIcon Icon="@Icons.Material.Filled.Web" Size="Size.Large" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
-                <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Blazor</MudText>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="6" sm="4" md="2">
-            <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                <MudIcon Icon="@Icons.Material.Filled.Storage" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">SQL</MudText>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="6" sm="4" md="2">
-            <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                <MudIcon Icon="@Icons.Material.Filled.Api" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">APIs</MudText>
-            </MudPaper>
-        </MudItem>
+            <!-- Row 1: Core platform -->
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftAzure" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET Aspire</MudText>
+                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftVisualStudio" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Cloud" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftAzure" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Azure</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <i class="fa-brands fa-rust" Size="Size.Large" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));"></i>
+                    <MudIcon Icon="@Icons.Material.Filled.Code" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">C#</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <i class="fa-solid fa-fire mb-2" style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Blazor</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <i class="fa-solid fa-database mb-2" style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">SQL</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Api" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">APIs</MudText>
+                </MudPaper>
+            </MudItem>
+            <!-- Row 2: Frameworks & tools -->
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Hub" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET Aspire</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <i class="fa-brands fa-rust mb-2" style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5)); display: block;"></i>
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Rust</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Size="Size.Large" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.DesktopWindows" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">WPF</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Storage" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">SQL Lite</MudText>
+                    <i class="fa-solid fa-feather mb-2" style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">SQLite</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftWindows" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.Dns" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">IIS</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <i class="fa-brands fa-docker" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));"></i>
+                    <i class="fa-brands fa-docker mb-2" style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5)); display: block;"></i>
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Docker</MudText>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Cloud" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Azure</MudText>
-                </MudPaper>
-            </MudItem>
+            <!-- Row 3: Languages & data -->
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Code" Size="Size.Large" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.TableChart" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">T-SQL</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Web" Size="Size.Large" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.IntegrationInstructions" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Razor</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Storage" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <i class="fa-solid fa-bolt mb-2" style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5)); display: block;"></i>
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Redis</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Api" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">APIs</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftVisualStudio" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Cloud" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Azure</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Code" Size="Size.Large" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.Code" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">F#</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <i class="fa-brands fa-html5" Size="Size.Large" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));"></i>
+                    <i class="fa-brands fa-html5 mb-2" style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5)); display: block;"></i>
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">HTML/CSS</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Storage" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Redis</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Api" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">APIs</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Custom.Brands.MicrosoftVisualStudio" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">.NET</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Cloud" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Azure</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="6" sm="4" md="2">
-                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Javascript" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <i class="fa-brands fa-js mb-2" style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5)); display: block;"></i>
                     <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Javascript</MudText>
                 </MudPaper>
             </MudItem>
+            <!-- Row 4: Frameworks & frontend -->
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.DataObject" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">TypeScript</MudText>
+                </MudPaper>
+            </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Web" Size="Size.Large" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Razor</MudText>
+                    <i class="fa-brands fa-angular mb-2" style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Angular</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <i class="fa-solid fa-server mb-2" style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">ASP.NET</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Storage" Size="Size.Large" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Redis</MudText>
+                    <MudIcon Icon="@Icons.Material.Filled.AccountTree" Style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">EF Core</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" sm="4" md="2">
                 <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
-                    <MudIcon Icon="@Icons.Material.Filled.Api" Size="Size.Large" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">APIs</MudText>
+                    <i class="fa-solid fa-diagram-project mb-2" style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">GraphQL</MudText>
                 </MudPaper>
             </MudItem>
-    </MudGrid>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Dashboard" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">MudBlazor</MudText>
+                </MudPaper>
+            </MudItem>
+            <!-- Row 5: Cloud & databases -->
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <i class="fa-solid fa-dharmachakra mb-2" style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Kubernetes</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <i class="fa-brands fa-github mb-2" style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">GitHub CI/CD</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Layers" Style="color: #9FD4FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(159, 212, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Terraform</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.BackupTable" Style="color: #7CB8FF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(124, 184, 255, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">PostgreSQL</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <i class="fa-solid fa-leaf mb-2" style="color: #6FC9D7; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(111, 201, 215, 0.5)); display: block;"></i>
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">MongoDB</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="6" sm="4" md="2">
+                <MudPaper Elevation="0" Class="pa-4 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                    <MudIcon Icon="@Icons.Material.Filled.Public" Style="color: #5B8DEF; font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(91, 141, 239, 0.5));" Class="mb-2" />
+                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: rgba(255,255,255,0.9);">Cosmos DB</MudText>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
     </MudContainer>
 </MudPaper>
 
@@ -268,7 +270,3 @@
     </MudStack>
 </MudContainer>
 
-@code {
-
-    public void Dispose() { }
-}

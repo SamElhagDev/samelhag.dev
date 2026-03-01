@@ -1,8 +1,6 @@
 @page "/contact"
 @using MudBlazor
 @using System.ComponentModel.DataAnnotations
-@inject IJSRuntime JS
-@inject NavigationManager Nav
 @inject ISnackbar Snackbar
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
@@ -216,5 +214,4 @@
         public string Message { get; set; } = string.Empty;
     }
 
-    public void Dispose() { }
 }
