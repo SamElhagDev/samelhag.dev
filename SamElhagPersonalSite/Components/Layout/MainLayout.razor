@@ -8,17 +8,17 @@
 
 <MudLayout>
     <MudAppBar Elevation="0" Dense="false" Style="background: rgba(10, 15, 30, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(91, 141, 239, 0.2);">
-        <MudText Typo="Typo.h6" Class="ml-3" Style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.03em; background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 50%, #6FC9D7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <MudText Typo="Typo.h6" Class="text-gradient-brand ml-3">
             [Sam Elhag] / [Sam.E]
         </MudText>
         <MudSpacer />
         <MudStack Row="true" Spacing="1" Class="mr-3">
-            <MudButton Href="/" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">Home</MudButton>
-            <MudButton Href="/about" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">About</MudButton>
-            <MudButton Href="/Interests" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">Interests</MudButton>
-            <MudButton Href="/projects" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">Projects</MudButton>
-            <MudButton Href="/contact" Variant="Variant.Filled"
-                      Style="font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; font-weight: 600; text-transform: none; border-radius: 8px; box-shadow: 0 4px 20px rgba(91, 141, 239, 0.5); letter-spacing: -0.01em;">
+            <MudButton Href="/" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Home</MudButton>
+            <MudButton Href="/about" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">About</MudButton>
+            <MudButton Href="/Interests" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Interests</MudButton>
+            <MudButton Href="/projects" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Projects</MudButton>
+            <MudButton Href="/contact" Variant="Variant.Filled" Class="nav-link-custom"
+                      Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; font-weight: 600; border-radius: 8px; box-shadow: 0 4px 20px rgba(91, 141, 239, 0.5);">
                 Contact
             </MudButton>
         </MudStack>
@@ -38,58 +38,58 @@
             <MudContainer MaxWidth="MaxWidth.Large">
                 <MudGrid Spacing="6">
                     <MudItem xs="12" md="5">
-                        <MudText Typo="Typo.h4" Style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.03em; background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 50%, #6FC9D7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px;">
+                        <MudText Typo="Typo.h4" Class="text-gradient-brand" Style="margin-bottom: 16px;">
                              [Sam Elhag] / [Sam.E]
                         </MudText>
                         <MudText Typo="Typo.body1" Style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; font-weight: 400;">
                             Always Learning, Always Building.
                         </MudText>
                         <MudStack Row="true" Spacing="3" Class="mt-6">
-                            <MudIconButton Icon="@Icons.Custom.Brands.GitHub" 
+                            <MudIconButton Icon="@Icons.Custom.Brands.GitHub"
                                            Href="https://github.com/SamElhagDev"
                                            Target="_blank"
-                                           Color="Color.Surface" Size="Size.Large" 
-                                           Style="background: rgba(192, 192, 192, 0.1); border-radius: 12px; border: 1px solid rgba(192, 192, 192, 0.2); transition: all 0.3s;" />
-                            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" 
+                                           Color="Color.Surface" Size="Size.Large"
+                                           Class="footer-social-btn" />
+                            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn"
                                            Href="https://www.linkedin.com/in/sam-elhag-b82312102/"
                                            Target="_blank"
-                                           Color="Color.Surface" Size="Size.Large" 
-                                           Style="background: rgba(192, 192, 192, 0.1); border-radius: 12px; border: 1px solid rgba(192, 192, 192, 0.2); transition: all 0.3s;" />
-                            <MudIconButton Icon="@Icons.Custom.Brands.Twitter" 
+                                           Color="Color.Surface" Size="Size.Large"
+                                           Class="footer-social-btn" />
+                            <MudIconButton Icon="@Icons.Custom.Brands.Twitter"
                                            Href="https://x.com/SamEElhag"
                                            Target="_blank"
-                                           Color="Color.Surface" Size="Size.Large" 
-                                           Style="background: rgba(192, 192, 192, 0.1); border-radius: 12px; border: 1px solid rgba(192, 192, 192, 0.2); transition: all 0.3s;" />                       
+                                           Color="Color.Surface" Size="Size.Large"
+                                           Class="footer-social-btn" />                       
                         </MudStack>
                     </MudItem>
                     <MudItem xs="12" md="3">
-                        <MudText Typo="Typo.h6" Style="font-family: 'Space Grotesk', sans-serif; color: white; font-weight: 600; margin-bottom: 24px; font-size: 1.2rem; letter-spacing: -0.02em;">Quick Links</MudText>
+                        <MudText Typo="Typo.h6" Class="footer-heading">Quick Links</MudText>
                         <MudStack Spacing="3">
-                            <MudLink Href="/" Style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-decoration: none; transition: all 0.3s;">
+                            <MudLink Href="/" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Home</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/about" Style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-decoration: none; transition: all 0.3s;">
+                            <MudLink Href="/about" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>About</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/Interests" Style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-decoration: none; transition: all 0.3s;">
+                            <MudLink Href="/Interests" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Interests</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/projects" Style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-decoration: none;">
+                            <MudLink Href="/projects" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Projects</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/contact" Style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-decoration: none;">
+                            <MudLink Href="/contact" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Contact</span>
@@ -98,20 +98,20 @@
                         </MudStack>
                     </MudItem>
                     <MudItem xs="12" md="4">
-                        <MudText Typo="Typo.h6" Style="font-family: 'Space Grotesk', sans-serif; color: white; font-weight: 600; margin-bottom: 24px; font-size: 1.2rem; letter-spacing: -0.02em;">Get In Touch</MudText>
+                        <MudText Typo="Typo.h6" Class="footer-heading">Get In Touch</MudText>
                         <MudStack Spacing="3">
                             <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
                                 <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: rgba(255,255,255,0.9);" Size="Size.Medium" />
                                 <div>
-                                    <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Email</MudText>
-                                    <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">sami.eltaj.elhag@gmail.com</MudText>
+                                    <MudText Typo="Typo.body2" Class="text-muted-50" Style="font-size: 0.9rem;">Email</MudText>
+                                    <MudText Typo="Typo.body1" Class="text-white-90" Style="font-size: 1.1rem;">sami.eltaj.elhag@gmail.com</MudText>
                                 </div>
                             </MudStack>
                             <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
                                 <MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="color: rgba(255,255,255,0.9);" Size="Size.Medium" />
                                 <div>
-                                    <MudText Typo="Typo.body2" Style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Location</MudText>
-                                    <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">Pittsburgh,PA</MudText>
+                                    <MudText Typo="Typo.body2" Class="text-muted-50" Style="font-size: 0.9rem;">Location</MudText>
+                                    <MudText Typo="Typo.body1" Class="text-white-90" Style="font-size: 1.1rem;">Pittsburgh,PA</MudText>
                                 </div>
                             </MudStack>
                         </MudStack>

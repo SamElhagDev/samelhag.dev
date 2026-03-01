@@ -6,45 +6,45 @@
 <PageTitle>Projects - Sam Elhag</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-8">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Style="font-weight: 700; color: white;">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="text-white-bold">
         My Projects
     </MudText>
-    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-10" Style="color: rgba(255,255,255,0.6);">
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-10 text-muted-60">
         Engineering software that bridges domains. More projects in progress.
     </MudText>
 
     <!-- Featured Project -->
-    <MudPaper Elevation="0" Class="pa-8" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.4); border-radius: 20px; box-shadow: 0 8px 40px rgba(91,141,239,0.15);">
+    <MudPaper Elevation="0" Class="glass-card glass-card--featured pa-8">
         <MudGrid AlignItems="AlignItems.Center" Spacing="4">
             <MudItem xs="12" md="2" Class="text-center">
-                <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 100%); padding: 24px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center;">
+                <div class="icon-box icon-box--inline icon-box--xl icon-box--blue-cyan">
                     <MudIcon Icon="@Icons.Material.Filled.Air" Style="color: white; font-size: 3.5rem;" />
                 </div>
             </MudItem>
             <MudItem xs="12" md="7">
-                <MudText Typo="Typo.overline" Style="color: #6FC9D7; letter-spacing: 2px; font-family: 'JetBrains Mono', monospace;">FEATURED</MudText>
-                <MudText Typo="Typo.h5" Class="mt-1 mb-2" Style="color: white; font-weight: 700;">NACA 0012 Airfoil Heat Transfer Simulation</MudText>
+                <MudText Typo="Typo.overline" Class="text-overline-cyan">FEATURED</MudText>
+                <MudText Typo="Typo.h5" Class="mt-1 mb-2 text-white-bold">NACA 0012 Airfoil Heat Transfer Simulation</MudText>
                 <MudText Typo="Typo.body1" Class="mb-4" Style="color: rgba(255,255,255,0.75); line-height: 1.8;">
                     Real-time computational fluid dynamics and transient heat transfer simulation.
                     Built with .NET 10, Blazor Server, and the Canvas API. Uses finite difference methods
                     on a 560×240 grid with 134,400 nodes, running live in the browser.
                 </MudText>
                 <MudChipSet T="string">
-                    <MudChip T="string" Size="Size.Small" Style="background: rgba(91,141,239,0.2); color: #7CB8FF; border: 1px solid rgba(91,141,239,0.3);">.NET 10</MudChip>
-                    <MudChip T="string" Size="Size.Small" Style="background: rgba(91,141,239,0.2); color: #7CB8FF; border: 1px solid rgba(91,141,239,0.3);">Blazor Server</MudChip>
-                    <MudChip T="string" Size="Size.Small" Style="background: rgba(111,201,215,0.2); color: #6FC9D7; border: 1px solid rgba(111,201,215,0.3);">Canvas API</MudChip>
-                    <MudChip T="string" Size="Size.Small" Style="background: rgba(159,212,255,0.2); color: #9FD4FF; border: 1px solid rgba(159,212,255,0.3);">KaTeX</MudChip>
-                    <MudChip T="string" Size="Size.Small" Style="background: rgba(91,141,239,0.2); color: #7CB8FF; border: 1px solid rgba(91,141,239,0.3);">CFD</MudChip>
+                    <MudChip T="string" Size="Size.Small" Class="chip-blue-accent">.NET 10</MudChip>
+                    <MudChip T="string" Size="Size.Small" Class="chip-blue-accent">Blazor Server</MudChip>
+                    <MudChip T="string" Size="Size.Small" Class="chip-cyan-accent">Canvas API</MudChip>
+                    <MudChip T="string" Size="Size.Small" Class="chip-light-blue-accent">KaTeX</MudChip>
+                    <MudChip T="string" Size="Size.Small" Class="chip-blue-accent">CFD</MudChip>
                 </MudChipSet>
             </MudItem>
             <MudItem xs="12" md="3">
                 <MudStack Spacing="2">
                     <MudButton Variant="Variant.Filled" Href="/projects/heat-transfer" FullWidth="true"
-                               Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; font-weight: 600; border-radius: 10px; text-transform: none; padding: 10px;">
+                               Class="btn-gradient" Style="padding: 10px;">
                         View Showcase
                     </MudButton>
                     <MudButton Variant="Variant.Outlined" Href="/HeatSimulation" FullWidth="true"
-                               Style="border: 1px solid rgba(91,141,239,0.5); color: #E8F0FF; border-radius: 10px; text-transform: none; padding: 10px;">
+                               Class="btn-outlined-blue" Style="padding: 10px; border-width: 1px;">
                         Launch Simulation
                     </MudButton>
                 </MudStack>
