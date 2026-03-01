@@ -1,7 +1,6 @@
 @page "/projects/heat-transfer"
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @using MudBlazor
-@implements IAsyncDisposable
 @inject IJSRuntime JS
 
 <PageTitle>NACA 0012 Heat Transfer Simulation - Sam Elhag</PageTitle>
@@ -188,25 +187,6 @@
     </MudStack>
 </MudPaper>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-<script>
-    window.renderKatexInDocument = window.renderKatexInDocument || function () {
-        if (typeof renderMathInElement !== 'undefined') {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    { left: '$$', right: '$$', display: true },
-                    { left: '$', right: '$', display: false }
-                ],
-                throwOnError: false
-            });
-            return true;
-        }
-        return false;
-    };
-</script>
-
 <style>
     .katex-container {
         background: rgba(20, 30, 50, 0.5);
@@ -239,21 +219,7 @@
     {
         if (firstRender)
         {
-            var hasLoaded = await JS.InvokeAsync<bool>("siteInterop.getSessionFlag", "showcaseKatexLoaded");
-            if (!hasLoaded)
-            {
-                await JS.InvokeVoidAsync("siteInterop.setSessionFlag", "showcaseKatexLoaded");
-                await JS.InvokeVoidAsync("siteInterop.reloadPage");
-            }
-            else
-            {
-                await JS.InvokeVoidAsync("renderKatexInDocument");
-            }
+            await JS.InvokeVoidAsync("siteInterop.waitForKatexThenRender");
         }
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await Task.CompletedTask;
     }
 }

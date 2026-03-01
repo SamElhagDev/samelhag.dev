@@ -1,7 +1,5 @@
 @page "/projects"
 @using MudBlazor
-@inject IJSRuntime JS
-@inject NavigationManager Nav
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 
@@ -55,7 +53,3 @@
     </MudPaper>
 </MudContainer>
 
-@code {
-
-    public void Dispose() { }
-}
