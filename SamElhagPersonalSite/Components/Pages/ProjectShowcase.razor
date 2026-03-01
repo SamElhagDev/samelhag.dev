@@ -9,13 +9,13 @@
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-12 mb-10">
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" Class="text-center">
-            <MudText Typo="Typo.overline" Style="color: #6FC9D7; letter-spacing: 3px; font-family: 'JetBrains Mono', monospace;">
+            <MudText Typo="Typo.overline" Class="text-overline-cyan" Style="letter-spacing: 3px;">
                 FEATURED PROJECT
             </MudText>
-            <MudText Typo="Typo.h3" Class="mt-2 mb-4" Style="font-weight: 800; color: rgba(255,255,255,0.95);">
+            <MudText Typo="Typo.h3" Class="mt-2 mb-4 text-heading-bold">
                 NACA 0012 Airfoil<br />Heat Transfer Simulation
             </MudText>
-            <MudText Typo="Typo.h6" Class="mb-8" Style="color: rgba(255,255,255,0.65); font-weight: 400; max-width: 700px; margin: 0 auto 2rem;">
+            <MudText Typo="Typo.h6" Class="mb-8 text-muted-65" Style="font-weight: 400; max-width: 700px; margin: 0 auto 2rem;">
                 Real-time computational fluid dynamics and transient heat transfer, rendered live in the browser via Blazor Server and the Canvas API.
             </MudText>
         </MudItem>
@@ -23,20 +23,20 @@
 </MudContainer>
 
 <!-- Problem Statement -->
-<MudPaper Elevation="0" Class="pa-10 mb-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px;">
+<MudPaper Elevation="0" Class="glass-card glass-card--blue pa-10 mb-6">
     <MudContainer MaxWidth="MaxWidth.Large">
         <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4" Spacing="2">
-            <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); padding: 10px; border-radius: 10px; display: inline-flex;">
+            <div class="icon-box icon-box--inline icon-box--blue" style="padding: 10px; border-radius: 10px;">
                 <MudIcon Icon="@Icons.Material.Filled.Lightbulb" Style="color: white;" />
             </div>
-            <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Problem Statement</MudText>
+            <MudText Typo="Typo.h5" Class="text-white-bold">Problem Statement</MudText>
         </MudStack>
-        <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.8); line-height: 1.9;">
+        <MudText Typo="Typo.body1" Class="text-body-light">
             Aerodynamic heat transfer governs the thermal limits of aircraft structures, turbine blades, and re-entry vehicles.
             Understanding how heat flows around a lifting surface at transonic speeds is fundamental to safe, efficient flight.
             Yet most visualisations of this phenomenon are locked behind expensive simulation software.
         </MudText>
-        <MudText Typo="Typo.body1" Class="mt-4" Style="color: rgba(255,255,255,0.8); line-height: 1.9;">
+        <MudText Typo="Typo.body1" Class="mt-4 text-body-light">
             I built this simulation to bridge both disciplines — applying numerical methods from mechanical engineering coursework
             inside a modern, interactive web application accessible from any browser.
         </MudText>
@@ -44,15 +44,15 @@
 </MudPaper>
 
 <!-- Solution Approach -->
-<MudPaper Elevation="0" Class="pa-10 mb-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px;">
+<MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-10 mb-6">
     <MudContainer MaxWidth="MaxWidth.Large">
         <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4" Spacing="2">
-            <div Style="background: linear-gradient(135deg, #6FC9D7 0%, #7CB8FF 100%); padding: 10px; border-radius: 10px; display: inline-flex;">
+            <div class="icon-box icon-box--inline icon-box--cyan" style="padding: 10px; border-radius: 10px;">
                 <MudIcon Icon="@Icons.Material.Filled.Science" Style="color: white;" />
             </div>
-            <MudText Typo="Typo.h5" Style="color: white; font-weight: 700;">Solution Approach</MudText>
+            <MudText Typo="Typo.h5" Class="text-white-bold">Solution Approach</MudText>
         </MudStack>
-        <MudText Typo="Typo.body1" Style="color: rgba(255,255,255,0.8); line-height: 1.9;">
+        <MudText Typo="Typo.body1" Class="text-body-light">
             The simulation discretises the heat conduction PDE over a 560×240 structured grid using an explicit Euler
             time integration scheme with a second-order central-difference Laplacian. The NACA 0012 airfoil geometry
             is computed analytically from its standard thickness equation, and flow velocities are derived from
@@ -69,15 +69,15 @@
 
 <!-- Technology Stack -->
 <MudContainer MaxWidth="MaxWidth.Large" Class="mb-6">
-    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Style="color: white; font-weight: 700;">Technology Stack</MudText>
+    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6 text-white-bold">Technology Stack</MudText>
     <MudGrid Spacing="3" Justify="Justify.Center">
         @foreach (var tech in _techStack)
         {
             <MudItem xs="12" sm="6" md="4" lg="2">
-                <MudPaper Elevation="0" Class="pa-5 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; height: 100%;">
+                <MudPaper Elevation="0" Class="glass-card glass-card--blue pa-5 text-center" Style="height: 100%;">
                     <MudIcon Icon="@tech.Icon" Style="@($"color: {tech.Color}; font-size: 2rem;")" Class="mb-2" />
-                    <MudText Typo="Typo.body1" Style="font-weight: 600; color: white;">@tech.Name</MudText>
-                    <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.5);">@tech.Rationale</MudText>
+                    <MudText Typo="Typo.body1" Class="text-label">@tech.Name</MudText>
+                    <MudText Typo="Typo.caption" Class="text-muted-50">@tech.Rationale</MudText>
                 </MudPaper>
             </MudItem>
         }
@@ -88,14 +88,14 @@
 <div id="simulation">
     <MudPaper Elevation="0" Class="pa-10 mb-6" Style="background: linear-gradient(135deg, rgba(22, 33, 62, 0.8) 0%, rgba(10, 15, 30, 0.9) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.4); border-radius: 16px; text-align: center;">
         <MudIcon Icon="@Icons.Material.Filled.Monitor" Style="color: #5B8DEF; font-size: 4rem;" Class="mb-4" />
-        <MudText Typo="Typo.h5" Class="mb-3" Style="color: white; font-weight: 700;">Live Interactive Simulation</MudText>
+        <MudText Typo="Typo.h5" Class="mb-3 text-white-bold">Live Interactive Simulation</MudText>
         <MudText Typo="Typo.body1" Class="mb-6" Style="color: rgba(255,255,255,0.7); max-width: 620px; margin: 0 auto 1.5rem;">
             Adjust thermal diffusivity, airspeed (20–300 m/s), surface temperature, and angle of attack in real time.
             The simulation runs on a 560×240 finite difference grid with 134,400 nodes and renders streamlines,
             temperature contours, and aerodynamic statistics live in the browser.
         </MudText>
         <MudButton Variant="Variant.Filled" Href="/HeatSimulation" Size="Size.Large" StartIcon="@Icons.Material.Filled.Launch"
-                   Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; padding: 16px 48px; font-size: 1.05rem; font-weight: 600; border-radius: 10px; text-transform: none; box-shadow: 0 8px 32px rgba(91, 141, 239, 0.5);">
+                   Class="btn-gradient" Style="padding: 16px 48px; font-size: 1.05rem;">
             Launch Simulation
         </MudButton>
     </MudPaper>
@@ -103,27 +103,27 @@
 
 <!-- Outcomes & Results -->
 <MudContainer MaxWidth="MaxWidth.Large" Class="mb-6">
-    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Style="color: white; font-weight: 700;">Outcomes & Results</MudText>
+    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6 text-white-bold">Outcomes & Results</MudText>
     <MudGrid Spacing="4" Justify="Justify.Center">
         <MudItem xs="12" sm="4">
-            <MudPaper Elevation="0" Class="pa-6 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px;">
+            <MudPaper Elevation="0" Class="glass-card glass-card--blue pa-6 text-center">
                 <MudText Typo="Typo.h4" Style="color: #5B8DEF; font-weight: 800; font-family: 'JetBrains Mono', monospace;">1.3M–20.5M</MudText>
-                <MudText Typo="Typo.body1" Style="color: white; font-weight: 600; margin-top: 4px;">Reynolds Number Range</MudText>
-                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.5);">Covers laminar and turbulent regimes</MudText>
+                <MudText Typo="Typo.body1" Class="text-label" Style="margin-top: 4px;">Reynolds Number Range</MudText>
+                <MudText Typo="Typo.caption" Class="text-muted-50">Covers laminar and turbulent regimes</MudText>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" sm="4">
-            <MudPaper Elevation="0" Class="pa-6 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.3); border-radius: 16px;">
+            <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6 text-center">
                 <MudText Typo="Typo.h4" Style="color: #6FC9D7; font-weight: 800; font-family: 'JetBrains Mono', monospace;">Mach 0.3</MudText>
-                <MudText Typo="Typo.body1" Style="color: white; font-weight: 600; margin-top: 4px;">Freestream Mach Number</MudText>
-                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.5);">Low subsonic, incompressible flow assumption</MudText>
+                <MudText Typo="Typo.body1" Class="text-label" Style="margin-top: 4px;">Freestream Mach Number</MudText>
+                <MudText Typo="Typo.caption" Class="text-muted-50">Low subsonic, incompressible flow assumption</MudText>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" sm="4">
-            <MudPaper Elevation="0" Class="pa-6 text-center" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(124, 184, 255, 0.3); border-radius: 16px;">
+            <MudPaper Elevation="0" Class="glass-card glass-card--light-blue pa-6 text-center">
                 <MudText Typo="Typo.h4" Style="color: #7CB8FF; font-weight: 800; font-family: 'JetBrains Mono', monospace;">134,400</MudText>
-                <MudText Typo="Typo.body1" Style="color: white; font-weight: 600; margin-top: 4px;">Finite Difference Nodes</MudText>
-                <MudText Typo="Typo.caption" Style="color: rgba(255,255,255,0.5);">560×240 structured grid</MudText>
+                <MudText Typo="Typo.body1" Class="text-label" Style="margin-top: 4px;">Finite Difference Nodes</MudText>
+                <MudText Typo="Typo.caption" Class="text-muted-50">560x240 structured grid</MudText>
             </MudPaper>
         </MudItem>
     </MudGrid>
@@ -131,25 +131,25 @@
 
 <!-- Key Concepts -->
 <MudContainer MaxWidth="MaxWidth.Large" Class="mb-6">
-    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Style="color: white; font-weight: 700;">Key Concepts</MudText>
+    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6 text-white-bold">Key Concepts</MudText>
     <MudExpansionPanels Elevation="0" Style="background: transparent;">
-        <MudExpansionPanel Text="Reynolds Number — What is it?" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 12px; margin-bottom: 8px; color: white;">
-            <MudText Style="color: rgba(255,255,255,0.8); line-height: 1.8; padding: 8px 0;">
+        <MudExpansionPanel Text="Reynolds Number — What is it?" Class="expansion-panel-glass">
+            <MudText Class="text-body-light" Style="padding: 8px 0; line-height: 1.8;">
                 The Reynolds number (Re) compares inertial forces to viscous forces in a fluid. A low Re means smooth, layered (laminar) flow; a high Re means chaotic, turbulent flow. For an aircraft wing, Re determines drag, boundary layer thickness, and heat transfer characteristics.
             </MudText>
         </MudExpansionPanel>
-        <MudExpansionPanel Text="Prandtl Number — What is it?" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 12px; margin-bottom: 8px; color: white;">
-            <MudText Style="color: rgba(255,255,255,0.8); line-height: 1.8; padding: 8px 0;">
+        <MudExpansionPanel Text="Prandtl Number — What is it?" Class="expansion-panel-glass">
+            <MudText Class="text-body-light" Style="padding: 8px 0; line-height: 1.8;">
                 The Prandtl number (Pr) is the ratio of momentum diffusivity to thermal diffusivity. For air, Pr ≈ 0.71, meaning momentum spreads slightly faster than heat. This controls the relative thickness of the velocity and thermal boundary layers around the airfoil.
             </MudText>
         </MudExpansionPanel>
-        <MudExpansionPanel Text="Nusselt Number — What is it?" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 12px; margin-bottom: 8px; color: white;">
-            <MudText Style="color: rgba(255,255,255,0.8); line-height: 1.8; padding: 8px 0;">
+        <MudExpansionPanel Text="Nusselt Number — What is it?" Class="expansion-panel-glass">
+            <MudText Class="text-body-light" Style="padding: 8px 0; line-height: 1.8;">
                 The Nusselt number (Nu) measures how effective convection is compared to conduction at a surface. A high Nu means convection dominates, pulling heat away quickly. It drives the convective heat transfer coefficient shown in the simulation's stat cards.
             </MudText>
         </MudExpansionPanel>
-        <MudExpansionPanel Text="Finite Difference Method — How does it work?" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 12px; margin-bottom: 8px; color: white;">
-            <MudText Style="color: rgba(255,255,255,0.8); line-height: 1.8; padding: 8px 0;">
+        <MudExpansionPanel Text="Finite Difference Method — How does it work?" Class="expansion-panel-glass">
+            <MudText Class="text-body-light" Style="padding: 8px 0; line-height: 1.8;">
                 The finite difference method replaces the continuous heat equation with a grid of discrete points. At each time step, the temperature at every node is updated based on its neighbours using a central-difference stencil. The explicit Euler scheme steps forward in time — simple and fast, requiring only a small time step for numerical stability.
             </MudText>
         </MudExpansionPanel>
@@ -157,19 +157,19 @@
 </MudContainer>
 
 <!-- Call to Action -->
-<MudPaper Elevation="0" Class="pa-10 mb-8" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.3); border-radius: 16px; text-align: center;">
-    <MudText Typo="Typo.h5" Class="mb-3" Style="color: white; font-weight: 700;">Interested in the Code?</MudText>
-    <MudText Typo="Typo.body1" Class="mb-6" Style="color: rgba(255,255,255,0.65);">
+<MudPaper Elevation="0" Class="glass-card glass-card--blue pa-10 mb-8" Style="text-align: center;">
+    <MudText Typo="Typo.h5" Class="mb-3 text-white-bold">Interested in the Code?</MudText>
+    <MudText Typo="Typo.body1" Class="mb-6 text-muted-65">
         The full source is on GitHub. Have a question about the implementation or want to collaborate?
     </MudText>
     <MudStack Row="true" Justify="Justify.Center" Spacing="3">
         <MudButton Variant="Variant.Outlined" Href="https://github.com/SamElhagDev/SamElhagPersonalSite"
                    Target="_blank" StartIcon="@Icons.Custom.Brands.GitHub"
-                   Style="border: 2px solid rgba(91,141,239,0.5); color: #E8F0FF; background: rgba(91,141,239,0.1); padding: 12px 28px; font-weight: 600; border-radius: 10px; text-transform: none;">
+                   Class="btn-outlined-blue" Style="padding: 12px 28px;">
             View Source on GitHub
         </MudButton>
         <MudButton Variant="Variant.Filled" Href="/contact" StartIcon="@Icons.Material.Filled.Email"
-                   Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; padding: 12px 28px; font-weight: 600; border-radius: 10px; text-transform: none; box-shadow: 0 8px 32px rgba(91,141,239,0.4);">
+                   Class="btn-gradient" Style="padding: 12px 28px;">
             Get in Touch
         </MudButton>
     </MudStack>

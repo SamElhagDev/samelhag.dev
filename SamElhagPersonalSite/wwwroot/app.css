@@ -81,6 +81,179 @@ h1:focus {
     text-align: start;
 }
 
+/* ═══════════════════════════════════════════════════════
+   Design System — shared utility classes
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Cards ── */
+.glass-card {
+    background: rgba(22, 33, 62, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s !important;
+}
+
+.glass-card--blue   { border: 1px solid rgba(91, 141, 239, 0.3) !important; }
+.glass-card--cyan   { border: 1px solid rgba(111, 201, 215, 0.3) !important; }
+.glass-card--red    { border: 1px solid rgba(139, 0, 0, 0.25) !important; }
+.glass-card--silver { border: 1px solid rgba(192, 192, 192, 0.25) !important; }
+.glass-card--light-blue { border: 1px solid rgba(124, 184, 255, 0.3) !important; }
+
+.glass-card--featured {
+    border: 1px solid rgba(91, 141, 239, 0.4) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 40px rgba(91, 141, 239, 0.15) !important;
+}
+
+.glass-card--r20 { border-radius: 20px !important; }
+
+/* ── Buttons ── */
+.btn-gradient {
+    background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    text-transform: none !important;
+    box-shadow: 0 8px 32px rgba(91, 141, 239, 0.5) !important;
+    transition: all 0.3s !important;
+}
+
+.btn-outlined-blue {
+    border: 2px solid rgba(91, 141, 239, 0.5) !important;
+    color: #E8F0FF !important;
+    background: rgba(91, 141, 239, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 10px !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+}
+
+.btn-outlined-cyan {
+    border: 2px solid rgba(111, 201, 215, 0.5) !important;
+    color: #E8F0FF !important;
+    background: rgba(111, 201, 215, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 10px !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+}
+
+/* ── Icon Boxes ── */
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.icon-box--inline { display: inline-flex; }
+.icon-box--md     { padding: 12px; border-radius: 12px; }
+.icon-box--lg     { padding: 16px; border-radius: 12px; }
+.icon-box--xl     { padding: 24px; border-radius: 16px; }
+
+.icon-box--blue       { background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); }
+.icon-box--blue-cyan  { background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 100%); }
+.icon-box--cyan       { background: linear-gradient(135deg, #6FC9D7 0%, #7CB8FF 100%); }
+.icon-box--teal-blue  { background: linear-gradient(135deg, #4EC9B0 0%, #5B8DEF 100%); }
+.icon-box--red        { background: linear-gradient(135deg, #8B0000 0%, #C0C0C0 100%); }
+.icon-box--silver-red { background: linear-gradient(135deg, #C0C0C0 0%, #8B0000 100%); }
+.icon-box--brand      { background: linear-gradient(135deg, #5B8DEF 0%, #6FC9D7 50%, #C0C0C0 100%); }
+
+/* ── Typography ── */
+.text-heading      { font-weight: 700 !important; color: rgba(255,255,255,0.95) !important; }
+.text-heading-bold { font-weight: 800 !important; color: rgba(255,255,255,0.95) !important; }
+.text-white-bold   { color: white !important; font-weight: 700 !important; }
+.text-muted-50     { color: rgba(255,255,255,0.5) !important; }
+.text-muted-60     { color: rgba(255,255,255,0.6) !important; }
+.text-muted-65     { color: rgba(255,255,255,0.65) !important; }
+.text-body-light   { color: rgba(255,255,255,0.8) !important; line-height: 1.9 !important; }
+.text-white-90     { color: rgba(255,255,255,0.9) !important; }
+.text-white-95     { color: rgba(255,255,255,0.95) !important; }
+.text-label        { font-weight: 600 !important; color: rgba(255,255,255,0.9) !important; }
+
+.text-gradient-brand {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+    background: linear-gradient(135deg, #7CB8FF 0%, #5B8DEF 50%, #6FC9D7 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.text-overline-cyan {
+    color: #6FC9D7 !important;
+    letter-spacing: 2px !important;
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* ── Chips ── */
+.chip-blue        { background: rgba(91, 141, 239, 0.15) !important; color: white !important; border: 1px solid rgba(91, 141, 239, 0.3) !important; }
+.chip-blue-accent { background: rgba(91, 141, 239, 0.2) !important; color: #7CB8FF !important; border: 1px solid rgba(91, 141, 239, 0.3) !important; }
+.chip-cyan        { background: rgba(111, 201, 215, 0.15) !important; color: white !important; border: 1px solid rgba(111, 201, 215, 0.3) !important; }
+.chip-cyan-accent { background: rgba(111, 201, 215, 0.2) !important; color: #6FC9D7 !important; border: 1px solid rgba(111, 201, 215, 0.3) !important; }
+.chip-silver      { background: rgba(192, 192, 192, 0.15) !important; color: white !important; border: 1px solid rgba(192, 192, 192, 0.3) !important; }
+.chip-red         { background: rgba(139, 0, 0, 0.15) !important; color: white !important; border: 1px solid rgba(139, 0, 0, 0.3) !important; }
+.chip-light-blue-accent { background: rgba(159, 212, 255, 0.2) !important; color: #9FD4FF !important; border: 1px solid rgba(159, 212, 255, 0.3) !important; }
+
+/* ── Navigation & Layout ── */
+.nav-link-custom {
+    font-family: 'Inter', sans-serif !important;
+    text-transform: none !important;
+    font-weight: 500 !important;
+    color: #E8F0FF !important;
+    letter-spacing: -0.01em !important;
+}
+
+.footer-social-btn {
+    background: rgba(192, 192, 192, 0.1) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(192, 192, 192, 0.2) !important;
+    transition: all 0.3s !important;
+}
+
+.footer-link {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 1.1rem !important;
+    text-decoration: none !important;
+    transition: all 0.3s !important;
+}
+
+.footer-heading {
+    font-family: 'Space Grotesk', sans-serif !important;
+    color: white !important;
+    font-weight: 600 !important;
+    margin-bottom: 24px !important;
+    font-size: 1.2rem !important;
+    letter-spacing: -0.02em !important;
+}
+
+/* ── Misc ── */
+.icon-white { color: white !important; }
+
+.section-band {
+    background: rgba(22, 33, 62, 0.4) !important;
+    backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(192, 192, 192, 0.1) !important;
+    border-bottom: 1px solid rgba(192, 192, 192, 0.1) !important;
+}
+
+.expansion-panel-glass {
+    background: rgba(22, 33, 62, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(91, 141, 239, 0.3) !important;
+    border-radius: 12px !important;
+    margin-bottom: 8px !important;
+    color: white !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   End Design System
+   ═══════════════════════════════════════════════════════ */
+
 /* Scale down for 1080p screens */
 @media (max-width: 1920px) and (max-height: 1080px) {
     html {
