@@ -1,0 +1,137 @@
+@page "/Interests"
+@using MudBlazor
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<MudContainer>
+    <!-- Media Section -->
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="mb-4" Style="font-weight: 700; color: white;">
+        Interests
+    </MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-10" Style="color: rgba(255,255,255,0.6); font-weight: 400;">
+        What I consume, When Not Building
+    </MudText>
+
+    <MudGrid Spacing="4">
+        <!-- Backend Development -->
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                    <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.LibraryMusic" Style="color: white; font-size: 1.8rem;" />
+                    </div>
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Music</MudText>
+                </MudStack>
+                <MudChipSet T="string">
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">C#</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">.NET Core</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">ASP.NET</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Entity Framework</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">REST APIs</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">GraphQL</MudChip>
+                </MudChipSet>
+            </MudPaper>
+        </MudItem>
+
+        <!-- Frontend Development -->
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                    <div Style="background: linear-gradient(135deg, #6FC9D7 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.Tv" Style="color: white; font-size: 1.8rem;" />
+                    </div>
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">TV and Movies</MudText>
+                </MudStack>
+                <MudChipSet T="string">
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Blazor</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">JavaScript</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">TypeScript</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">HTML/CSS</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">React</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">MudBlazor</MudChip>
+                </MudChipSet>
+            </MudPaper>
+        </MudItem>
+
+        <!-- Cloud & DevOps -->
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                    <div Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.Games" Style="color: white; font-size: 1.8rem;" />
+                    </div>
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Gaming</MudText>
+                </MudStack>
+                <MudChipSet T="string">
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Azure</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Docker</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Kubernetes</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">GitHub Actions</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Azure DevOps</MudChip>
+                    <MudChip T="string" Style="background: rgba(91, 141, 239, 0.15); color: white; border: 1px solid rgba(91, 141, 239, 0.3);">Terraform</MudChip>
+                </MudChipSet>
+            </MudPaper>
+        </MudItem>
+
+        <!-- Database & Storage -->
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(111, 201, 215, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                    <div Style="background: linear-gradient(135deg, #6FC9D7 0%, #7CB8FF 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.Build" Style="color: white; font-size: 1.8rem;" />
+                    </div>
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Firearms</MudText>
+                </MudStack>
+                <MudChipSet T="string">
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">SQL Server</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">PostgreSQL</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">MongoDB</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Redis</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Cosmos DB</MudChip>
+                    <MudChip T="string" Style="background: rgba(111, 201, 215, 0.15); color: white; border: 1px solid rgba(111, 201, 215, 0.3);">Blob Storage</MudChip>
+                </MudChipSet>
+            </MudPaper>
+        </MudItem>
+
+        <!-- Project Management -->
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(192, 192, 192, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                    <div Style="background: linear-gradient(135deg, #C0C0C0 0%, #8B0000 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.FormatPaint" Style="color: white; font-size: 1.8rem;" />
+                    </div>
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Art</MudText>
+                </MudStack>
+                <MudChipSet T="string">
+                    <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Jira</MudChip>
+                    <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Azure Boards</MudChip>
+                    <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Scrum</MudChip>
+                    <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Agile</MudChip>
+                    <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Confluence</MudChip>
+                    <MudChip T="string" Style="background: rgba(192, 192, 192, 0.15); color: white; border: 1px solid rgba(192, 192, 192, 0.3);">Monday.com</MudChip>
+                </MudChipSet>
+            </MudPaper>
+        </MudItem>
+
+        <!-- Engineering/CAD -->
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="pa-6" Style="background: rgba(22, 33, 62, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(139, 0, 0, 0.2); border-radius: 16px; transition: all 0.3s; height: 100%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
+                    <div Style="background: linear-gradient(135deg, #8B0000 0%, #C0C0C0 100%); padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <MudIcon Icon="@Icons.Material.Filled.ElectricBolt" Style="color: white; font-size: 1.8rem;" />
+                    </div>
+                    <MudText Typo="Typo.h5" Style="color: white; font-weight: 700; margin-left: 12px;">Electronics</MudText>
+                </MudStack>
+                <MudChipSet T="string">
+                    <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">AutoCAD</MudChip>
+                    <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">SolidWorks</MudChip>
+                    <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">Revit</MudChip>
+                    <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">Fusion 360</MudChip>
+                    <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">CATIA</MudChip>
+                    <MudChip T="string" Style="background: rgba(139, 0, 0, 0.15); color: white; border: 1px solid rgba(139, 0, 0, 0.3);">Inventor</MudChip>
+                </MudChipSet>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+
