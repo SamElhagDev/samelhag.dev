@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "SamElhagPersonalSite (HTTP)",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite/SamElhagPersonalSite.csproj"],
+      "port": 5264
+    },
+    {
+      "name": "SamElhagPersonalSite (HTTPS)",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite/SamElhagPersonalSite.csproj"],
+      "port": 7063
+    },
+    {
+      "name": "SamElhagPersonalSite.AppHost (HTTP)",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite.AppHost/SamElhagPersonalSite.AppHost.csproj"],
+      "port": 15258
+    },
+    {
+      "name": "SamElhagPersonalSite.AppHost (HTTPS)",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite.AppHost/SamElhagPersonalSite.AppHost.csproj"],
+      "port": 17296
+    },
+    {
+      "name": "inheritance-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Program Files/nodejs/node_modules/npm/bin/npx-cli.js", "http-server", ".", "-p", "8765", "-c-1"],
+      "port": 8765
+    }
+  ]
+}

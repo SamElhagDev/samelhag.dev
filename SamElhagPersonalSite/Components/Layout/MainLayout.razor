@@ -17,6 +17,7 @@
         <MudStack Row="true" Spacing="1" Class="mr-3">
             <MudButton Href="/" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">Home</MudButton>
             <MudButton Href="/about" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">About</MudButton>
+            <MudButton Href="/skillsAndInterests" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">Skills and Interests</MudButton>
             <MudButton Href="/projects" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">Projects</MudButton>
             <MudButton Href="/HeatSimulation" Color="Color.Inherit" Variant="Variant.Text" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #E8F0FF; letter-spacing: -0.01em;">Simulation</MudButton>
             <MudButton Href="/contact" Variant="Variant.Filled"
@@ -91,6 +92,12 @@
                                     <span>About</span>
                                 </MudStack>
                             </MudLink>
+                            <MudLink Href="/skillsAndInterests" Style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-decoration: none; transition: all 0.3s;">
+                                <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
+                                    <span>Skills and Interests</span>
+                                </MudStack>
+                            </MudLink>
                             <MudLink Href="/projects" Style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-decoration: none;">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
@@ -141,9 +148,3 @@
     <span class="dismiss">🗙</span>
 </div>
 
-@code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-       
-    }
-}

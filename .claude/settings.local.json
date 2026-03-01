@@ -13,7 +13,8 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:schroeder-consulting-llc.com)",
       "Bash(dotnet build:*)",
-      "Bash(Select-String -Pattern \"About|error CS|error RZ\")"
+      "Bash(Select-String -Pattern \"About|error CS|error RZ\")",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
