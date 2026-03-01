@@ -1,4 +1,4 @@
-# Sam Elhag - Personal Website
+# samelhag.dev - Personal Website
 
 <div align="center">
 
