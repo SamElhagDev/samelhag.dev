@@ -23,49 +23,45 @@
 </MudContainer>
 
 <!-- Problem Statement -->
-<MudPaper Elevation="0" Class="glass-card glass-card--blue pa-10 mb-6">
-    <MudContainer MaxWidth="MaxWidth.Large">
-        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4" Spacing="2">
-            <div class="icon-box icon-box--inline icon-box--blue" style="padding: 10px; border-radius: 10px;">
-                <MudIcon Icon="@Icons.Material.Filled.Lightbulb" Style="color: white;" />
-            </div>
-            <MudText Typo="Typo.h5" Class="text-white-bold">Problem Statement</MudText>
-        </MudStack>
-        <MudText Typo="Typo.body1" Class="text-body-light">
-            Aerodynamic heat transfer governs the thermal limits of aircraft structures, turbine blades, and re-entry vehicles.
-            Understanding how heat flows around a lifting surface at transonic speeds is fundamental to safe, efficient flight.
-            Yet most visualisations of this phenomenon are locked behind expensive simulation software.
-        </MudText>
-        <MudText Typo="Typo.body1" Class="mt-4 text-body-light">
-            I built this simulation to bridge both disciplines — applying numerical methods from mechanical engineering coursework
-            inside a modern, interactive web application accessible from any browser.
-        </MudText>
-    </MudContainer>
-</MudPaper>
+<MudContainer MaxWidth="MaxWidth.Large" Class="glass-card glass-card--blue pa-10 mb-6">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4" Spacing="2">
+        <div class="icon-box icon-box--inline icon-box--blue" style="padding: 10px; border-radius: 10px;">
+            <MudIcon Icon="@Icons.Material.Filled.Lightbulb" Style="color: white;" />
+        </div>
+        <MudText Typo="Typo.h5" Class="text-white-bold">Problem Statement</MudText>
+    </MudStack>
+    <MudText Typo="Typo.body1" Class="text-body-light">
+        Aerodynamic heat transfer governs the thermal limits of aircraft structures, turbine blades, and re-entry vehicles.
+        Understanding how heat flows around a lifting surface at transonic speeds is fundamental to safe, efficient flight.
+        Yet most visualisations of this phenomenon are locked behind expensive simulation software.
+    </MudText>
+    <MudText Typo="Typo.body1" Class="mt-4 text-body-light">
+        I built this simulation to bridge both disciplines — applying numerical methods from mechanical engineering coursework
+        inside a modern, interactive web application accessible from any browser.
+    </MudText>
+</MudContainer>
 
 <!-- Solution Approach -->
-<MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-10 mb-6">
-    <MudContainer MaxWidth="MaxWidth.Large">
-        <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4" Spacing="2">
-            <div class="icon-box icon-box--inline icon-box--cyan" style="padding: 10px; border-radius: 10px;">
-                <MudIcon Icon="@Icons.Material.Filled.Science" Style="color: white;" />
-            </div>
-            <MudText Typo="Typo.h5" Class="text-white-bold">Solution Approach</MudText>
-        </MudStack>
-        <MudText Typo="Typo.body1" Class="text-body-light">
-            The simulation discretises the heat conduction PDE over a 560×240 structured grid using an explicit Euler
-            time integration scheme with a second-order central-difference Laplacian. The NACA 0012 airfoil geometry
-            is computed analytically from its standard thickness equation, and flow velocities are derived from
-            potential flow theory scaled to Mach 0.3 freestream conditions.
-        </MudText>
-        <div class="katex-container mt-6">
-            <div class="katex-formula">$$\frac{\partial T}{\partial t} = \alpha \nabla^2 T = \alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} \right)$$</div>
+<MudContainer MaxWidth="MaxWidth.Large" Class="glass-card glass-card--cyan pa-10 mb-6">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4" Spacing="2">
+        <div class="icon-box icon-box--inline icon-box--cyan" style="padding: 10px; border-radius: 10px;">
+            <MudIcon Icon="@Icons.Material.Filled.Science" Style="color: white;" />
         </div>
-        <MudText Typo="Typo.caption" Align="Align.Center" Class="mt-2" Style="color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace;">
-            Transient heat conduction PDE — solved at each of the 134,400 grid nodes per time step
-        </MudText>
-    </MudContainer>
-</MudPaper>
+        <MudText Typo="Typo.h5" Class="text-white-bold">Solution Approach</MudText>
+    </MudStack>
+    <MudText Typo="Typo.body1" Class="text-body-light">
+        The simulation discretises the heat conduction PDE over a 560×240 structured grid using an explicit Euler
+        time integration scheme with a second-order central-difference Laplacian. The NACA 0012 airfoil geometry
+        is computed analytically from its standard thickness equation, and flow velocities are derived from
+        potential flow theory scaled to Mach 0.3 freestream conditions.
+    </MudText>
+    <div class="katex-container mt-6">
+        <div class="katex-formula">$$\frac{\partial T}{\partial t} = \alpha \nabla^2 T = \alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} \right)$$</div>
+    </div>
+    <MudText Typo="Typo.caption" Align="Align.Center" Class="mt-2" Style="color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace;">
+        Transient heat conduction PDE — solved at each of the 134,400 grid nodes per time step
+    </MudText>
+</MudContainer>
 
 <!-- Technology Stack -->
 <MudContainer MaxWidth="MaxWidth.Large" Class="mb-6">
@@ -86,7 +82,7 @@
 
 <!-- Live Simulation -->
 <div id="simulation">
-    <MudPaper Elevation="0" Class="pa-10 mb-6" Style="background: linear-gradient(135deg, rgba(22, 33, 62, 0.8) 0%, rgba(10, 15, 30, 0.9) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.4); border-radius: 16px; text-align: center;">
+    <MudContainer Elevation="0" Class="glass-card glass-card--cyan pa-10 mb-6" Style="background: linear-gradient(135deg, rgba(22, 33, 62, 0.8) 0%, rgba(10, 15, 30, 0.9) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.4); border-radius: 16px; text-align: center;">
         <MudIcon Icon="@Icons.Material.Filled.Monitor" Style="color: #5B8DEF; font-size: 4rem;" Class="mb-4" />
         <MudText Typo="Typo.h5" Class="mb-3 text-white-bold">Live Interactive Simulation</MudText>
         <MudText Typo="Typo.body1" Class="mb-6" Style="color: rgba(255,255,255,0.7); max-width: 620px; margin: 0 auto 1.5rem;">
@@ -98,7 +94,7 @@
                    Class="btn-gradient" Style="padding: 16px 48px; font-size: 1.05rem;">
             Launch Simulation
         </MudButton>
-    </MudPaper>
+    </MudContainer>
 </div>
 
 <!-- Outcomes & Results -->

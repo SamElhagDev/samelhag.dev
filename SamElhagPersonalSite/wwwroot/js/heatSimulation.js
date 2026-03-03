@@ -74,7 +74,8 @@ window.HeatSimulation = {
                     const temp = T[idx].toFixed(1);
                     const tempC = (temp - 273.15).toFixed(1);
                     const isAirfoil = airfoilMask[idx] ? ' (Airfoil Surface)' : '(Air)';
-                    hoverTempElement.textContent = `Temperature: ${temp} K (${tempC} °C Cordinates: ${Math.round(mouseX)},${Math.round(mouseY)})${isAirfoil}`;
+                    const displayY = Math.round(height - mouseY);
+                    hoverTempElement.textContent = `Temperature: ${temp} K (${tempC} °C Coordinates: ${Math.round(mouseX)},${displayY})${isAirfoil}`;
                     hoverTempElement.style.display = 'block';
                 }
             });

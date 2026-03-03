@@ -51,6 +51,17 @@
        Anatomy of a Sam.E
     </MudText>
 
+    <!-- View toggle -->
+    <div style="display: flex; justify-content: center; margin-bottom: 24px;">
+        <MudButton Variant="Variant.Filled" Size="Size.Medium"
+                   StartIcon="@(showModel ? Icons.Material.Filled.Description : Icons.Material.Filled.Code)"
+                   Class="btn-outlined-blue"
+                   Style="padding: 8px 24px;"
+                   OnClick="@(() => showModel = !showModel)">
+            @(showModel ? "Words" : "Model")
+        </MudButton>
+    </div>
+
     <!-- ═══ Sam.E outer container ═══ -->
     <MudPaper Elevation="0" Style="background: rgba(22, 33, 62, 0.8); backdrop-filter: blur(20px); border: 2px solid rgba(91, 141, 239, 0.4); border-radius: 20px; padding: 28px; box-shadow: 0 8px 32px rgba(91, 141, 239, 0.15);">
 
@@ -61,6 +72,40 @@
             </div>
             <MudText Style="color: white; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem;">Sam.E</MudText>
         </MudStack>
+
+        @if (!showModel)
+        {
+            <!-- ═══ Words view ═══ -->
+            <div class="wia-inner-card" style="border: 1px solid rgba(91, 141, 239, 0.25); padding: 28px; max-width: 900px; margin: 0 auto;">
+                <MudText Class="mb-4" Style="color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.85;">
+                    I'm a Sudanese-American developer and mechanical engineer based in Pittsburgh. I got my start
+                    taking things apart as a kid in Khartoum, and never really stopped — the subjects just got more
+                    interesting. These days I build full-stack applications, data pipelines, and the occasional
+                    simulation for fun.
+                </MudText>
+
+                <MudText Class="mb-4" Style="color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.85;">
+                    My background is a bit unconventional. I studied mechanical engineering, spent time doing policy
+                    analysis, and eventually landed in software — where everything clicked. I like working at the
+                    intersection of systems thinking and code: turning messy, real-world problems into clean
+                    architectures and reliable software.
+                </MudText>
+
+                <MudText Class="mb-4" Style="color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.85;">
+                    Most of my work lives in the .NET ecosystem — C#, Blazor, ASP.NET — but I reach for Rust when
+                    performance matters and TypeScript when the browser demands it. I care about clean architecture,
+                    automation, and building things that actually get used.
+                </MudText>
+
+                <MudText Style="color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.85;">
+                    Outside of work you'll find me debating policy, gaming with friends, or listening to music through
+                    a pair of open-backs that are probably too expensive. Click <strong style="color: #7CB8FF;">Model</strong>
+                    above if you want the structured version.
+                </MudText>
+            </div>
+        }
+        else
+        {
 
         <!-- ── Interface definitions comment ── -->
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #6A9955; margin: 4px 0 14px 4px;">// ── Interfaces ──</div>
@@ -319,6 +364,12 @@
         </div>
 
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-top: 20px;">}</div>
+
+        }
     </MudPaper>
 
 </MudContainer>
+
+@code {
+    private bool showModel = false;
+}
