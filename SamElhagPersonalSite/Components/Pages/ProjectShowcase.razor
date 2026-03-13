@@ -58,7 +58,7 @@
     <div class="katex-container mt-6">
         <div class="katex-formula">$$\frac{\partial T}{\partial t} = \alpha \nabla^2 T = \alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} \right)$$</div>
     </div>
-    <MudText Typo="Typo.caption" Align="Align.Center" Class="mt-2" Style="color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace;">
+    <MudText Typo="Typo.caption" Align="Align.Center" Class="mt-2" Style="color: rgba(245,237,224,0.4); font-family: 'JetBrains Mono', monospace;">
         Transient heat conduction PDE — solved at each of the 134,400 grid nodes per time step
     </MudText>
 </MudContainer>
@@ -82,10 +82,10 @@
 
 <!-- Live Simulation -->
 <div id="simulation">
-    <MudContainer Elevation="0" Class="glass-card glass-card--cyan pa-10 mb-6" Style="background: linear-gradient(135deg, rgba(22, 33, 62, 0.8) 0%, rgba(10, 15, 30, 0.9) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(91, 141, 239, 0.4); border-radius: 16px; text-align: center;">
-        <MudIcon Icon="@Icons.Material.Filled.Monitor" Style="color: #5B8DEF; font-size: 4rem;" Class="mb-4" />
+    <MudContainer Elevation="0" Class="glass-card glass-card--cyan pa-10 mb-6" Style="background: linear-gradient(135deg, rgba(28, 25, 22, 0.8) 0%, rgba(14, 12, 10, 0.9) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(249, 115, 22, 0.4); border-radius: 16px; text-align: center;">
+        <MudIcon Icon="@Icons.Material.Filled.Monitor" Style="color: #f97316; font-size: 4rem;" Class="mb-4" />
         <MudText Typo="Typo.h5" Class="mb-3 text-white-bold">Live Interactive Simulation</MudText>
-        <MudText Typo="Typo.body1" Class="mb-6" Style="color: rgba(255,255,255,0.7); max-width: 620px; margin: 0 auto 1.5rem;">
+        <MudText Typo="Typo.body1" Class="mb-6" Style="color: rgba(245,237,224,0.7); max-width: 620px; margin: 0 auto 1.5rem;">
             Adjust thermal diffusivity, airspeed (20–300 m/s), surface temperature, and angle of attack in real time.
             The simulation runs on a 560×240 finite difference grid with 134,400 nodes and renders streamlines,
             temperature contours, and aerodynamic statistics live in the browser.
@@ -103,21 +103,21 @@
     <MudGrid Spacing="4" Justify="Justify.Center">
         <MudItem xs="12" sm="4">
             <MudPaper Elevation="0" Class="glass-card glass-card--blue pa-6 text-center">
-                <MudText Typo="Typo.h4" Style="color: #5B8DEF; font-weight: 800; font-family: 'JetBrains Mono', monospace;">1.3M–20.5M</MudText>
+                <MudText Typo="Typo.h4" Style="color: #f97316; font-weight: 800; font-family: 'JetBrains Mono', monospace;">1.3M–20.5M</MudText>
                 <MudText Typo="Typo.body1" Class="text-label" Style="margin-top: 4px;">Reynolds Number Range</MudText>
                 <MudText Typo="Typo.caption" Class="text-muted-50">Covers laminar and turbulent regimes</MudText>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" sm="4">
             <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6 text-center">
-                <MudText Typo="Typo.h4" Style="color: #6FC9D7; font-weight: 800; font-family: 'JetBrains Mono', monospace;">Mach 0.3</MudText>
+                <MudText Typo="Typo.h4" Style="color: #ea580c; font-weight: 800; font-family: 'JetBrains Mono', monospace;">Mach 0.3</MudText>
                 <MudText Typo="Typo.body1" Class="text-label" Style="margin-top: 4px;">Freestream Mach Number</MudText>
                 <MudText Typo="Typo.caption" Class="text-muted-50">Low subsonic, incompressible flow assumption</MudText>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" sm="4">
             <MudPaper Elevation="0" Class="glass-card glass-card--light-blue pa-6 text-center">
-                <MudText Typo="Typo.h4" Style="color: #7CB8FF; font-weight: 800; font-family: 'JetBrains Mono', monospace;">134,400</MudText>
+                <MudText Typo="Typo.h4" Style="color: #fb923c; font-weight: 800; font-family: 'JetBrains Mono', monospace;">134,400</MudText>
                 <MudText Typo="Typo.body1" Class="text-label" Style="margin-top: 4px;">Finite Difference Nodes</MudText>
                 <MudText Typo="Typo.caption" Class="text-muted-50">560x240 structured grid</MudText>
             </MudPaper>
@@ -173,16 +173,16 @@
 
 <style>
     .katex-container {
-        background: rgba(20, 30, 50, 0.5);
+        background: rgba(28, 25, 22, 0.5);
         padding: 20px 24px;
         border-radius: 8px;
-        border-left: 4px solid #5B8DEF;
+        border-left: 4px solid #f97316;
         overflow-x: auto;
     }
 
     .katex-formula {
         font-size: 1.2em;
-        color: #E8F0FF;
+        color: #f5ede0;
         text-align: center;
     }
 </style>
@@ -192,11 +192,11 @@
 
     private readonly TechItem[] _techStack =
     [
-        new(".NET 10",    Icons.Custom.Brands.MicrosoftVisualStudio, "#7CB8FF", "Async server runtime"),
-        new("Blazor",     Icons.Material.Filled.Web,                 "#5B8DEF", "Server-side rendering"),
-        new("MudBlazor",  Icons.Material.Filled.Palette,             "#6FC9D7", "Component library"),
-        new("KaTeX",      Icons.Material.Filled.Functions,           "#9FD4FF", "Math typesetting"),
-        new("Canvas API", Icons.Material.Filled.Draw,                "#7CB8FF", "GPU-accelerated render"),
+        new(".NET 10",    Icons.Custom.Brands.MicrosoftVisualStudio, "#fb923c", "Async server runtime"),
+        new("Blazor",     Icons.Material.Filled.Web,                 "#f97316", "Server-side rendering"),
+        new("MudBlazor",  Icons.Material.Filled.Palette,             "#ea580c", "Component library"),
+        new("KaTeX",      Icons.Material.Filled.Functions,           "#fb923c", "Math typesetting"),
+        new("Canvas API", Icons.Material.Filled.Draw,                "#f97316", "GPU-accelerated render"),
     ];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

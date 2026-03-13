@@ -40,11 +40,11 @@ function initMazeBackground() {
   var CELL = 50;
 
   var palette = {
-    bg: '#080c18',
-    gridNode: 'rgba(70, 110, 170, 0.1)',
-    particle: ['#5b9cf5','#a78bfa','#34d399','#f472b6','#60a5fa','#c084fc','#38bdf8','#818cf8'],
-    symbol: '#a0c4f0',
-    glow: ['rgba(91,156,245,0.12)','rgba(167,139,250,0.09)','rgba(52,211,153,0.08)'],
+    bg: '#0e0c0a',
+    gridNode: 'rgba(249, 115, 22, 0.06)',
+    particle: ['#f97316','#fb923c','#ea580c','#a89070','#f59e0b','#d97706','#fbbf24','#b45309'],
+    symbol: '#a89070',
+    glow: ['rgba(249,115,22,0.04)','rgba(234,88,12,0.03)','rgba(168,144,112,0.02)'],
   };
 
   var cols = 0, rows = 0;
@@ -168,7 +168,7 @@ function initMazeBackground() {
   function drawMaze() {
     if (!maze) return;
     ctx.lineWidth = 0.8;
-    ctx.strokeStyle = 'rgba(91, 156, 245, 0.12)';
+    ctx.strokeStyle = 'rgba(249, 115, 22, 0.10)';
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
         var x = c * CELL, y = r * CELL;
@@ -180,7 +180,7 @@ function initMazeBackground() {
       for (var c = 0; c < cols; c++) {
         var conns = (adj[nodeKey(r,c)] || []).length;
         if (conns >= 2) {
-          ctx.fillStyle = 'rgba(167, 139, 250, 0.15)';
+          ctx.fillStyle = 'rgba(249, 115, 22, 0.12)';
           ctx.beginPath(); ctx.arc(c * CELL, r * CELL, 2, 0, Math.PI * 2); ctx.fill();
         }
       }
@@ -197,13 +197,13 @@ function initMazeBackground() {
         if (maze[r][c].right) {
           var t = ((phase + r * 0.5 + c * 0.3) % 2) / 2;
           var ax = x + CELL * t;
-          ctx.fillStyle = '#5b9cf5';
+          ctx.fillStyle = '#f97316';
           ctx.beginPath(); ctx.moveTo(ax + 4, y); ctx.lineTo(ax - 2, y - 2.5); ctx.lineTo(ax - 2, y + 2.5); ctx.closePath(); ctx.fill();
         }
         if (maze[r][c].down) {
           var t2 = ((phase + r * 0.3 + c * 0.5) % 2) / 2;
           var ay = y + CELL * t2;
-          ctx.fillStyle = '#a78bfa';
+          ctx.fillStyle = '#fb923c';
           ctx.beginPath(); ctx.moveTo(x, ay + 4); ctx.lineTo(x - 2.5, ay - 2); ctx.lineTo(x + 2.5, ay - 2); ctx.closePath(); ctx.fill();
         }
       }
@@ -230,13 +230,13 @@ function initMazeBackground() {
   function drawAxesHint() {
     var ox = 45, oy = H - 45, len = 35;
     ctx.save(); ctx.globalAlpha = 0.1; ctx.lineWidth = 1.5; ctx.lineCap = 'round';
-    ctx.strokeStyle = '#f87171';
+    ctx.strokeStyle = '#fb923c';
     ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + len, oy); ctx.stroke();
-    ctx.fillStyle = '#f87171'; ctx.font = '12px serif'; ctx.fillText('x', ox + len + 5, oy + 4);
-    ctx.strokeStyle = '#34d399';
+    ctx.fillStyle = '#fb923c'; ctx.font = '12px serif'; ctx.fillText('x', ox + len + 5, oy + 4);
+    ctx.strokeStyle = '#a89070';
     ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - len); ctx.stroke();
-    ctx.fillStyle = '#34d399'; ctx.fillText('y', ox - 4, oy - len - 8);
-    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(ox, oy, 2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#a89070'; ctx.fillText('y', ox - 4, oy - len - 8);
+    ctx.fillStyle = '#f5ede0'; ctx.beginPath(); ctx.arc(ox, oy, 2, 0, Math.PI * 2); ctx.fill();
     ctx.restore();
   }
 
@@ -244,15 +244,15 @@ function initMazeBackground() {
     var cx = W * 0.88, cy = H * 0.12, rad = 45, angle = time * 0.35;
     ctx.save(); ctx.globalAlpha = 0.1; ctx.translate(cx, cy); ctx.lineWidth = 2; ctx.lineCap = 'round';
     var ix = Math.cos(angle) * rad, iy = Math.sin(angle) * rad * 0.35;
-    ctx.strokeStyle = '#f87171'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(ix, iy); ctx.stroke();
-    ctx.fillStyle = '#f87171'; ctx.font = '13px serif'; ctx.fillText('î', ix + 7, iy);
+    ctx.strokeStyle = '#fb923c'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(ix, iy); ctx.stroke();
+    ctx.fillStyle = '#fb923c'; ctx.font = '13px serif'; ctx.fillText('î', ix + 7, iy);
     var jx = Math.cos(angle + Math.PI/2) * rad, jy = Math.sin(angle + Math.PI/2) * rad * 0.35;
-    ctx.strokeStyle = '#34d399'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(jx, jy); ctx.stroke();
-    ctx.fillStyle = '#34d399'; ctx.fillText('ĵ', jx + 7, jy);
+    ctx.strokeStyle = '#a89070'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(jx, jy); ctx.stroke();
+    ctx.fillStyle = '#a89070'; ctx.fillText('ĵ', jx + 7, jy);
     var ky = -Math.abs(Math.sin(angle * 0.6)) * rad;
-    ctx.strokeStyle = '#60a5fa'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, ky); ctx.stroke();
-    ctx.fillStyle = '#60a5fa'; ctx.fillText('k̂', 7, ky - 5);
-    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, 0, 2, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#f97316'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, ky); ctx.stroke();
+    ctx.fillStyle = '#f97316'; ctx.fillText('k̂', 7, ky - 5);
+    ctx.fillStyle = '#f5ede0'; ctx.beginPath(); ctx.arc(0, 0, 2, 0, Math.PI * 2); ctx.fill();
     ctx.restore();
   }
 
@@ -268,7 +268,7 @@ function initMazeBackground() {
       size: 1.2 + Math.random() * 1.8,
       trail: [], trailMax: 20 + Math.floor(Math.random() * 30),
       life: 0, maxLife: 500 + Math.random() * 800,
-      prevDir: null, glowSize: 6 + Math.random() * 8,
+      prevDir: null, glowSize: 3 + Math.random() * 4,
     };
   }
 
@@ -319,7 +319,7 @@ function initMazeBackground() {
     }
     ctx.globalAlpha = alpha * 0.95;
     ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.fill();
-    ctx.globalAlpha = alpha * 0.2;
+    ctx.globalAlpha = alpha * 0.08;
     var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glowSize);
     grad.addColorStop(0, p.color); grad.addColorStop(1, 'transparent');
     ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(p.x, p.y, p.glowSize, 0, Math.PI * 2); ctx.fill();

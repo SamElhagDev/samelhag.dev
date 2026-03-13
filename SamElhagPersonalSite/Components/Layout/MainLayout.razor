@@ -1,15 +1,15 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 @using MudBlazor
 
-<MudThemeProvider IsDarkMode="true" />
+<MudThemeProvider IsDarkMode="true" Theme="@_theme" />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="0" Dense="false" Style="background: rgba(10, 15, 30, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(91, 141, 239, 0.2);">
+    <MudAppBar Elevation="0" Dense="false" Style="background: rgba(19, 17, 16, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(249, 115, 22, 0.12);">
         <MudText Typo="Typo.h6" Class="text-gradient-brand ml-3">
-            [Sam Elhag] / [Sam.E]
+            [Sam.E]
         </MudText>
         <MudSpacer />
         <MudStack Row="true" Spacing="1" Class="mr-3">
@@ -18,7 +18,7 @@
             <MudButton Href="/Interests" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Interests</MudButton>
             <MudButton Href="/projects" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Projects</MudButton>
             <MudButton Href="/contact" Variant="Variant.Filled" Class="nav-link-custom"
-                      Style="background: linear-gradient(135deg, #5B8DEF 0%, #7CB8FF 100%); color: white; font-weight: 600; border-radius: 8px; box-shadow: 0 4px 20px rgba(91, 141, 239, 0.5);">
+                      Style="background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%); color: white; font-weight: 600; border-radius: 8px; box-shadow: 0 2px 10px rgba(249, 115, 22, 0.2);">
                 Contact
             </MudButton>
         </MudStack>
@@ -34,14 +34,14 @@
         </div>
 
         <!-- Footer -->
-        <MudPaper Square="true" Elevation="0" Class="pa-8 mt-12" Style="background: rgba(10, 10, 20, 0.6); backdrop-filter: blur(10px); border-top: 1px solid rgba(192, 192, 192, 0.15);">
+        <MudPaper Square="true" Elevation="0" Class="pa-8 mt-12" Style="background: rgba(14, 12, 10, 0.8); backdrop-filter: blur(10px); border-top: 1px solid rgba(249, 115, 22, 0.10);">
             <MudContainer MaxWidth="MaxWidth.Large">
                 <MudGrid Spacing="6">
                     <MudItem xs="12" md="5">
                         <MudText Typo="Typo.h4" Class="text-gradient-brand" Style="margin-bottom: 16px;">
-                             [Sam Elhag] / [Sam.E]
+                             [Sam.E]
                         </MudText>
-                        <MudText Typo="Typo.body1" Style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; font-weight: 400;">
+                        <MudText Typo="Typo.body1" Style="font-family: 'Inter', sans-serif; color: rgba(245,237,224,0.7); font-size: 1.05rem; line-height: 1.7; font-weight: 400;">
                             Always Learning, Always Building.
                         </MudText>
                         <MudStack Row="true" Spacing="3" Class="mt-6">
@@ -59,37 +59,37 @@
                                            Href="https://x.com/SamEElhag"
                                            Target="_blank"
                                            Color="Color.Surface" Size="Size.Large"
-                                           Class="footer-social-btn" />                       
+                                           Class="footer-social-btn" />
                         </MudStack>
                     </MudItem>
                     <MudItem xs="12" md="3">
                         <MudText Typo="Typo.h6" Class="footer-heading">Quick Links</MudText>
                         <MudStack Spacing="3">
-                            <MudLink Href="/" Color="Color.Inherit" Style="color: #7CB8FF;" Class="footer-link">
+                            <MudLink Href="/" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Home</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/about" Color="Color.Inherit" Style="color: #7CB8FF;" Class="footer-link">
+                            <MudLink Href="/about" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>About</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/Interests" Color="Color.Inherit" Style="color: #7CB8FF;" Class="footer-link">
+                            <MudLink Href="/Interests" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Interests</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/projects" Color="Color.Inherit" Style="color: #7CB8FF;" Class="footer-link">
+                            <MudLink Href="/projects" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Projects</span>
                                 </MudStack>
                             </MudLink>
-                            <MudLink Href="/contact" Color="Color.Inherit" Style="color: #7CB8FF;" Class="footer-link">
+                            <MudLink Href="/contact" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                                     <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
                                     <span>Contact</span>
@@ -101,14 +101,14 @@
                         <MudText Typo="Typo.h6" Class="footer-heading">Get In Touch</MudText>
                         <MudStack Spacing="3">
                             <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
-                                <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: rgba(255,255,255,0.9);" Size="Size.Medium" />
+                                <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: rgba(245,237,224,0.9);" Size="Size.Medium" />
                                 <div>
                                     <MudText Typo="Typo.body2" Class="text-muted-50" Style="font-size: 0.9rem;">Email</MudText>
                                     <MudText Typo="Typo.body1" Class="text-white-90" Style="font-size: 1.1rem;">sami.eltaj.elhag@gmail.com</MudText>
                                 </div>
                             </MudStack>
                             <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
-                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="color: rgba(255,255,255,0.9);" Size="Size.Medium" />
+                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="color: rgba(245,237,224,0.9);" Size="Size.Medium" />
                                 <div>
                                     <MudText Typo="Typo.body2" Class="text-muted-50" Style="font-size: 0.9rem;">Location</MudText>
                                     <MudText Typo="Typo.body1" Class="text-white-90" Style="font-size: 1.1rem;">Pittsburgh,PA</MudText>
@@ -117,9 +117,9 @@
                         </MudStack>
                     </MudItem>
                 </MudGrid>
-                <MudDivider Class="my-8" Style="background: rgba(192, 192, 192, 0.2);" />
-                <MudText Typo="Typo.body1" Align="Align.Center" Style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.5); font-size: 0.95rem; font-weight: 400;">
-                    © @DateTime.Now.Year Sam Elhag. All rights reserved.
+                <MudDivider Class="my-8" Style="background: rgba(168, 144, 112, 0.2);" />
+                <MudText Typo="Typo.body1" Align="Align.Center" Style="font-family: 'Inter', sans-serif; color: rgba(245,237,224,0.5); font-size: 0.95rem; font-weight: 400;">
+                    &copy; @DateTime.Now.Year Sam Elhag. All rights reserved.
                 </MudText>
             </MudContainer>
         </MudPaper>
@@ -133,3 +133,41 @@
     <span class="dismiss">🗙</span>
 </div>
 
+@code {
+    private bool _isDarkMode = true;
+
+    private MudTheme _theme = new()
+    {
+        PaletteDark = new PaletteDark()
+        {
+            Black = "#0e0c0a",
+            Background = "#00000000",
+            Surface = "#1c1916",
+            AppbarBackground = "#131110e6",
+            DrawerBackground = "#131110",
+            Primary = "#f5ede0",
+            Secondary = "#a89070",
+            Tertiary = "#6b5a46",
+            Info = "#f97316",
+            Success = "#22c55e",
+            Warning = "#fb923c",
+            Error = "#ef4444",
+            TextPrimary = "#f5ede0",
+            TextSecondary = "#a89070",
+            TextDisabled = "#4a3a2a",
+            ActionDefault = "#a89070",
+            ActionDisabled = "#4a3a2a",
+            Divider = "#302a23",
+            DividerLight = "#302a2344",
+            LinesDefault = "#302a23",
+            DrawerText = "#f5ede0",
+            DrawerIcon = "#a89070",
+            AppbarText = "#f5ede0",
+        },
+        LayoutProperties = new LayoutProperties()
+        {
+            AppbarHeight = "80px",
+            DefaultBorderRadius = "8px",
+        }
+    };
+}

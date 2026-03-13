@@ -20,7 +20,7 @@
     cursor: crosshair;"></canvas>
     
     <!-- Temperature display on hover -->
-    <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-2" Style="font-family: 'JetBrains Mono', monospace; color: #5B8DEF;">
+    <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-2" Style="font-family: 'JetBrains Mono', monospace; color: #f97316;">
         <span id="hoverTemp">Hover over canvas to see temperature</span>
     </MudText>
 
@@ -68,7 +68,7 @@
 
     </MudGrid>
     
-    <MudPaper Class="pa-6 mt-4 d-flex justify-center" Elevation="0" Style="background: rgba(10, 15, 30, 0.95); color: #E8F0FF; font-family: 'Segoe UI', sans-serif; border-radius: 12px; border: 1px solid rgba(91, 141, 239, 0.15);">
+    <MudPaper Class="pa-6 mt-4 d-flex justify-center" Elevation="0" Style="background: rgba(19, 17, 16, 0.95); color: #f5ede0; font-family: 'Segoe UI', sans-serif; border-radius: 12px; border: 1px solid rgba(249, 115, 22, 0.15);">
     <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" Style="gap: 12px;">
         <MudButton id="pauseBtn" Class="px-6 glass-card glass-card--blue text-center active" Elevation="2">Pause</MudButton>
         <MudButton id="resetBtn" Class="px-6 glass-card glass-card--blue text-center" Elevation="2">Reset</MudButton>
@@ -114,14 +114,14 @@
     </MudGrid>
 
     <!-- Mathematical Equations with KaTeX -->
-    <MudPaper Class="pa-6 mt-4" Elevation="0" Style="background: rgba(10, 15, 30, 0.95); color: #E8F0FF; font-family: 'Segoe UI', sans-serif; border-radius: 12px; border: 1px solid rgba(91, 141, 239, 0.15);">
+    <MudPaper Class="pa-6 mt-4" Elevation="0" Style="background: rgba(19, 17, 16, 0.95); color: #f5ede0; font-family: 'Segoe UI', sans-serif; border-radius: 12px; border: 1px solid rgba(249, 115, 22, 0.15);">
 
-        <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Style="color: #7CB8FF; font-weight: 700; letter-spacing: 1px;">
+        <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Style="color: #fb923c; font-weight: 700; letter-spacing: 1px;">
             Mathematical Formulation
         </MudText>
 
         <!-- Equation 1: Transient Heat Conduction -->
-        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">1. Transient Heat Conduction Equation</MudText>
+        <MudText Typo="Typo.h6" Style="color: #f97316;" Class="mb-2">1. Transient Heat Conduction Equation</MudText>
         <div class="katex-container mb-3">
             <div class="katex-formula">$$\underbrace{\frac{\partial T}{\partial t}}_{\text{Rate of temperature change}} = \underbrace{\alpha}_{\text{Thermal diffusivity}} \left( \underbrace{\frac{\partial^2 T}{\partial x^2}}_{\text{Diffusion in } x} + \underbrace{\frac{\partial^2 T}{\partial y^2}}_{\text{Diffusion in } y} \right) + \underbrace{\dot{Q}}_{\text{Heat source}}$$</div>
         </div>
@@ -140,10 +140,10 @@
             </table>
         </div>
 
-        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+        <MudDivider Class="my-4" Style="background-color: rgba(249, 115, 22, 0.25);" />
 
         <!-- Equation 2: Forced Convection -->
-        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">2. Forced Convection Heat Transfer (Energy Equation)</MudText>
+        <MudText Typo="Typo.h6" Style="color: #f97316;" Class="mb-2">2. Forced Convection Heat Transfer (Energy Equation)</MudText>
         <div class="katex-container mb-3">
             <div class="katex-formula">$$\underbrace{\frac{\partial T}{\partial t}}_{\text{Local rate of change}} + \underbrace{u \frac{\partial T}{\partial x}}_{\text{Convection in } x} + \underbrace{v \frac{\partial T}{\partial y}}_{\text{Convection in } y} = \underbrace{\alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} \right)}_{\text{Thermal diffusion } (\alpha \nabla^2 T)}$$</div>
         </div>
@@ -157,10 +157,10 @@
             </table>
         </div>
 
-        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+        <MudDivider Class="my-4" Style="background-color: rgba(249, 115, 22, 0.25);" />
 
         <!-- Equation 3: Finite Difference Discretization -->
-        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">3. Finite Difference Discretization (Explicit Euler)</MudText>
+        <MudText Typo="Typo.h6" Style="color: #f97316;" Class="mb-2">3. Finite Difference Discretization (Explicit Euler)</MudText>
         <div class="katex-container mb-3">
             <div class="katex-formula">$$\underbrace{T_{i,j}^{\,n+1}}_{\text{New temperature}} = \underbrace{T_{i,j}^{\,n}}_{\text{Current temperature}} + \Delta t \left\{ \underbrace{\alpha \left[ \frac{T_{i+1,j}^n - 2T_{i,j}^n + T_{i-1,j}^n}{\Delta x^2} \right]}_{\text{Diffusion in } x \text{ (central difference)}} + \underbrace{\alpha \left[ \frac{T_{i,j+1}^n - 2T_{i,j}^n + T_{i,j-1}^n}{\Delta y^2} \right]}_{\text{Diffusion in } y \text{ (central difference)}} - \underbrace{u \frac{\Delta_x T}{\Delta x}}_{\text{Upwind convection } x} - \underbrace{v \frac{\Delta_y T}{\Delta y}}_{\text{Upwind convection } y} \right\}$$</div>
         </div>
@@ -177,10 +177,10 @@
             </table>
         </div>
 
-        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+        <MudDivider Class="my-4" Style="background-color: rgba(249, 115, 22, 0.25);" />
 
         <!-- Equation 4: Dimensionless Numbers -->
-        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">4. Key Dimensionless Numbers</MudText>
+        <MudText Typo="Typo.h6" Style="color: #f97316;" Class="mb-2">4. Key Dimensionless Numbers</MudText>
         <div class="katex-container mb-3">
             <div class="katex-formula">$$\underbrace{Re = \frac{\rho \, U_\infty \, L}{\mu}}_{\text{Reynolds number}} \qquad \underbrace{Pr = \frac{\mu \, c_p}{k}}_{\text{Prandtl number}} \qquad \underbrace{Nu = \frac{h \, L}{k}}_{\text{Nusselt number}}$$</div>
         </div>
@@ -196,10 +196,10 @@
             </table>
         </div>
 
-        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+        <MudDivider Class="my-4" Style="background-color: rgba(249, 115, 22, 0.25);" />
 
         <!-- Equation 5: Nusselt Correlations -->
-        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">5. Nusselt Number Correlations</MudText>
+        <MudText Typo="Typo.h6" Style="color: #f97316;" Class="mb-2">5. Nusselt Number Correlations</MudText>
         <div class="katex-container mb-3">
             <div class="katex-formula" id="nusseltFormula"></div>
         </div>
@@ -213,10 +213,10 @@
             </table>
         </div>
 
-        <MudDivider Class="my-4" Style="background-color: rgba(91, 141, 239, 0.25);" />
+        <MudDivider Class="my-4" Style="background-color: rgba(249, 115, 22, 0.25);" />
 
         <!-- Equation 6: NACA 0012 -->
-        <MudText Typo="Typo.h6" Style="color: #5B8DEF;" Class="mb-2">6. NACA 0012 Airfoil Geometry</MudText>
+        <MudText Typo="Typo.h6" Style="color: #f97316;" Class="mb-2">6. NACA 0012 Airfoil Geometry</MudText>
         <div class="katex-container mb-3">
             <div class="katex-formula">$$\underbrace{y_t}_{\text{Half-thickness}} = \underbrace{5t}_{\text{Scaling factor}} \left[ \underbrace{0.2969\sqrt{x}}_{\text{Leading edge}} - \underbrace{0.1260\,x}_{\text{Linear term}} - \underbrace{0.3516\,x^2}_{\text{Quadratic}} + \underbrace{0.2843\,x^3}_{\text{Cubic}} - \underbrace{0.1015\,x^4}_{\text{Trailing edge}} \right]$$</div>
         </div>
@@ -235,16 +235,16 @@
 
 <style>
     .katex-container {
-        background: rgba(20, 30, 50, 0.5);
+        background: rgba(28, 25, 22, 0.5);
         padding: 20px 24px;
         border-radius: 8px;
-        border-left: 4px solid #5B8DEF;
+        border-left: 4px solid #f97316;
         overflow-x: auto;
     }
 
     .katex-formula {
         font-size: 1.3em;
-        color: #E8F0FF;
+        color: #f5ede0;
         text-align: center;
     }
 
@@ -258,20 +258,20 @@
 
     .eq-legend {
         padding: 12px 16px;
-        background: rgba(15, 22, 40, 0.4);
+        background: rgba(19, 17, 16, 0.4);
         border-radius: 6px;
-        border: 1px solid rgba(91, 141, 239, 0.1);
+        border: 1px solid rgba(249, 115, 22, 0.1);
     }
 
     .eq-legend-table {
         width: 100%;
         border-collapse: collapse;
         font-size: 0.9rem;
-        color: #C8D8E8;
+        color: rgba(245, 237, 224, 0.7);
     }
 
     .eq-legend-table tr + tr td {
-        border-top: 1px solid rgba(91, 141, 239, 0.08);
+        border-top: 1px solid rgba(249, 115, 22, 0.08);
     }
 
     .eq-legend-table td {
@@ -281,7 +281,7 @@
 
     .eq-sym {
         font-family: 'Courier New', monospace;
-        color: #9FD4FF;
+        color: #fb923c;
         white-space: nowrap;
         width: 140px;
         font-weight: 600;
