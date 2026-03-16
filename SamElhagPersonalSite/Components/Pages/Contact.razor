@@ -1,7 +1,11 @@
 @page "/contact"
 @using MudBlazor
 @using System.ComponentModel.DataAnnotations
+@using SamElhagPersonalSite.Models
+@using SamElhagPersonalSite.Services
 @inject ISnackbar Snackbar
+@inject IEmailService EmailService
+@inject ILogger<Contact> Logger
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <PageTitle>Contact - Sam Elhag</PageTitle>
@@ -145,19 +149,17 @@
         isSubmitting = true;
         try
         {
-            // simulate server call
-            await Task.Delay(800);
+            await EmailService.SendContactEmailAsync(model);
 
-            Snackbar.Add("Submission successful — I'll get back to you shortly.", Severity.Success);
+            Snackbar.Add("Message sent successfully — I'll get back to you shortly!", Severity.Success);
 
-            // reset model and form
             model = new ContactFormModel();
             await form.ResetAsync();
         }
         catch (Exception ex)
         {
-            Snackbar.Add("An error occurred. Please try again.", Severity.Error);
-            Console.Error.WriteLine(ex);
+            Logger.LogError(ex, "Failed to send contact email from {Email}", model.Email);
+            Snackbar.Add("An error occurred. Please try again later.", Severity.Error);
         }
         finally
         {
@@ -165,14 +167,4 @@
             StateHasChanged();
         }
     }
-
-    public class ContactFormModel
-    {
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Subject { get; set; } = string.Empty;
-        public string Message { get; set; } = string.Empty;
-    }
-
 }

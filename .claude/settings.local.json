@@ -21,7 +21,9 @@
       "Bash(powershell -Command \"Stop-Process -Id 71108 -Force -ErrorAction SilentlyContinue\")",
       "Bash(find 'C:\\\\Users\\\\Sam Elhag.EREF\\\\source\\\\repos\\\\SamElhagPersonalSite' -type f -name *.razor.css)",
       "Bash(taskkill //F //PID 91624)",
-      "Bash(taskkill //F //IM SamElhagPersonalSite.exe)"
+      "Bash(taskkill //F //IM SamElhagPersonalSite.exe)",
+      "Read(//c/Users/Sam Elhag.EREF/source/repos/SamElhagPersonalSite/**)",
+      "Bash(dotnet user-secrets:*)"
     ]
   }
 }
