@@ -1,8 +1,20 @@
 using MudBlazor.Services;
 using SamElhagPersonalSite.Components;
+using SamElhagPersonalSite.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
+builder.Services.Configure<EmailSettings>(options =>
+{
+    builder.Configuration.GetSection("EmailSettings").Bind(options);
+    var smtp = builder.Configuration.GetSection("samelhagdevSMTP");
+    if (smtp.Exists())
+    {
+        options.Username = smtp["Username"] ?? options.Username;
+        options.Password = smtp["Password"] ?? options.Password;
+    }
+});
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 builder.AddServiceDefaults();
 
