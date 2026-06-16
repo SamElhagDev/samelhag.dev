@@ -44,7 +44,7 @@ function initMazeBackground() {
     gridNode: 'rgba(249, 115, 22, 0.06)',
     particle: ['#f97316','#fb923c','#ea580c','#a89070','#f59e0b','#d97706','#fbbf24','#b45309'],
     symbol: '#a89070',
-    glow: ['rgba(249,115,22,0.04)','rgba(234,88,12,0.03)','rgba(168,144,112,0.02)'],
+    glow: ['rgba(249,115,22,0.02)','rgba(234,88,12,0.015)','rgba(168,144,112,0.01)'],
   };
 
   var cols = 0, rows = 0;
@@ -168,7 +168,7 @@ function initMazeBackground() {
   function drawMaze() {
     if (!maze) return;
     ctx.lineWidth = 0.8;
-    ctx.strokeStyle = 'rgba(249, 115, 22, 0.10)';
+    ctx.strokeStyle = 'rgba(249, 115, 22, 0.06)';
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
         var x = c * CELL, y = r * CELL;
@@ -180,7 +180,7 @@ function initMazeBackground() {
       for (var c = 0; c < cols; c++) {
         var conns = (adj[nodeKey(r,c)] || []).length;
         if (conns >= 2) {
-          ctx.fillStyle = 'rgba(249, 115, 22, 0.12)';
+          ctx.fillStyle = 'rgba(249, 115, 22, 0.07)';
           ctx.beginPath(); ctx.arc(c * CELL, r * CELL, 2, 0, Math.PI * 2); ctx.fill();
         }
       }
@@ -189,7 +189,7 @@ function initMazeBackground() {
 
   function drawCorridorArrows() {
     if (!maze) return;
-    ctx.globalAlpha = 0.15;
+    ctx.globalAlpha = 0.08;
     var phase = time * 1.5;
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
@@ -313,13 +313,13 @@ function initMazeBackground() {
       for (var i = 1; i < p.trail.length; i++) {
         var t = i / p.trail.length;
         ctx.beginPath(); ctx.moveTo(p.trail[i-1].x, p.trail[i-1].y); ctx.lineTo(p.trail[i].x, p.trail[i].y);
-        ctx.strokeStyle = p.color; ctx.globalAlpha = alpha * t * 0.5;
+        ctx.strokeStyle = p.color; ctx.globalAlpha = alpha * t * 0.35;
         ctx.lineWidth = p.size * (0.3 + t * 0.7); ctx.lineCap = 'round'; ctx.stroke();
       }
     }
     ctx.globalAlpha = alpha * 0.95;
     ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.fill();
-    ctx.globalAlpha = alpha * 0.08;
+    ctx.globalAlpha = alpha * 0.04;
     var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glowSize);
     grad.addColorStop(0, p.color); grad.addColorStop(1, 'transparent');
     ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(p.x, p.y, p.glowSize, 0, Math.PI * 2); ctx.fill();
@@ -386,7 +386,7 @@ function initMazeBackground() {
   doResize(true); // Force initial resize
   buildMaze();
 
-  var pCount = Math.min(100, Math.floor((W * H) / 10000)); // Reduced from 200
+  var pCount = Math.min(60, Math.floor((W * H) / 16000)); // dimmed for IDE theme
   for (var i = 0; i < pCount; i++) { var p = makeParticle(); pickNext(p); particles.push(p); }
   var plCount = Math.min(20, Math.floor((W * H) / 40000)); // Reduced from 40
   for (var i = 0; i < plCount; i++) { pulses.push(makePulse()); }
@@ -436,7 +436,7 @@ function initMazeBackground() {
     // Always re-apply transform (setting canvas.width resets context state)
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
-    time += 0.016;
+    time += 0.011;
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = palette.bg; ctx.fillRect(0, 0, W, H);
 

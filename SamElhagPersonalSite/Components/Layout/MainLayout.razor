@@ -7,7 +7,7 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="0" Dense="false" Style="background: rgba(19, 17, 16, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(249, 115, 22, 0.12);">
+    <MudAppBar Elevation="0" Dense="false" Style="background: #131110; border-bottom: 1px solid var(--bc-border);">
         <MudText Typo="Typo.h6" Class="text-gradient-brand ml-3">
             [Sam.E]
         </MudText>
@@ -22,7 +22,7 @@
             <MudButton Href="/Interests" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Interests</MudButton>
             <MudButton Href="/projects" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Projects</MudButton>
             <MudButton Href="/contact" Variant="Variant.Filled" Class="nav-link-custom"
-                      Style="background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%); color: white; font-weight: 600; border-radius: 8px; box-shadow: 0 2px 10px rgba(249, 115, 22, 0.2);">
+                      Style="background: var(--bc-accent); color: white; font-weight: 600; border-radius: var(--bc-radius);">
                 Contact
             </MudButton>
         </MudStack>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- Footer -->
-        <MudPaper Square="true" Elevation="0" Class="pa-8 mt-12" Style="background: rgba(14, 12, 10, 0.8); backdrop-filter: blur(10px); border-top: 1px solid rgba(249, 115, 22, 0.10);">
+        <MudPaper Square="true" Elevation="0" Class="pa-8 mt-12" Style="background: var(--bc-bg-deep); border-top: 1px solid var(--bc-border);">
             <MudContainer MaxWidth="MaxWidth.Large">
                 <MudGrid Spacing="6">
                     <MudItem xs="12" md="5">
@@ -147,7 +147,7 @@
             Black = "#0e0c0a",
             Background = "#00000000",
             Surface = "#1c1916",
-            AppbarBackground = "#131110e6",
+            AppbarBackground = "#131110",
             DrawerBackground = "#131110",
             Primary = "#f5ede0",
             Secondary = "#a89070",
@@ -171,7 +171,7 @@
         LayoutProperties = new LayoutProperties()
         {
             AppbarHeight = "80px",
-            DefaultBorderRadius = "8px",
+            DefaultBorderRadius = "6px",
         }
     };
 }

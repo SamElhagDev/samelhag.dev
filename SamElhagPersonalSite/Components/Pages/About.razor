@@ -32,15 +32,14 @@
     }
 
     .wia-inner-card {
-        background: rgba(14, 12, 10, 0.7);
-        border-radius: 12px;
+        background: var(--bc-bg-deep);
+        border-radius: var(--bc-radius);
         padding: 18px;
         min-width: 0;
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition: background 0.2s;
     }
     .wia-inner-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        background: var(--bc-bg-primary);
     }
 </style>
 
@@ -63,7 +62,7 @@
     </div>
 
     <!-- ═══ Sam.E outer container ═══ -->
-    <MudPaper Elevation="0" Style="background: rgba(28, 25, 22, 0.8); backdrop-filter: blur(20px); border: 2px solid rgba(249, 115, 22, 0.4); border-radius: 20px; padding: 28px; box-shadow: 0 4px 20px rgba(249, 115, 22, 0.06);">
+    <MudPaper Elevation="0" Style="background: var(--bc-bg-surface); border: 1px solid var(--bc-accent-border); border-radius: var(--bc-radius-lg); padding: 28px; box-shadow: none;">
 
         <!-- Header row -->
         <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4" Spacing="3">
