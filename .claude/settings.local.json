@@ -23,7 +23,8 @@
       "Bash(taskkill //F //PID 91624)",
       "Bash(taskkill //F //IM SamElhagPersonalSite.exe)",
       "Read(//c/Users/Sam Elhag.EREF/source/repos/SamElhagPersonalSite/**)",
-      "Bash(dotnet user-secrets:*)"
+      "Bash(dotnet user-secrets:*)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} in %{time_total}s\\\\n\" --max-time 25 http://localhost:5264/)"
     ]
   }
 }

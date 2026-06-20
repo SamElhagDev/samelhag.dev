@@ -200,26 +200,19 @@
       toggle();
     }
   });
-
-  // Expose for the navbar chip
   window.commandPalette = { open: open, close: close, toggle: toggle, isMac: isMac };
 
-  // Wire the navbar trigger chip(s): set keycap text + click handler
-  function wireChips() {
-    var triggers = document.querySelectorAll('.cmdk-trigger');
-    for (var i = 0; i < triggers.length; i++) {
-      var btn = triggers[i];
-      var cap = btn.querySelector('[data-cmdk-keycap]');
-      if (cap) cap.textContent = isMac ? '⌘K' : 'Ctrl K';
-      if (!btn.dataset.cmdkBound) {
-        btn.dataset.cmdkBound = '1';
-        btn.addEventListener('click', function (e) { e.preventDefault(); toggle(); });
-      }
-    }
-  }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var trigger = (t && t.closest) ? t.closest('.cmdk-trigger') : null;
+    if (trigger) { e.preventDefault(); toggle(); }
+  });
 
-  // Run now + after Blazor interactive render / enhanced navigation (app bar renders after circuit connect)
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireChips); else wireChips();
-  [300, 1000, 2500].forEach(function (t) { setTimeout(wireChips, t); });
-  if (window.Blazor) window.Blazor.addEventListener('enhancednavigationend', wireChips);
+  function updateKeycaps() {
+    var caps = document.querySelectorAll('[data-cmdk-keycap]');
+    for (var i = 0; i < caps.length; i++) caps[i].textContent = isMac ? '⌘K' : 'Ctrl K';
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateKeycaps); else updateKeycaps();
+  [300, 1000, 2500].forEach(function (t) { setTimeout(updateKeycaps, t); });
+  if (window.Blazor) window.Blazor.addEventListener('enhancednavigationend', updateKeycaps);
 })();
