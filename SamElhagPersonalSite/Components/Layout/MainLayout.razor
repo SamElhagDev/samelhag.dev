@@ -29,11 +29,13 @@
     </MudAppBar>
     <MudMainContent Style="
         background-color: transparent;
-        min-height: 100vh;
+        min-height: calc(100vh / 0.9);
         position: relative;
+        display: flex;
+        flex-direction: column;
     ">
-        <div style="position: relative; z-index: 1;">
-        <div>
+        <div style="position: relative; z-index: 1; flex: 1 0 auto; display: flex; flex-direction: column;">
+        <div style="flex: 1 0 auto;">
             @Body
         </div>
 
