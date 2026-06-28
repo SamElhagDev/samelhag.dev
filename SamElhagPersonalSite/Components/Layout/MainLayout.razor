@@ -1,5 +1,8 @@
 @inherits LayoutComponentBase
 @using MudBlazor
+@using Microsoft.AspNetCore.Components.Routing
+@inject NavigationManager Nav
+@implements IDisposable
 
 <MudThemeProvider IsDarkMode="true" Theme="@_theme" />
 <MudPopoverProvider />
@@ -13,14 +16,10 @@
         </MudText>
         <MudSpacer />
         <MudStack Row="true" Spacing="1">
-            <MudButton Href="/" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Home</MudButton>
-            <MudButton Href="/about" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">About</MudButton>
-            <MudButton Href="/Interests" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Interests</MudButton>
-            <MudButton Href="/projects" Color="Color.Inherit" Variant="Variant.Text" Class="nav-link-custom">Projects</MudButton>
-            <MudButton Href="/contact" Variant="Variant.Filled" Class="nav-link-custom"
-                      Style="background: var(--bc-accent); color: white; font-weight: 600; border-radius: var(--bc-radius);">
-                Contact
-            </MudButton>
+            @foreach (var item in _navItems)
+            {
+                <MudButton Href="@item.Href" Color="Color.Inherit" Variant="Variant.Text" Class="@NavClass(item.Href)">@item.Label</MudButton>
+            }
         </MudStack>
         <MudSpacer />
         <button type="button" class="cmdk-trigger mr-3" aria-label="Open command palette">
@@ -140,6 +139,29 @@
 
 @code {
     private bool _isDarkMode = true;
+
+    private readonly (string Label, string Href)[] _navItems =
+    {
+        ("Home", "/"),
+        ("About", "/about"),
+        ("Interests", "/interests"),
+        ("Projects", "/projects"),
+        ("Contact", "/contact"),
+    };
+
+    protected override void OnInitialized() => Nav.LocationChanged += HandleLocationChanged;
+
+    public void Dispose() => Nav.LocationChanged -= HandleLocationChanged;
+
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e) => InvokeAsync(StateHasChanged);
+
+    private string NavClass(string href)
+    {
+        var current = Nav.ToBaseRelativePath(Nav.Uri).Split('?')[0].Split('#')[0].TrimEnd('/').ToLowerInvariant();
+        current = current.Length == 0 ? "/" : "/" + current;
+        var target = href == "/" ? "/" : href.TrimEnd('/').ToLowerInvariant();
+        return current == target ? "nav-link-custom nav-link-active" : "nav-link-custom";
+    }
 
     private MudTheme _theme = new()
     {
