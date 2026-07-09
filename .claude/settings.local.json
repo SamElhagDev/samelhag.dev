@@ -24,7 +24,9 @@
       "Bash(taskkill //F //IM SamElhagPersonalSite.exe)",
       "Read(//c/Users/Sam Elhag.EREF/source/repos/SamElhagPersonalSite/**)",
       "Bash(dotnet user-secrets:*)",
-      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} in %{time_total}s\\\\n\" --max-time 25 http://localhost:5264/)"
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} in %{time_total}s\\\\n\" --max-time 25 http://localhost:5264/)",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget"
     ]
   }
 }

@@ -248,6 +248,50 @@ h1:focus {
     font-family: 'JetBrains Mono', monospace !important;
 }
 
+/* ── Hero role flip (split-flap: Mechanical / Software) ── */
+.role-flip__window {
+    position: relative;
+    display: inline-block;
+    height: 1.3em;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.role-flip__sizer { visibility: hidden; }
+
+.role-flip__stack {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: var(--bc-accent-light);
+    animation: role-flip-roll 5s infinite;
+}
+
+.role-flip__stack > span {
+    height: 1.3em;
+    line-height: 1.3em;
+}
+
+.role-flip__static {
+    display: none;
+    color: var(--bc-accent-light);
+}
+
+@keyframes role-flip-roll {
+    0%,  28%  { transform: translateY(0); }
+    39%, 64%  { transform: translateY(-1.3em); }
+    75%, 100% { transform: translateY(-2.6em); }
+}
+
+/* Respect users who prefer no motion: show a static label instead */
+@media (prefers-reduced-motion: reduce) {
+    .role-flip__window { display: none; }
+    .role-flip__static { display: inline; }
+}
+
 /* ── Chips ── */
 .chip-blue        { background: var(--bc-bg-elevated) !important; color: var(--bc-text-secondary) !important; border: 1px solid var(--bc-border) !important; font-family: 'JetBrains Mono', monospace !important; }
 .chip-blue-accent { background: var(--bc-bg-elevated) !important; color: var(--bc-accent-light) !important; border: 1px solid var(--bc-border) !important; font-family: 'JetBrains Mono', monospace !important; }
