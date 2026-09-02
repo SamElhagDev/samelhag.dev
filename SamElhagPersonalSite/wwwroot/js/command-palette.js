@@ -9,7 +9,7 @@
     { label: 'Projects',                   type: 'nav',      value: '/projects',               hint: 'Page',     icon: 'fa-solid fa-folder-open' },
     { label: 'Contact',                    type: 'nav',      value: '/contact',                hint: 'Page',     icon: 'fa-solid fa-envelope' },
     { label: 'Heat Transfer — Case Study', type: 'nav',      value: '/projects/heat-transfer', hint: 'Project',  icon: 'fa-solid fa-wind' },
-    { label: 'Heat Transfer — Live Sim',   type: 'nav',      value: '/HeatSimulation',         hint: 'Project',  icon: 'fa-solid fa-play' },
+    { label: 'Heat Transfer — Live Sim',   type: 'nav',      value: '/heatsimulation',         hint: 'Project',  icon: 'fa-solid fa-play' },
     { label: 'GitHub',                     type: 'external', value: 'https://github.com/SamElhagDev',                   hint: 'External', icon: 'fa-brands fa-github' },
     { label: 'LinkedIn',                   type: 'external', value: 'https://www.linkedin.com/in/sam-elhag-b82312102/', hint: 'External', icon: 'fa-brands fa-linkedin' },
     { label: 'X (Twitter)',                type: 'external', value: 'https://x.com/SamEElhag',                          hint: 'External', icon: 'fa-brands fa-x-twitter' },
