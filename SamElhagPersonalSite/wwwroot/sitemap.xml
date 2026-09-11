@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Add a <url> entry here whenever a new page or project case study is published. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://samelhag.dev/</loc></url>
+  <url><loc>https://samelhag.dev/about</loc></url>
+  <url><loc>https://samelhag.dev/projects</loc></url>
+  <url><loc>https://samelhag.dev/projects/heat-transfer</loc></url>
+  <url><loc>https://samelhag.dev/heatsimulation</loc></url>
+  <url><loc>https://samelhag.dev/interests</loc></url>
+  <url><loc>https://samelhag.dev/contact</loc></url>
+</urlset>

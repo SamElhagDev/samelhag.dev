@@ -1,0 +1,46 @@
+@* Per-page <title>, description, canonical URL, and social-card metadata.
+   Prerendering puts these in the initial HTML, which is what search engines and
+   link unfurlers (LinkedIn, X, Slack) read. *@
+<PageTitle>@FullTitle</PageTitle>
+<HeadContent>
+    <meta name="description" content="@Description" />
+    <link rel="canonical" href="@CanonicalUrl" />
+    @if (NoIndex)
+    {
+        <meta name="robots" content="noindex" />
+    }
+    <meta property="og:type" content="@OgType" />
+    <meta property="og:site_name" content="@SiteInfo.Name" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="@FullTitle" />
+    <meta property="og:description" content="@Description" />
+    <meta property="og:url" content="@CanonicalUrl" />
+    <meta property="og:image" content="@SiteInfo.OgImageUrl" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="@SiteInfo.OgImageAlt" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SiteInfo.XHandle" />
+    <meta name="twitter:title" content="@FullTitle" />
+    <meta name="twitter:description" content="@Description" />
+    <meta name="twitter:image" content="@SiteInfo.OgImageUrl" />
+</HeadContent>
+
+@code {
+    /// <summary>Page name; the site name is appended except on the home page.</summary>
+    [Parameter, EditorRequired] public string Title { get; set; } = string.Empty;
+
+    /// <summary>One or two sentences, ideally under 160 characters.</summary>
+    [Parameter, EditorRequired] public string Description { get; set; } = string.Empty;
+
+    /// <summary>Site-relative path of the page, e.g. "/about".</summary>
+    [Parameter, EditorRequired] public string Path { get; set; } = "/";
+
+    [Parameter] public string OgType { get; set; } = "website";
+
+    [Parameter] public bool NoIndex { get; set; }
+
+    private string FullTitle => Path == "/" ? Title : $"{Title} — {SiteInfo.Name}";
+
+    private string CanonicalUrl => SiteInfo.BaseUrl + Path;
+}

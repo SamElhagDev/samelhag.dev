@@ -1,0 +1,76 @@
+.contact-layout {
+    display: grid;
+    align-items: start;
+    gap: var(--space-5);
+}
+
+.contact-card__title {
+    margin-bottom: var(--space-5);
+}
+
+.contact-form__grid {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.contact-form__submit {
+    margin-top: var(--space-5);
+}
+
+.contact-aside {
+    display: grid;
+    gap: var(--space-5);
+}
+
+.contact-details {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.contact-details li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.contact-details__label {
+    display: block;
+    color: var(--bc-text-muted);
+    font-size: var(--text-sm);
+}
+
+.contact-details a,
+.contact-details__value {
+    color: var(--bc-text-primary);
+    overflow-wrap: anywhere;
+    text-decoration: none;
+}
+
+.contact-details a:hover {
+    color: var(--bc-accent-light);
+}
+
+.contact-social {
+    --stack-gap: var(--space-2);
+}
+
+.contact-social .btn {
+    justify-content: flex-start;
+}
+
+@media (min-width: 640px) {
+    .contact-form__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* MudTextField renders its own root element, so the span class needs ::deep. */
+    .contact-form__grid ::deep .span-full {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 960px) {
+    .contact-layout {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+}

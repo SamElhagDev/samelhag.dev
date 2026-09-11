@@ -1,170 +1,124 @@
 @page "/contact"
-@using MudBlazor
 @using System.ComponentModel.DataAnnotations
 @using SamElhagPersonalSite.Models
 @using SamElhagPersonalSite.Services
 @inject ISnackbar Snackbar
 @inject IEmailService EmailService
 @inject ILogger<Contact> Logger
-@rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<PageTitle>Contact - Sam Elhag</PageTitle>
+<Seo Title="Contact"
+     Description="Have a project in mind or want to collaborate? Send Sam Elhag a message."
+     Path="/contact" />
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="mt-8">
-    <!-- Header -->
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="text-heading">
-        Get In Touch
-    </MudText>
-    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8 text-muted-50" Style="font-weight: 400;">
+<div class="container">
+    <PageHeader Eyebrow="~/contact" Title="Get in touch">
         Have a project in mind or want to collaborate? I'd love to hear from you!
-    </MudText>
+    </PageHeader>
 
-    <MudGrid Justify="Justify.Center">
-        <!-- Contact Form -->
-        <MudItem xs="12" md="7">
-            <MudPaper Elevation="0" Class="glass-card glass-card--blue glass-card--r20 pa-6">
-                <MudText Typo="Typo.h5" GutterBottom="true" Class="mb-4 text-white-bold">Send me a message</MudText>
-                
-                <MudForm @ref="form">
-                    <MudGrid>
-                        <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="model.FirstName" Label="First Name" Variant="Variant.Outlined" 
-                                        Required="true" RequiredError="First name is required" />
-                        </MudItem>
-                        <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="model.LastName" Label="Last Name" Variant="Variant.Outlined" 
-                                        Required="true" RequiredError="Last name is required" />
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudTextField @bind-Value="model.Email" Label="Email" Variant="Variant.Outlined" 
-                                        InputType="InputType.Email" Required="true" RequiredError="Email is required"
-                                        Validation="@(new EmailAddressAttribute() { ErrorMessage = "Invalid email address" })" />
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudTextField @bind-Value="model.Subject" Label="Subject" Variant="Variant.Outlined" 
-                                        Required="true" RequiredError="Subject is required" />
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudTextField @bind-Value="model.Message" Label="Message" Variant="Variant.Outlined" 
-                                        Lines="6" Required="true" RequiredError="Message is required" />
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudButton Variant="Variant.Filled"
-                                       FullWidth="true"
-                                       Size="Size.Large"
-                                       Disabled="@isSubmitting"
-                                       OnClick="SubmitForm"
-                                       StartIcon="@Icons.Material.Filled.Send"
-                                       Class="btn-gradient">
-                                @(isSubmitting ? "Sending…" : "Send Message")
-                            </MudButton>
-                        </MudItem>
-                    </MudGrid>
-                </MudForm>
-            </MudPaper>
-        </MudItem>
+    <div class="contact-layout">
+        <section class="card" aria-labelledby="form-title">
+            <h2 id="form-title" class="card__title contact-card__title">Send me a message</h2>
 
-        <!-- Contact Information -->
-        <MudItem xs="12" md="5">
-            <MudStack Spacing="4">
-                <!-- Contact Details -->
-                <MudPaper Elevation="0" Class="glass-card glass-card--blue glass-card--r20 pa-4">
-                    <MudText Typo="Typo.h6" GutterBottom="true" Class="mb-4 text-white-bold">Contact Information</MudText>
+            <MudForm @ref="_form">
+                <div class="contact-form__grid">
+                    <MudTextField @bind-Value="_model.FirstName" Label="First name" Variant="Variant.Outlined"
+                                  Required="true" RequiredError="First name is required" autocomplete="given-name" />
+                    <MudTextField @bind-Value="_model.LastName" Label="Last name" Variant="Variant.Outlined"
+                                  Required="true" RequiredError="Last name is required" autocomplete="family-name" />
+                    <MudTextField @bind-Value="_model.Email" Label="Email" Variant="Variant.Outlined" InputType="InputType.Email"
+                                  Required="true" RequiredError="Email is required" autocomplete="email" Class="span-full"
+                                  Validation="@(new EmailAddressAttribute { ErrorMessage = "Invalid email address" })" />
+                    <MudTextField @bind-Value="_model.Subject" Label="Subject" Variant="Variant.Outlined"
+                                  Required="true" RequiredError="Subject is required" Class="span-full" />
+                    <MudTextField @bind-Value="_model.Message" Label="Message" Variant="Variant.Outlined" Lines="6" MaxLength="10000"
+                                  Required="true" RequiredError="Message is required" Class="span-full" />
+                </div>
 
-                    <MudStack Spacing="3">
-                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
-                            <div class="icon-box icon-box--blue-cyan">
-                                <MudIcon Icon="@Icons.Material.Filled.Email" Class="icon-white" Style="font-size: 1.2rem;" />
-                            </div>
-                            <div>
-                                <MudText Typo="Typo.body2" Class="text-muted-50">Email</MudText>
-                                <MudText Typo="Typo.body1" Class="text-white-95">sami.eltaj.elhag@gmail.com</MudText>
-                            </div>
-                        </MudStack>
+                <button type="button" class="btn btn--primary btn--lg btn--block contact-form__submit"
+                        disabled="@_isSubmitting" @onclick="SubmitAsync">
+                    <Icon Svg="@Icons.Material.Outlined.Send" />
+                    @(_isSubmitting ? "Sending…" : "Send message")
+                </button>
+            </MudForm>
+        </section>
 
-                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
-                            <div class="icon-box icon-box--blue-cyan">
-                                <MudIcon Icon="@Icons.Material.Filled.Phone" Class="icon-white" Style="font-size: 1.2rem;" />
-                            </div>
-                            <div>
-                                <MudText Typo="Typo.body2" Class="text-muted-50">Phone</MudText>
-                                <MudText Typo="Typo.body1" Class="text-white-95">+1 (304) 435-8767</MudText>
-                            </div>
-                        </MudStack>
+        <aside class="contact-aside" aria-label="Other ways to reach me">
+            <section class="card" aria-labelledby="details-title">
+                <h2 id="details-title" class="card__title contact-card__title">Contact information</h2>
+                <ul class="contact-details" role="list">
+                    <li>
+                        <span class="icon-tile icon-tile--sm"><Icon Svg="@Icons.Material.Outlined.Email" /></span>
+                        <div>
+                            <span class="contact-details__label">Email</span>
+                            <a href="@($"mailto:{SiteInfo.Email}")">@SiteInfo.Email</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon-tile icon-tile--sm"><Icon Svg="@Icons.Material.Outlined.Phone" /></span>
+                        <div>
+                            <span class="contact-details__label">Phone</span>
+                            <a href="@SiteInfo.PhoneHref">@SiteInfo.Phone</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon-tile icon-tile--sm"><Icon Svg="@Icons.Material.Outlined.LocationOn" /></span>
+                        <div>
+                            <span class="contact-details__label">Location</span>
+                            <span class="contact-details__value">@SiteInfo.Location</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
 
-                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
-                            <div class="icon-box icon-box--blue-cyan">
-                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="icon-white" Style="font-size: 1.2rem;" />
-                            </div>
-                            <div>
-                                <MudText Typo="Typo.body2" Class="text-muted-50">Location</MudText>
-                                <MudText Typo="Typo.body1" Class="text-white-95">Pittsburgh, PA</MudText>
-                            </div>
-                        </MudStack>
-                    </MudStack>
-                </MudPaper>
-
-                <!-- Social Links -->
-                <MudPaper Elevation="0" Class="glass-card glass-card--blue glass-card--r20 pa-4">
-                    <MudText Typo="Typo.h6" GutterBottom="true" Class="mb-4 text-white-bold">Connect with me</MudText>
-
-                    <MudStack Spacing="2">
-                        <MudButton Variant="Variant.Outlined" FullWidth="true"
-                                 StartIcon="@Icons.Custom.Brands.GitHub" Href="https://github.com/SamElhagDev" Target="_blank"
-                                 Class="btn-outlined-blue">
-                            GitHub
-                        </MudButton>
-                        <MudButton Variant="Variant.Outlined" FullWidth="true"
-                                 StartIcon="@Icons.Custom.Brands.LinkedIn" Href="https://www.linkedin.com/in/sam-elhag-b82312102/" Target="_blank"
-                                 Class="btn-outlined-cyan">
-                            LinkedIn
-                        </MudButton>
-                        <MudButton Variant="Variant.Outlined" FullWidth="true"
-                                 StartIcon="@Icons.Custom.Brands.Twitter" Href="https://x.com/SamEElhag" Target="_blank"
-                                 Class="btn-outlined-blue">
-                            Twitter
-                        </MudButton>
-                    </MudStack>
-                </MudPaper>
-            </MudStack>
-        </MudItem>
-    </MudGrid>
-</MudContainer>
+            <section class="card" aria-labelledby="social-title">
+                <h2 id="social-title" class="card__title contact-card__title">Connect with me</h2>
+                <div class="stack contact-social">
+                    @foreach (var link in SiteInfo.Social)
+                    {
+                        <a class="btn btn--block" href="@link.Url" target="_blank" rel="noopener noreferrer">
+                            <Icon Svg="@link.Icon" />
+                            @link.Label
+                        </a>
+                    }
+                </div>
+            </section>
+        </aside>
+    </div>
+</div>
 
 @code {
-    private MudForm? form;
-    private bool isSubmitting;
-    private ContactFormModel model = new();
+    private MudForm? _form;
+    private bool _isSubmitting;
+    private ContactFormModel _model = new();
 
-    private async Task SubmitForm()
+    private async Task SubmitAsync()
     {
-        await form!.Validate();
+        await _form!.ValidateAsync();
 
-        if (!form.IsValid)
+        if (!_form.IsValid)
         {
             Snackbar.Add("Please fix the validation errors.", Severity.Warning);
             return;
         }
 
-        isSubmitting = true;
+        _isSubmitting = true;
         try
         {
-            await EmailService.SendContactEmailAsync(model);
+            await EmailService.SendContactEmailAsync(_model);
 
             Snackbar.Add("Message sent successfully — I'll get back to you shortly!", Severity.Success);
 
-            model = new ContactFormModel();
-            await form.ResetAsync();
+            _model = new ContactFormModel();
+            await _form.ResetAsync();
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, "Failed to send contact email from {Email}", model.Email);
+            Logger.LogError(ex, "Failed to send contact email from {Email}", _model.Email);
             Snackbar.Add("An error occurred. Please try again later.", Severity.Error);
         }
         finally
         {
-            isSubmitting = false;
-            StateHasChanged();
+            _isSubmitting = false;
         }
     }
 }

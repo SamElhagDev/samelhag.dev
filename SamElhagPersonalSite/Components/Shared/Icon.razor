@@ -1,0 +1,20 @@
+@* Inline SVG from MudBlazor's icon set. Sized by font-size (1em) and colored by currentColor,
+   so it follows the surrounding text. Decorative (aria-hidden) unless a Title is given. *@
+<svg class="icon @Class" viewBox="0 0 24 24" fill="currentColor" focusable="false"
+     aria-hidden="@(Title is null ? "true" : null)" role="@(Title is null ? null : "img")">
+    @if (Title is not null)
+    {
+        <title>@Title</title>
+    }
+    @((MarkupString)Svg)
+</svg>
+
+@code {
+    /// <summary>SVG inner markup, e.g. <c>Icons.Material.Outlined.Search</c>.</summary>
+    [Parameter, EditorRequired] public string Svg { get; set; } = string.Empty;
+
+    [Parameter] public string? Class { get; set; }
+
+    /// <summary>Accessible name; omit for decorative icons.</summary>
+    [Parameter] public string? Title { get; set; }
+}

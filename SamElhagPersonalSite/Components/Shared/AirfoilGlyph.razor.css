@@ -1,0 +1,43 @@
+.airfoil {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.airfoil__grid {
+    fill: var(--bc-text-faint);
+    opacity: 0.45;
+}
+
+.airfoil__stream {
+    fill: none;
+    stroke: var(--bc-border-strong);
+    stroke-width: 1.25;
+}
+
+.airfoil__stream--near {
+    stroke: var(--bc-accent);
+    stroke-opacity: 0.55;
+    stroke-width: 1.5;
+}
+
+.airfoil__chord {
+    stroke: var(--bc-text-faint);
+    stroke-dasharray: 4 4;
+    stroke-width: 1;
+}
+
+.airfoil__section {
+    fill: var(--bc-bg-elevated);
+    stroke: var(--bc-accent-light);
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+
+.airfoil__tracer {
+    fill: var(--bc-accent-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .airfoil__tracer { display: none; }
+}

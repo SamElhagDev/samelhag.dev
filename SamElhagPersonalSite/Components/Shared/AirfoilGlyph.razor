@@ -1,0 +1,105 @@
+@* Decorative NACA 0012 section with illustrative streamlines, computed from the 4-digit
+   thickness equation (the same geometry the heat-transfer simulation uses). *@
+@using System.Globalization
+@using System.Text
+
+<svg class="airfoil @Class" viewBox="0 0 400 240" aria-hidden="true" focusable="false">
+    <defs>
+        <pattern id="@_gridId" width="16" height="16" patternUnits="userSpaceOnUse">
+            <circle class="airfoil__grid" cx="1" cy="1" r="0.9" />
+        </pattern>
+    </defs>
+    <rect width="400" height="240" fill="url(#@_gridId)" />
+
+    @foreach (var stream in Streams)
+    {
+        <path class="@(stream.Near ? "airfoil__stream airfoil__stream--near" : "airfoil__stream")" d="@stream.Path" />
+    }
+
+    <path class="airfoil__chord" d="@ChordPath" />
+    <path class="airfoil__section" d="@SectionPath" />
+
+    @foreach (var tracer in Tracers)
+    {
+        <circle class="airfoil__tracer" r="2.5">
+            <animateMotion dur="@tracer.Duration" begin="@tracer.Begin" repeatCount="indefinite" path="@Streams[tracer.Stream].Path" />
+        </circle>
+    }
+</svg>
+
+@code {
+    [Parameter] public string? Class { get; set; }
+
+    // Per-instance id so two glyphs on one page never share a <pattern>.
+    private readonly string _gridId = $"airfoil-grid-{Guid.NewGuid():N}";
+
+    private const double LeadingEdge = 110;
+    private const double Chord = 220;
+    private const double CenterY = 120;
+    private const double Pivot = LeadingEdge + 0.25 * Chord; // rotate about the quarter chord
+    private const double AngleOfAttack = 5 * Math.PI / 180;
+    private const double Scale = Chord / 470;                // streamline constants were tuned at a 470px chord
+
+    private static readonly (string Path, bool Near)[] Streams = BuildStreams();
+    private static readonly string SectionPath = BuildSection();
+    private static readonly string ChordPath = $"M{Point(0, 0)} L{Point(1, 0)}";
+    private static readonly (string Duration, string Begin, int Stream)[] Tracers = [("6s", "0s", 2), ("7s", "-3s", 3), ("8s", "-5s", 1)];
+
+    // NACA 4-digit half-thickness at chord fraction u, for a 12% thick section.
+    private static double HalfThickness(double u) =>
+        0.6 * (0.2969 * Math.Sqrt(u) - 0.1260 * u - 0.3516 * u * u + 0.2843 * u * u * u - 0.1015 * u * u * u * u);
+
+    // Chord-normalised coordinates (u along the chord, v up) to SVG space, pitched nose-up.
+    private static (double X, double Y) ToSvg(double u, double v)
+    {
+        var x = LeadingEdge + u * Chord - Pivot;
+        var y = -v * Chord;
+        return (Pivot + x * Math.Cos(AngleOfAttack) - y * Math.Sin(AngleOfAttack),
+                CenterY + x * Math.Sin(AngleOfAttack) + y * Math.Cos(AngleOfAttack));
+    }
+
+    private static string Point(double u, double v)
+    {
+        var (x, y) = ToSvg(u, v);
+        return $"{Format(x)},{Format(y)}";
+    }
+
+    private static string Format(double value) => value.ToString("0.#", CultureInfo.InvariantCulture);
+
+    private static string BuildSection()
+    {
+        const int samples = 60;
+        var path = new StringBuilder();
+        for (var i = 0; i <= samples; i++) // upper surface, leading → trailing edge (cosine spacing)
+        {
+            var u = (1 - Math.Cos(Math.PI * i / samples)) / 2;
+            path.Append(i == 0 ? 'M' : 'L').Append(Point(u, HalfThickness(u))).Append(' ');
+        }
+        for (var i = samples; i >= 0; i--) // lower surface back to the leading edge
+        {
+            var u = (1 - Math.Cos(Math.PI * i / samples)) / 2;
+            path.Append('L').Append(Point(u, -HalfThickness(u))).Append(' ');
+        }
+        return path.Append('Z').ToString();
+    }
+
+    // Illustrative, not solved: each line is displaced around the section's thickness, with
+    // upwash ahead of the leading edge and downwash behind the trailing edge.
+    private static (string Path, bool Near)[] BuildStreams()
+    {
+        double[] offsets = [-78, -52, -28, 28, 52, 78];
+        return offsets.Select(y0 =>
+        {
+            var path = new StringBuilder();
+            for (double x = 0; x <= 400; x += 5)
+            {
+                var u = (x - LeadingEdge) / Chord;
+                var bump = Math.Exp(-Math.Pow((u - 0.3) / 0.45, 2));
+                var wash = Math.Tanh(2.5 * (u - 0.45)) / (1 + Math.Abs(y0) / (90 * Scale));
+                var y = CenterY + y0 + Math.Sign(y0) * 30 * Scale * bump / (1 + Math.Abs(y0) / (60 * Scale)) + 14 * Scale * wash;
+                path.Append(x == 0 ? 'M' : 'L').Append(Format(x)).Append(',').Append(Format(y)).Append(' ');
+            }
+            return (path.ToString().TrimEnd(), Math.Abs(y0) == 28);
+        }).ToArray();
+    }
+}

@@ -19,29 +19,31 @@
     display: block;
 }
 
-
 #components-reconnect-modal {
-    background-color: white;
     width: 20rem;
     margin: 20vh auto;
     padding: 2rem;
-    border: 0;
-    border-radius: 0.5rem;
-    box-shadow: 0 3px 6px 2px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--bc-border-strong);
+    border-radius: var(--bc-radius-lg);
+    /* MudBlazor sets `background-color: var(--mud-palette-background) !important` on this dialog, and
+       this theme's palette background is transparent so the maze canvas shows through the page.
+       Without !important here the dialog would render see-through. */
+    background-color: var(--bc-bg-elevated) !important;
+    box-shadow: var(--shadow-overlay);
+    color: var(--bc-text-primary);
+    font-family: var(--font-sans);
     opacity: 0;
     transition: display 0.5s allow-discrete, overlay 0.5s allow-discrete;
     animation: components-reconnect-modal-fadeOutOpacity 0.5s both;
-    &[open]
 
-{
-    animation: components-reconnect-modal-slideUp 1.5s cubic-bezier(.05, .89, .25, 1.02) 0.3s, components-reconnect-modal-fadeInOpacity 0.5s ease-in-out 0.3s;
-    animation-fill-mode: both;
-}
-
+    &[open] {
+        animation: components-reconnect-modal-slideUp 1.5s cubic-bezier(.05, .89, .25, 1.02) 0.3s, components-reconnect-modal-fadeInOpacity 0.5s ease-in-out 0.3s;
+        animation-fill-mode: both;
+    }
 }
 
 #components-reconnect-modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(8, 7, 6, 0.6);
     animation: components-reconnect-modal-fadeInOpacity 0.5s ease-in-out;
     opacity: 1;
 }
@@ -85,23 +87,26 @@
 
 #components-reconnect-modal p {
     margin: 0;
+    color: var(--bc-text-body);
     text-align: center;
 }
 
 #components-reconnect-modal button {
+    padding: 0.5rem 1.5rem;
     border: 0;
-    background-color: #6b9ed2;
-    color: white;
-    padding: 4px 24px;
-    border-radius: 4px;
+    border-radius: var(--bc-radius);
+    background-color: var(--bc-accent);
+    color: var(--bc-on-accent);
+    font-weight: 600;
+    cursor: pointer;
 }
 
     #components-reconnect-modal button:hover {
-        background-color: #3b6ea2;
+        background-color: var(--bc-accent-light);
     }
 
     #components-reconnect-modal button:active {
-        background-color: #6b9ed2;
+        background-color: var(--bc-accent-deep);
     }
 
 .components-rejoining-animation {
@@ -112,7 +117,7 @@
 
     .components-rejoining-animation div {
         position: absolute;
-        border: 3px solid #0087ff;
+        border: 3px solid var(--bc-accent);
         opacity: 1;
         border-radius: 50%;
         animation: components-rejoining-animation 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;

@@ -4,6 +4,20 @@ window._mazeAnimationId = window._mazeAnimationId || null;
 window._mazeIntervalId = window._mazeIntervalId || null;
 window._mazeCanvas = window._mazeCanvas || null;
 
+// Each (re)initialisation installs its own start/stop here, so the reduced-motion listener below
+// always drives the live instance.
+window.mazeBackground = window.mazeBackground || { controller: null };
+
+// Honour a change to the reduced-motion preference while the page is open.
+if (window.matchMedia) {
+  var _mazeMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var _mazeOnMotionChange = function () {
+    if (window.mazeBackground.controller) window.mazeBackground.controller.start();
+  };
+  if (_mazeMotionQuery.addEventListener) _mazeMotionQuery.addEventListener('change', _mazeOnMotionChange);
+  else if (_mazeMotionQuery.addListener) _mazeMotionQuery.addListener(_mazeOnMotionChange);
+}
+
 function initMazeBackground() {
   var canvas = document.getElementById('bg');
   if (!canvas) {
@@ -405,14 +419,8 @@ function initMazeBackground() {
     for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
   }
 
-  function animate(currentTime) {
-    // Throttle to target FPS
-    if (currentTime - lastFrameTime < frameInterval) {
-      window._mazeAnimationId = requestAnimationFrame(animate);
-      return;
-    }
-    lastFrameTime = currentTime;
-
+  // Paints one frame, first self-healing the canvas if Blazor replaced or reset it.
+  function drawFrame() {
     // Self-heal: detect if Blazor replaced the canvas element
     var liveCanvas = document.getElementById('bg');
     if (liveCanvas && liveCanvas !== canvas) {
@@ -447,16 +455,44 @@ function initMazeBackground() {
     drawBasisVectors(); drawAxesHint();
 
     frameCount++;
+  }
 
+  function animate(currentTime) {
+    window._mazeAnimationId = requestAnimationFrame(animate);
+
+    // Throttle to target FPS
+    if (currentTime - lastFrameTime < frameInterval) return;
+    lastFrameTime = currentTime;
+    drawFrame();
+  }
+
+  function stop() {
+    if (window._mazeAnimationId) {
+      cancelAnimationFrame(window._mazeAnimationId);
+      window._mazeAnimationId = null;
+    }
+  }
+
+  // Animates, unless the visitor prefers reduced motion — then it paints one still frame.
+  function start() {
+    stop();
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      drawFrame();
+      return;
+    }
     window._mazeAnimationId = requestAnimationFrame(animate);
   }
-  window._mazeAnimationId = requestAnimationFrame(animate);
+
+  window.mazeBackground.controller = { start: start, stop: stop };
+  start();
 
   // Store interval ID so it can be cleared if needed
   if (window._mazeIntervalId) {
     clearInterval(window._mazeIntervalId);
   }
   window._mazeIntervalId = setInterval(function() {
+    // A still background (reduced motion) keeps its layout instead of jumping.
+    if (!window._mazeAnimationId) return;
     buildMaze();
     for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
     for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
@@ -474,6 +510,7 @@ function initMazeBackground() {
         buildMaze();
         for (var i = 0; i < particles.length; i++) { var np = makeParticle(); for (var k in np) particles[i][k] = np[k]; pickNext(particles[i]); }
         for (var i = 0; i < pulses.length; i++) { var np = makePulse(); for (var k in np) pulses[i][k] = np[k]; }
+        if (!window._mazeAnimationId) drawFrame(); // still background: repaint at the new size
       }
     }, 1000); // Debounce: wait 1s after resize stops before rebuilding
   });

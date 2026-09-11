@@ -1,0 +1,77 @@
+@* Portfolio card. Featured cards add an illustration beside the details; regular cards
+   are compact tiles for the projects grid. *@
+<article class="card project-card @(Featured ? "card--featured project-card--featured" : "card--interactive")"
+         aria-labelledby="@TitleId">
+    <div class="project-card__body">
+        @if (Eyebrow is not null)
+        {
+            <p class="eyebrow">@Eyebrow</p>
+        }
+
+        <div class="project-card__heading">
+            <span class="icon-tile"><Icon Svg="@Project.Icon" /></span>
+            @if (HeadingLevel == 2)
+            {
+                <h2 id="@TitleId" class="project-card__title">@Project.Title</h2>
+            }
+            else
+            {
+                <h3 id="@TitleId" class="project-card__title">@Project.Title</h3>
+            }
+        </div>
+
+        <p class="project-card__summary">@Project.Summary</p>
+
+        <ul class="metric-list" role="list" aria-label="Key figures">
+            @foreach (var metric in Project.Metrics)
+            {
+                <li>@metric</li>
+            }
+        </ul>
+
+        <ul class="tag-list" role="list" aria-label="Technologies">
+            @foreach (var tag in Project.Tags)
+            {
+                <li class="tag">@tag</li>
+            }
+        </ul>
+
+        <div class="cluster project-card__actions">
+            <a class="btn btn--primary" href="@Project.Primary.Href" target="@Target(Project.Primary)" rel="@Rel(Project.Primary)">
+                @Project.Primary.Label
+                <Icon Svg="@Icons.Material.Outlined.ArrowForward" Class="icon--trailing" />
+            </a>
+            @if (Project.Secondary is { } secondary)
+            {
+                <a class="btn" href="@secondary.Href" target="@Target(secondary)" rel="@Rel(secondary)">
+                    <Icon Svg="@Icons.Material.Outlined.PlayArrow" />
+                    @secondary.Label
+                </a>
+            }
+        </div>
+    </div>
+
+    @if (Featured && Project.Illustration == ProjectIllustration.Airfoil)
+    {
+        <div class="project-card__visual">
+            <AirfoilGlyph />
+        </div>
+    }
+</article>
+
+@code {
+    [Parameter, EditorRequired] public Project Project { get; set; } = default!;
+
+    [Parameter] public bool Featured { get; set; }
+
+    /// <summary>2 when the card sits directly under the page's h1, otherwise 3.</summary>
+    [Parameter] public int HeadingLevel { get; set; } = 3;
+
+    [Parameter] public string? Eyebrow { get; set; }
+
+    private string TitleId => $"project-{Project.Slug}";
+
+    private static string? Target(ProjectLink link) => link.External ? "_blank" : null;
+
+    private static string? Rel(ProjectLink link) => link.External ? "noopener noreferrer" : null;
+}

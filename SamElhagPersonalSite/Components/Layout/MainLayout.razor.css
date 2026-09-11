@@ -1,20 +1,27 @@
 #blazor-error-ui {
-    color-scheme: light only;
-    background: lightyellow;
-    bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
+    color-scheme: dark;
     display: none;
-    left: 0;
-    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
     position: fixed;
-    width: 100%;
-    z-index: 1000;
+    inset: auto 0 0 0;
+    z-index: 2000;
+    padding: 0.75rem 3rem 0.75rem 1.25rem;
+    background: var(--bc-bg-elevated);
+    border-top: 2px solid var(--bc-accent);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
+    color: var(--bc-text-primary);
+    font-size: var(--text-sm);
 }
 
+    #blazor-error-ui .reload {
+        margin-left: 0.5rem;
+        color: var(--bc-accent-light);
+        font-weight: 600;
+    }
+
     #blazor-error-ui .dismiss {
-        cursor: pointer;
         position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
+        top: 0.6rem;
+        right: 0.9rem;
+        color: var(--bc-text-secondary);
+        cursor: pointer;
     }

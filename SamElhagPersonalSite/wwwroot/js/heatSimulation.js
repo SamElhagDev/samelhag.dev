@@ -73,15 +73,15 @@ window.HeatSimulation = {
                     const idx = i * gridWidth + j;
                     const temp = T[idx].toFixed(1);
                     const tempC = (temp - 273.15).toFixed(1);
-                    const isAirfoil = airfoilMask[idx] ? ' (Airfoil Surface)' : '(Air)';
+                    const region = airfoilMask[idx] ? 'airfoil surface' : 'air';
                     const displayY = Math.round(height - mouseY);
-                    hoverTempElement.textContent = `Temperature: ${temp} K (${tempC} °C Coordinates: ${Math.round(mouseX)},${displayY})${isAirfoil}`;
+                    hoverTempElement.textContent = `T = ${temp} K (${tempC} °C) · x ${Math.round(mouseX)}, y ${displayY} · ${region}`;
                     hoverTempElement.style.display = 'block';
                 }
             });
 
             canvas.addEventListener('mouseleave', () => {
-                hoverTempElement.textContent = 'Hover over canvas to see temperature';
+                hoverTempElement.textContent = 'Hover over the canvas to see the temperature';
                 hoverTempElement.style.display = 'block';
             });
         }
@@ -297,56 +297,59 @@ window.HeatSimulation = {
             ctx.stroke();
 
             if (params.showMath) {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.92)';
+                // Equation overlay, drawn in the site's copper palette.
+                const mono = '"JetBrains Mono", "Courier New", monospace';
+
+                ctx.fillStyle = 'rgba(14, 12, 10, 0.92)';
                 ctx.fillRect(30, 30, 1100, 560);
-                ctx.strokeStyle = '#667eea';
+                ctx.strokeStyle = '#f97316';
                 ctx.lineWidth = 3;
                 ctx.strokeRect(30, 30, 1100, 560);
 
-                ctx.fillStyle = '#667eea';
-                ctx.font = 'bold 40px "Courier New"';
+                ctx.fillStyle = '#fb923c';
+                ctx.font = 'bold 40px ' + mono;
                 ctx.fillText('GOVERNING EQUATION', 70, 90);
 
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 38px "Courier New"';
-                ctx.fillText('\u2202T/\u2202t + u\u00b7\u2202T/\u2202x + v\u00b7\u2202T/\u2202y = \u03b1\u00b7\u2207\u00b2T', 70, 150);
+                ctx.fillStyle = '#f5ede0';
+                ctx.font = 'bold 38px ' + mono;
+                ctx.fillText('∂T/∂t + u·∂T/∂x + v·∂T/∂y = α·∇²T', 70, 150);
 
-                ctx.strokeStyle = '#667eea';
+                ctx.strokeStyle = '#f97316';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(70, 180);
                 ctx.lineTo(1090, 180);
                 ctx.stroke();
 
-                ctx.fillStyle = '#fbbf24';
-                ctx.font = 'bold 32px "Courier New"';
+                ctx.fillStyle = '#fb923c';
+                ctx.font = 'bold 32px ' + mono;
                 ctx.fillText('FINITE DIFFERENCE DISCRETIZATION', 70, 230);
 
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '28px "Courier New"';
-                ctx.fillText('T[i,j]\u207f\u207a\u00b9 = T[i,j]\u207f + \u0394t \u00b7 {', 70, 280);
+                ctx.fillStyle = '#f5ede0';
+                ctx.font = '28px ' + mono;
+                ctx.fillText('T[i,j]ⁿ⁺¹ = T[i,j]ⁿ + Δt · {', 70, 280);
 
-                ctx.fillStyle = '#a78bfa';
+                ctx.fillStyle = '#a89070';
                 ctx.fillText('  Diffusion:', 100, 320);
-                ctx.fillStyle = '#e0e0e0';
-                ctx.font = '26px "Courier New"';
-                ctx.fillText('\u03b1\u00b7[(T[i,j+1] - 2T[i,j] + T[i,j-1])/\u0394x\u00b2', 120, 360);
-                ctx.fillText('   + (T[i+1,j] - 2T[i,j] + T[i-1,j])/\u0394y\u00b2]', 120, 395);
+                ctx.fillStyle = '#cdbfac';
+                ctx.font = '26px ' + mono;
+                ctx.fillText('α·[(T[i,j+1] - 2T[i,j] + T[i,j-1])/Δx²', 120, 360);
+                ctx.fillText('   + (T[i+1,j] - 2T[i,j] + T[i-1,j])/Δy²]', 120, 395);
 
-                ctx.fillStyle = '#a78bfa';
-                ctx.font = '28px "Courier New"';
+                ctx.fillStyle = '#a89070';
+                ctx.font = '28px ' + mono;
                 ctx.fillText('  Convection:', 100, 440);
-                ctx.fillStyle = '#e0e0e0';
-                ctx.font = '26px "Courier New"';
-                ctx.fillText('- u\u00b7(\u2202T/\u2202x) - v\u00b7(\u2202T/\u2202y)', 120, 475);
+                ctx.fillStyle = '#cdbfac';
+                ctx.font = '26px ' + mono;
+                ctx.fillText('- u·(∂T/∂x) - v·(∂T/∂y)', 120, 475);
 
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '28px "Courier New"';
+                ctx.fillStyle = '#f5ede0';
+                ctx.font = '28px ' + mono;
                 ctx.fillText('}', 70, 515);
 
-                ctx.fillStyle = '#10b981';
-                ctx.font = 'bold 24px "Courier New"';
-                ctx.fillText('\u03b1 = ' + params.alpha.toFixed(3) + ' m\u00b2/s  |  \u0394t = ' + params.dt.toFixed(4) + ' s  |  Grid: ' + gridWidth + ' \u00d7 ' + gridHeight, 70, 560);
+                ctx.fillStyle = '#d4a574';
+                ctx.font = 'bold 24px ' + mono;
+                ctx.fillText('α = ' + params.alpha.toFixed(3) + ' m²/s  |  Δt = ' + params.dt.toFixed(4) + ' s  |  Grid: ' + gridWidth + ' × ' + gridHeight, 70, 560);
             }
 
             calculateStats();
@@ -370,7 +373,7 @@ window.HeatSimulation = {
 
             const avgFlux = count > 0 ? totalFlux / count : 0;
             const heatFluxEl = document.getElementById('heatFlux');
-            if (heatFluxEl) heatFluxEl.textContent = avgFlux.toExponential(2) + ' W/m\u00b2';
+            if (heatFluxEl) heatFluxEl.textContent = avgFlux.toExponential(2) + ' W/m²';
 
             const L = 1.0;
             const Re = rho * params.airspeed * L / mu;
@@ -439,11 +442,16 @@ window.HeatSimulation = {
             });
         }
 
+        // Toggle buttons report their state through aria-pressed (styled by .btn[aria-pressed="true"]).
+        function setPressed(button, pressed) {
+            button.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+        }
+
         var pauseBtn = document.getElementById('pauseBtn');
         if (pauseBtn) {
-            pauseBtn.addEventListener('click', function (e) {
+            pauseBtn.addEventListener('click', function () {
                 params.paused = !params.paused;
-                e.target.textContent = params.paused ? 'Resume' : 'Pause';
+                pauseBtn.textContent = params.paused ? 'Resume' : 'Pause';
             });
         }
 
@@ -456,17 +464,17 @@ window.HeatSimulation = {
 
         var toggleMathBtn = document.getElementById('toggleMathBtn');
         if (toggleMathBtn) {
-            toggleMathBtn.addEventListener('click', function (e) {
+            toggleMathBtn.addEventListener('click', function () {
                 params.showMath = !params.showMath;
-                e.target.classList.toggle('active');
+                setPressed(toggleMathBtn, params.showMath);
             });
         }
 
         var toggleStreamBtn = document.getElementById('toggleStreamBtn');
         if (toggleStreamBtn) {
-            toggleStreamBtn.addEventListener('click', function (e) {
+            toggleStreamBtn.addEventListener('click', function () {
                 params.showStreamlines = !params.showStreamlines;
-                e.target.classList.toggle('active');
+                setPressed(toggleStreamBtn, params.showStreamlines);
             });
         }
 

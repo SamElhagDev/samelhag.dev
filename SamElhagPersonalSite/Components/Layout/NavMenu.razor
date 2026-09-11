@@ -1,21 +1,17 @@
-﻿@using MudBlazor
-
-<MudHidden Breakpoint="Breakpoint.MdAndUp">
-    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.End" OnClick="@ToggleDrawer" />
-</MudHidden>
-
-<MudHidden Breakpoint="Breakpoint.SmAndDown">
-    <MudStack Row="true" Spacing="1">
-        <MudButton Href="/" Variant="Variant.Text" Color="Color.Inherit" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #f5ede0;">Home</MudButton>
-        <MudButton Href="/projects" Variant="Variant.Text" Color="Color.Inherit" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #f5ede0;">Projects</MudButton>
-        <MudButton Href="/about" Variant="Variant.Text" Color="Color.Inherit" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #f5ede0;">About</MudButton>
-        <MudButton Href="/skillsAndInterests" Variant="Variant.Text" Color="Color.Inherit" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #f5ede0;">Skills and Interests</MudButton>
-        <MudButton Href="/contact" Variant="Variant.Text" Color="Color.Inherit" Style="font-family: 'Inter', sans-serif; text-transform: none; font-weight: 500; color: #f5ede0;">Contact</MudButton>
-    </MudStack>
-</MudHidden>
+@* Primary navigation: a horizontal bar in the desktop header and a stacked list in the
+   mobile drawer. Links come from SiteInfo.Navigation; NavLink marks the current page. *@
+<nav class="@(Vertical ? "drawer-nav" : "site-nav")" aria-label="Primary">
+    <ul class="@(Vertical ? "drawer-nav__list" : "site-nav__list")" role="list">
+        @foreach (var item in SiteInfo.Navigation)
+        {
+            <li>
+                <NavLink class="@(Vertical ? "drawer-nav__link" : "site-nav__link")" href="@item.Href" Match="@item.Match">@item.Label</NavLink>
+            </li>
+        }
+    </ul>
+</nav>
 
 @code {
-    [CascadingParameter]
-    public required Action ToggleDrawer { get; set; }
+    /// <summary>Render as the stacked list used inside the mobile drawer.</summary>
+    [Parameter] public bool Vertical { get; set; }
 }
-

@@ -1,0 +1,52 @@
+@* Global footer: identity, secondary navigation, and contact details. *@
+<footer class="site-footer">
+    <div class="container">
+        <div class="site-footer__grid">
+            <div class="site-footer__brand">
+                <a class="brand brand--lg" href="/" aria-label="Sam.E, home">
+                    <span class="brand__bracket" aria-hidden="true">[</span>Sam.E<span class="brand__bracket" aria-hidden="true">]</span>
+                </a>
+                <p class="site-footer__tagline">@SiteInfo.Tagline</p>
+                <ul class="social-links" role="list">
+                    @foreach (var link in SiteInfo.Social)
+                    {
+                        <li>
+                            <a class="icon-btn" href="@link.Url" target="_blank" rel="noopener noreferrer" aria-label="@link.Label">
+                                <Icon Svg="@link.Icon" />
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <nav aria-label="Footer">
+                <h2 class="footer-heading">Navigate</h2>
+                <ul class="footer-links" role="list">
+                    @foreach (var item in SiteInfo.Navigation)
+                    {
+                        <li><a href="@item.Href">@item.Label</a></li>
+                    }
+                </ul>
+            </nav>
+
+            <div>
+                <h2 class="footer-heading">Get in touch</h2>
+                <ul class="footer-contact" role="list">
+                    <li>
+                        <Icon Svg="@Icons.Material.Outlined.Email" />
+                        <a href="@($"mailto:{SiteInfo.Email}")">@SiteInfo.Email</a>
+                    </li>
+                    <li>
+                        <Icon Svg="@Icons.Material.Outlined.LocationOn" />
+                        <span>@SiteInfo.Location</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="site-footer__bottom">
+            <p>&copy; @DateTime.Now.Year @SiteInfo.Name. All rights reserved.</p>
+            <p>Built with .NET 10 &amp; Blazor · <a href="@SiteInfo.SourceUrl" target="_blank" rel="noopener noreferrer">View source</a></p>
+        </div>
+    </div>
+</footer>

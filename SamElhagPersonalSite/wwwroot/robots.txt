@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /error
+Disallow: /not-found
+
+Sitemap: https://samelhag.dev/sitemap.xml

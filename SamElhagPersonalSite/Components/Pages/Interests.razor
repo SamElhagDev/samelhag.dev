@@ -1,165 +1,49 @@
-@page "/Interests"
-@using MudBlazor
-@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@page "/interests"
 
-<MudContainer>
-    <!-- Media Section -->
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="mb-4 text-white-bold">
-        Interests
-    </MudText>
-    <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-10 text-muted-60" Style="font-weight: 400;">
-        What I consume, When Not Building
-    </MudText>
+<Seo Title="Interests"
+     Description="What Sam Elhag listens to, watches, plays, and tinkers with when not building software, from IDM and sci-fi to microcontrollers and industrial design."
+     Path="/interests" />
 
-    <MudGrid Spacing="4">
-        <!-- Music -->
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6" Style="height: 100%;">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-                    <div class="icon-box icon-box--md icon-box--blue">
-                        <MudIcon Icon="@Icons.Material.Filled.LibraryMusic" Style="color: white; font-size: 1.8rem;" />
-                    </div>
-                    <MudText Typo="Typo.h5" Class="text-white-bold" Style="margin-left: 12px;">Music</MudText>
-                </MudStack>
-                <MudChipSet T="string">
-                    <MudChip T="string" Class="chip-red">Aphex Twin</MudChip>
-                    <MudChip T="string" Class="chip-red">µ-Ziq</MudChip>
-                    <MudChip T="string" Class="chip-red">Squarepusher</MudChip>
-                    <MudChip T="string" Class="chip-red">Rob Clouth</MudChip>
-                    <MudChip T="string" Class="chip-red">Telefon Tel Aviv</MudChip>
-                    <MudChip T="string" Class="chip-red">Jon Hopkins</MudChip>
-                    <MudChip T="string" Class="chip-red">Boards Of Canada</MudChip>
-                    <MudChip T="string" Class="chip-red">Polygon Window</MudChip>
-                    <MudChip T="string" Class="chip-red">Arovane</MudChip>
-                    <MudChip T="string" Class="chip-red">Wisp</MudChip>
-                    <MudChip T="string" Class="chip-red">Roni Size Reprazent</MudChip>
-                    <MudChip T="string" Class="chip-red">Daft Punk</MudChip>
-                </MudChipSet>
-            </MudPaper>
-        </MudItem>
+<div class="container">
+    <PageHeader Eyebrow="~/interests" Title="Interests">
+        What I consume when I'm not building.
+    </PageHeader>
 
-        <!-- TV and Movies -->
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6" Style="height: 100%;">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-                    <div class="icon-box icon-box--md icon-box--cyan">
-                        <MudIcon Icon="@Icons.Material.Filled.Tv" Style="color: white; font-size: 1.8rem;" />
-                    </div>
-                    <MudText Typo="Typo.h5" Class="text-white-bold" Style="margin-left: 12px;">TV and Movies</MudText>
-                </MudStack>
-                <MudChipSet T="string">
-                    <MudChip T="string" Class="chip-red">The Expanse</MudChip>
-                    <MudChip T="string" Class="chip-red">Dune</MudChip>
-                    <MudChip T="string" Class="chip-red">Interstellar</MudChip>
-                    <MudChip T="string" Class="chip-red">Oppenheimer</MudChip>
-                    <MudChip T="string" Class="chip-red">Blade Runner 2049</MudChip>
-                    <MudChip T="string" Class="chip-red">Chernobyl</MudChip>
-                    <MudChip T="string" Class="chip-red">For All Mankind</MudChip>
-                    <MudChip T="string" Class="chip-red">Foundation</MudChip>
-                    <MudChip T="string" Class="chip-red">Band of Brothers</MudChip>
-                    <MudChip T="string" Class="chip-red">The Wire</MudChip>
-                    <MudChip T="string" Class="chip-red">Severance</MudChip>
-                    <MudChip T="string" Class="chip-red">Arcane</MudChip>
-                </MudChipSet>
-            </MudPaper>
-        </MudItem>
+    <div class="grid-auto">
+        @foreach (var category in Categories)
+        {
+            <section class="card" aria-labelledby="interest-@category.Id">
+                <div class="card__head">
+                    <span class="icon-tile"><Icon Svg="@category.Icon" /></span>
+                    <h2 id="interest-@category.Id" class="card__title">@category.Title</h2>
+                </div>
+                <ul class="tag-list" role="list">
+                    @foreach (var item in category.Items)
+                    {
+                        <li class="tag">@item</li>
+                    }
+                </ul>
+            </section>
+        }
+    </div>
+</div>
 
-        <!-- Gaming -->
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6" Style="height: 100%;">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-                    <div class="icon-box icon-box--md icon-box--blue">
-                        <MudIcon Icon="@Icons.Material.Filled.Games" Style="color: white; font-size: 1.8rem;" />
-                    </div>
-                    <MudText Typo="Typo.h5" Class="text-white-bold" Style="margin-left: 12px;">Gaming</MudText>
-                </MudStack>
-                <MudChipSet T="string">
-                    <MudChip T="string" Class="chip-red">Escape from Tarkov</MudChip>
-                    <MudChip T="string" Class="chip-red">CS2</MudChip>
-                    <MudChip T="string" Class="chip-red">Civ VI</MudChip>
-                    <MudChip T="string" Class="chip-red">Rust</MudChip>
-                    <MudChip T="string" Class="chip-red">Homeworld 2</MudChip>
-                    <MudChip T="string" Class="chip-red">WARNO</MudChip>
-                    <MudChip T="string" Class="chip-red">Insurgency: Sandstorm</MudChip>
-                    <MudChip T="string" Class="chip-red">Fallout 4</MudChip>
-                </MudChipSet>
-            </MudPaper>
-        </MudItem>
+@code {
+    private sealed record Category(string Id, string Title, string Icon, string[] Items);
 
-        <!-- Firearms -->
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6" Style="height: 100%;">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-                    <div class="icon-box icon-box--md icon-box--cyan">
-                        <MudIcon Icon="@Icons.Material.Filled.Build" Style="color: white; font-size: 1.8rem;" />
-                    </div>
-                    <MudText Typo="Typo.h5" Class="text-white-bold" Style="margin-left: 12px;">Firearms</MudText>
-                </MudStack>
-                <MudChipSet T="string">
-                    <MudChip T="string" Class="chip-red">AR-15</MudChip>
-                    <MudChip T="string" Class="chip-red">AK Platform</MudChip>
-                    <MudChip T="string" Class="chip-red">Bolt-action rifles</MudChip>
-                    <MudChip T="string" Class="chip-red">Pistols</MudChip>
-                    <MudChip T="string" Class="chip-red">9mm</MudChip>
-                    <MudChip T="string" Class="chip-red">5.56 NATO</MudChip>
-                    <MudChip T="string" Class="chip-red">.308 Win</MudChip>
-                    <MudChip T="string" Class="chip-red">Optics</MudChip>
-                    <MudChip T="string" Class="chip-red">Marksmanship</MudChip>
-                    <MudChip T="string" Class="chip-red">Range days</MudChip>
-                    <MudChip T="string" Class="chip-red">Reloading</MudChip>
-                </MudChipSet>
-            </MudPaper>
-        </MudItem>
-
-        <!-- Art -->
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6" Style="height: 100%;">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-                    <div class="icon-box icon-box--md icon-box--silver-red">
-                        <MudIcon Icon="@Icons.Material.Filled.FormatPaint" Style="color: white; font-size: 1.8rem;" />
-                    </div>
-                    <MudText Typo="Typo.h5" Class="text-white-bold" Style="margin-left: 12px;">Art</MudText>
-                </MudStack>
-                <MudChipSet T="string">
-                    <MudChip T="string" Class="chip-red">Generative art</MudChip>
-                    <MudChip T="string" Class="chip-red">Bauhaus</MudChip>
-                    <MudChip T="string" Class="chip-red">Brutalist architecture</MudChip>
-                    <MudChip T="string" Class="chip-red">Industrial design</MudChip>
-                    <MudChip T="string" Class="chip-red">Typography</MudChip>
-                    <MudChip T="string" Class="chip-red">Minimalism</MudChip>
-                    <MudChip T="string" Class="chip-red">Concept art</MudChip>
-                    <MudChip T="string" Class="chip-red">Photography</MudChip>
-                    <MudChip T="string" Class="chip-red">Data visualization</MudChip>
-                    <MudChip T="string" Class="chip-red">Mid-century modern</MudChip>
-                </MudChipSet>
-            </MudPaper>
-        </MudItem>
-
-        <!-- Electrionics -->
-        <MudItem xs="12" md="6">
-            <MudPaper Elevation="0" Class="glass-card glass-card--cyan pa-6" Style="height: 100%;">
-                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-4">
-                    <div class="icon-box icon-box--md icon-box--red">
-                        <MudIcon Icon="@Icons.Material.Filled.ElectricBolt" Style="color: white; font-size: 1.8rem;" />
-                    </div>
-                    <MudText Typo="Typo.h5" Class="text-white-bold" Style="margin-left: 12px;">Electronics</MudText>
-                </MudStack>
-                <MudChipSet T="string">
-                    <MudChip T="string" Class="chip-red">Arduino</MudChip>
-                    <MudChip T="string" Class="chip-red">Raspberry Pi</MudChip>
-                    <MudChip T="string" Class="chip-red">ESP32</MudChip>
-                    <MudChip T="string" Class="chip-red">Microcontrollers</MudChip>
-                    <MudChip T="string" Class="chip-red">Soldering</MudChip>
-                    <MudChip T="string" Class="chip-red">SolidWorks</MudChip>
-                    <MudChip T="string" Class="chip-red">3D printing</MudChip>
-                    <MudChip T="string" Class="chip-red">Mechanical keyboards</MudChip>
-                    <MudChip T="string" Class="chip-red">DAC/Amp</MudChip>
-                    <MudChip T="string" Class="chip-red">Home lab</MudChip>
-                    <MudChip T="string" Class="chip-red">Hi-Fi</MudChip>
-                </MudChipSet>
-            </MudPaper>
-        </MudItem>
-    </MudGrid>
-</MudContainer>
-
-
+    private static readonly Category[] Categories =
+    [
+        new("music", "Music", Icons.Material.Outlined.LibraryMusic,
+            ["Aphex Twin", "µ-Ziq", "Squarepusher", "Rob Clouth", "Telefon Tel Aviv", "Jon Hopkins", "Boards Of Canada", "Polygon Window", "Arovane", "Wisp", "Roni Size Reprazent", "Daft Punk"]),
+        new("screen", "TV and movies", Icons.Material.Outlined.Tv,
+            ["The Expanse", "Dune", "Interstellar", "Oppenheimer", "Blade Runner 2049", "Chernobyl", "For All Mankind", "Foundation", "Band of Brothers", "The Wire", "Severance", "Arcane"]),
+        new("gaming", "Gaming", Icons.Material.Outlined.SportsEsports,
+            ["Escape from Tarkov", "CS2", "Civ VI", "Rust", "Homeworld 2", "WARNO", "Insurgency: Sandstorm", "Fallout 4"]),
+        new("firearms", "Firearms", Icons.Material.Outlined.GpsFixed,
+            ["AR-15", "AK Platform", "Bolt-action rifles", "Pistols", "9mm", "5.56 NATO", ".308 Win", "Optics", "Marksmanship", "Range days", "Reloading"]),
+        new("art", "Art", Icons.Material.Outlined.FormatPaint,
+            ["Generative art", "Bauhaus", "Brutalist architecture", "Industrial design", "Typography", "Minimalism", "Concept art", "Photography", "Data visualization", "Mid-century modern"]),
+        new("electronics", "Electronics", Icons.Material.Outlined.ElectricBolt,
+            ["Arduino", "Raspberry Pi", "ESP32", "Microcontrollers", "Soldering", "SolidWorks", "3D printing", "Mechanical keyboards", "DAC/Amp", "Home lab", "Hi-Fi"]),
+    ];
+}

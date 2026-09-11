@@ -1,4 +1,4 @@
-﻿@using MudBlazor
+@using System.Text.Json
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,47 +6,76 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#131110" />
+    <meta name="author" content="@SiteInfo.Name" />
     <ResourcePreloader />
-    <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
+
+    @* Variable fonts: one file per family rather than one per weight. *@
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=JetBrains+Mono:wght@400..700&family=Space+Grotesk:wght@400..700&display=swap" />
+
+    @* MudBlazor first, so the site's own styles win on specificity alone. *@
+    <link rel="stylesheet" href="@Assets["_content/MudBlazor/MudBlazor.min.css"]" />
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["SamElhagPersonalSite.styles.css"]" />
+
+    <link rel="icon" href="@Assets["favicon.svg"]" type="image/svg+xml" />
+    <link rel="icon" href="@Assets["favicon.png"]" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="@Assets["apple-touch-icon.png"]" />
+    <link rel="manifest" href="@Assets["site.webmanifest"]" />
+
+    @((MarkupString)StructuredDataScript)
+
     <ImportMap />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <HeadOutlet />
-
-    <!-- Icon Libraries -->
-    <!-- Bootstrap Icons: 2,000+ icons  →  usage: <i class="bi bi-{name}"></i>  -->
-    <!-- Browse: https://icons.getbootstrap.com -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <!-- Font Awesome 6 Free: 2,000+ icons + best brand set  →  usage: <i class="fa-solid fa-{name}"></i> / <i class="fa-brands fa-{name}"></i> -->
-    <!-- Browse: https://fontawesome.com/icons?o=r&m=free -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
-    <!-- Modern Engineering Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
-
-    <!-- KaTeX — math typesetting for simulation pages -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous" />
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <HeadOutlet @rendermode="PageRenderMode" />
 </head>
 
-<body style="background: #0e0c0a; margin: 0; padding: 0; overflow-x: hidden;">
-    <!-- Persistent maze background canvas - outside Blazor routing -->
-    <canvas id="bg" data-permanent style="display:block;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;background:#0e0c0a;"></canvas>
+<body>
+    @* Decorative animated maze behind every page; lives outside the router so it survives navigation. *@
+    <canvas id="bg" class="maze-bg" data-permanent aria-hidden="true"></canvas>
 
-    <Routes />
+    <Routes @rendermode="PageRenderMode" />
     <ReconnectModal />
     <script src="@Assets["_framework/blazor.web.js"]"></script>
-    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
-    <script src="js/site-interop.js"></script>
+    <script src="@Assets["_content/MudBlazor/MudBlazor.min.js"]"></script>
+    <script src="@Assets["js/site-interop.js"]"></script>
     <script src="@Assets["js/heatSimulation.js"]"></script>
     <script src="@Assets["js/maze-background.js"]"></script>
     <script src="@Assets["js/command-palette.js"]"></script>
 </body>
 
 </html>
+
+@code {
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    // Every page is prerendered, then becomes interactive — except pages marked
+    // [ExcludeFromInteractiveRouting] (the error page), which must stay static to read HttpContext.
+    private IComponentRenderMode? PageRenderMode =>
+        HttpContext.AcceptsInteractiveRouting() ? InteractiveServer : null;
+
+    // schema.org Person data for search engines. JsonSerializer escapes '<' and '&', so it is safe inside <script>.
+    private static readonly string StructuredDataScript =
+        "<script type=\"application/ld+json\">" +
+        JsonSerializer.Serialize(new Dictionary<string, object>
+        {
+            ["@context"] = "https://schema.org",
+            ["@type"] = "Person",
+            ["name"] = SiteInfo.Name,
+            ["alternateName"] = SiteInfo.Alias,
+            ["jobTitle"] = SiteInfo.Role,
+            ["url"] = SiteInfo.BaseUrl,
+            ["address"] = new Dictionary<string, object>
+            {
+                ["@type"] = "PostalAddress",
+                ["addressLocality"] = "Pittsburgh",
+                ["addressRegion"] = "PA",
+                ["addressCountry"] = "US",
+            },
+            ["sameAs"] = new[] { SiteInfo.GitHubUrl, SiteInfo.LinkedInUrl, SiteInfo.XUrl },
+        }) +
+        "</script>";
+}

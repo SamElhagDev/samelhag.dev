@@ -1,0 +1,21 @@
+@* Inner-page header: a terminal-path eyebrow, the page's single h1, and an optional lead. *@
+<header class="page-header @Class">
+    <p class="eyebrow eyebrow--path">@Eyebrow</p>
+    <h1 class="page-title">@Title</h1>
+    @if (ChildContent is not null)
+    {
+        <p class="lead">@ChildContent</p>
+    }
+</header>
+
+@code {
+    /// <summary>Route shown as a terminal path, e.g. "~/projects".</summary>
+    [Parameter, EditorRequired] public string Eyebrow { get; set; } = "~/";
+
+    [Parameter, EditorRequired] public string Title { get; set; } = string.Empty;
+
+    /// <summary>Lead paragraph under the title.</summary>
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public string? Class { get; set; }
+}

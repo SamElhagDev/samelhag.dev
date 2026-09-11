@@ -1,0 +1,27 @@
+.projects-grid {
+    margin-top: var(--space-5);
+}
+
+.more-card {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-3);
+}
+
+.more-card__title {
+    margin-bottom: var(--space-1);
+    font-size: var(--text-xl);
+}
+
+/* While the catalog holds only the featured project, the placeholder spans the row. */
+.projects-grid:has(> .more-card:only-child) {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+    .projects-grid:has(> .more-card:only-child) .more-card {
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        column-gap: var(--space-5);
+    }
+}

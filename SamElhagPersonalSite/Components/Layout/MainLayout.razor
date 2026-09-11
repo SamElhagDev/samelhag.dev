@@ -1,135 +1,69 @@
 @inherits LayoutComponentBase
-@using MudBlazor
-@using Microsoft.AspNetCore.Components.Routing
-@inject NavigationManager Nav
 @implements IDisposable
+@inject NavigationManager Nav
 
-<MudThemeProvider IsDarkMode="true" Theme="@_theme" />
+<MudThemeProvider IsDarkMode="true" Theme="@SiteTheme.Theme" />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<MudLayout>
-    <MudAppBar Elevation="0" Dense="false" Style="background: #131110; border-bottom: 1px solid var(--bc-border);">
-        <MudText Typo="Typo.h6" Class="text-gradient-brand ml-3">
-            [Sam.E]
-        </MudText>
-        <MudSpacer />
-        <MudStack Row="true" Spacing="1">
-            @foreach (var item in _navItems)
-            {
-                <MudButton Href="@item.Href" Color="Color.Inherit" Variant="Variant.Text" Class="@NavClass(item.Href)">@item.Label</MudButton>
-            }
-        </MudStack>
-        <MudSpacer />
-        <button type="button" class="cmdk-trigger mr-3" aria-label="Open command palette">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span class="cmdk-trigger-keys" data-cmdk-keycap>Ctrl K</span>
-        </button>
-    </MudAppBar>
-    <MudMainContent Style="
-        background-color: transparent;
-        min-height: calc(100vh / 0.9);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    ">
-        <div style="position: relative; z-index: 1; flex: 1 0 auto; display: flex; flex-direction: column;">
-        <div style="flex: 1 0 auto;">
-            @Body
-        </div>
+@* Visible on keyboard focus only; site-interop.js moves focus into <main>. *@
+<a class="skip-link" href="#main-content">Skip to content</a>
 
-        <!-- Footer -->
-        <MudPaper Square="true" Elevation="0" Class="pa-8 mt-12" Style="background: var(--bc-bg-deep); border-top: 1px solid var(--bc-border);">
-            <MudContainer MaxWidth="MaxWidth.Large">
-                <MudGrid Spacing="6">
-                    <MudItem xs="12" md="5">
-                        <MudText Typo="Typo.h4" Class="text-gradient-brand" Style="margin-bottom: 16px;">
-                             [Sam.E]
-                        </MudText>
-                        <MudText Typo="Typo.body1" Style="font-family: 'Inter', sans-serif; color: rgba(245,237,224,0.7); font-size: 1.05rem; line-height: 1.7; font-weight: 400;">
-                            Always Learning, Always Building.
-                        </MudText>
-                        <MudStack Row="true" Spacing="3" Class="mt-6">
-                            <MudIconButton Icon="@Icons.Custom.Brands.GitHub"
-                                           Href="https://github.com/SamElhagDev"
-                                           Target="_blank"
-                                           Color="Color.Surface" Size="Size.Large"
-                                           Class="footer-social-btn" />
-                            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn"
-                                           Href="https://www.linkedin.com/in/sam-elhag-b82312102/"
-                                           Target="_blank"
-                                           Color="Color.Surface" Size="Size.Large"
-                                           Class="footer-social-btn" />
-                            <MudIconButton Icon="@Icons.Custom.Brands.Twitter"
-                                           Href="https://x.com/SamEElhag"
-                                           Target="_blank"
-                                           Color="Color.Surface" Size="Size.Large"
-                                           Class="footer-social-btn" />
-                        </MudStack>
-                    </MudItem>
-                    <MudItem xs="12" md="3">
-                        <MudText Typo="Typo.h6" Class="footer-heading">Quick Links</MudText>
-                        <MudStack Spacing="3">
-                            <MudLink Href="/" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
-                                <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
-                                    <span>Home</span>
-                                </MudStack>
-                            </MudLink>
-                            <MudLink Href="/about" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
-                                <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
-                                    <span>About</span>
-                                </MudStack>
-                            </MudLink>
-                            <MudLink Href="/Interests" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
-                                <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
-                                    <span>Interests</span>
-                                </MudStack>
-                            </MudLink>
-                            <MudLink Href="/projects" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
-                                <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
-                                    <span>Projects</span>
-                                </MudStack>
-                            </MudLink>
-                            <MudLink Href="/contact" Color="Color.Inherit" Style="color: #fb923c;" Class="footer-link">
-                                <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Size="Size.Small" />
-                                    <span>Contact</span>
-                                </MudStack>
-                            </MudLink>
-                        </MudStack>
-                    </MudItem>
-                    <MudItem xs="12" md="4">
-                        <MudText Typo="Typo.h6" Class="footer-heading">Get In Touch</MudText>
-                        <MudStack Spacing="3">
-                            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
-                                <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: rgba(245,237,224,0.9);" Size="Size.Medium" />
-                                <div>
-                                    <MudText Typo="Typo.body2" Class="text-muted-50" Style="font-size: 0.9rem;">Email</MudText>
-                                    <MudText Typo="Typo.body1" Class="text-white-90" Style="font-size: 1.1rem;">sami.eltaj.elhag@gmail.com</MudText>
-                                </div>
-                            </MudStack>
-                            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Start">
-                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="color: rgba(245,237,224,0.9);" Size="Size.Medium" />
-                                <div>
-                                    <MudText Typo="Typo.body2" Class="text-muted-50" Style="font-size: 0.9rem;">Location</MudText>
-                                    <MudText Typo="Typo.body1" Class="text-white-90" Style="font-size: 1.1rem;">Pittsburgh,PA</MudText>
-                                </div>
-                            </MudStack>
-                        </MudStack>
-                    </MudItem>
-                </MudGrid>
-                <MudDivider Class="my-8" Style="background: rgba(168, 144, 112, 0.2);" />
-                <MudText Typo="Typo.body1" Align="Align.Center" Style="font-family: 'Inter', sans-serif; color: rgba(245,237,224,0.5); font-size: 0.95rem; font-weight: 400;">
-                    &copy; @DateTime.Now.Year Sam Elhag. All rights reserved.
-                </MudText>
-            </MudContainer>
-        </MudPaper>
+<MudLayout>
+    <MudAppBar Elevation="0" Gutters="false" Class="site-header" inert="@_drawerOpen">
+        <div class="container site-header__inner">
+            <a class="brand" href="/" aria-label="Sam.E, home">
+                <span class="brand__bracket" aria-hidden="true">[</span>Sam.E<span class="brand__bracket" aria-hidden="true">]</span>
+            </a>
+
+            <NavMenu />
+
+            <div class="site-header__actions">
+                @* command-palette.js opens on clicks to .cmdk-trigger and adds .is-mac to <html> to pick the keycap. *@
+                <button type="button" class="cmdk-trigger" aria-label="Search the site" aria-keyshortcuts="Control+K Meta+K">
+                    <Icon Svg="@Icons.Material.Outlined.Search" />
+                    <span class="cmdk-trigger-label" aria-hidden="true">Search</span>
+                    <kbd class="cmdk-trigger-keys" aria-hidden="true"><span class="kbd-mac">⌘K</span><span class="kbd-other">Ctrl K</span></kbd>
+                </button>
+                <button type="button" class="icon-btn menu-toggle" @ref="_menuToggle" @onclick="OpenDrawer"
+                        aria-label="Open menu" aria-controls="site-drawer" aria-expanded="@(_drawerOpen ? "true" : "false")">
+                    <Icon Svg="@Icons.Material.Outlined.Menu" />
+                </button>
+            </div>
         </div>
+    </MudAppBar>
+
+    <MudDrawer Open="_drawerOpen" OpenChanged="OnDrawerOpenChanged" Variant="DrawerVariant.Temporary"
+               Anchor="Anchor.End" Width="300px" Elevation="0" Class="site-drawer" id="site-drawer">
+        <div class="drawer-panel" inert="@(!_drawerOpen)" @onkeydown="OnDrawerKeyDown">
+            <div class="drawer-panel__head">
+                <span class="brand" aria-hidden="true"><span class="brand__bracket">[</span>Sam.E<span class="brand__bracket">]</span></span>
+                <button type="button" class="icon-btn" @ref="_drawerClose" @onclick="CloseDrawer" aria-label="Close menu">
+                    <Icon Svg="@Icons.Material.Outlined.Close" />
+                </button>
+            </div>
+
+            <NavMenu Vertical="true" />
+
+            <ul class="social-links drawer-panel__social" role="list">
+                @foreach (var link in SiteInfo.Social)
+                {
+                    <li>
+                        <a class="icon-btn" href="@link.Url" target="_blank" rel="noopener noreferrer" aria-label="@link.Label">
+                            <Icon Svg="@link.Icon" />
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </MudDrawer>
+
+    <MudMainContent Class="site-shell" inert="@_drawerOpen">
+        <main id="main-content" class="site-main" tabindex="-1">
+            @Body
+        </main>
+        <SiteFooter />
     </MudMainContent>
 </MudLayout>
 
@@ -140,63 +74,76 @@
 </div>
 
 @code {
-    private bool _isDarkMode = true;
+    private enum FocusTarget { None, DrawerClose, MenuToggle }
 
-    private readonly (string Label, string Href)[] _navItems =
+    private bool _drawerOpen;
+    private FocusTarget _pendingFocus;
+    private ElementReference _menuToggle;
+    private ElementReference _drawerClose;
+
+    protected override void OnInitialized() => Nav.LocationChanged += OnLocationChanged;
+
+    // Focus moves after the render that toggles `inert`, otherwise the target isn't focusable yet.
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        ("Home", "/"),
-        ("About", "/about"),
-        ("Interests", "/interests"),
-        ("Projects", "/projects"),
-        ("Contact", "/contact"),
-    };
+        var target = _pendingFocus;
+        _pendingFocus = FocusTarget.None;
 
-    protected override void OnInitialized() => Nav.LocationChanged += HandleLocationChanged;
-
-    public void Dispose() => Nav.LocationChanged -= HandleLocationChanged;
-
-    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e) => InvokeAsync(StateHasChanged);
-
-    private string NavClass(string href)
-    {
-        var current = Nav.ToBaseRelativePath(Nav.Uri).Split('?')[0].Split('#')[0].TrimEnd('/').ToLowerInvariant();
-        current = current.Length == 0 ? "/" : "/" + current;
-        var target = href == "/" ? "/" : href.TrimEnd('/').ToLowerInvariant();
-        return current == target ? "nav-link-custom nav-link-active" : "nav-link-custom";
+        if (target == FocusTarget.DrawerClose)
+        {
+            await _drawerClose.FocusAsync();
+        }
+        else if (target == FocusTarget.MenuToggle)
+        {
+            await _menuToggle.FocusAsync();
+        }
     }
 
-    private MudTheme _theme = new()
+    private void OpenDrawer()
     {
-        PaletteDark = new PaletteDark()
+        _drawerOpen = true;
+        _pendingFocus = FocusTarget.DrawerClose;
+    }
+
+    private void CloseDrawer()
+    {
+        if (!_drawerOpen)
         {
-            Black = "#0e0c0a",
-            Background = "#00000000",
-            Surface = "#1c1916",
-            AppbarBackground = "#131110",
-            DrawerBackground = "#131110",
-            Primary = "#f5ede0",
-            Secondary = "#a89070",
-            Tertiary = "#6b5a46",
-            Info = "#f97316",
-            Success = "#22c55e",
-            Warning = "#fb923c",
-            Error = "#ef4444",
-            TextPrimary = "#f5ede0",
-            TextSecondary = "#a89070",
-            TextDisabled = "#4a3a2a",
-            ActionDefault = "#a89070",
-            ActionDisabled = "#4a3a2a",
-            Divider = "#302a23",
-            DividerLight = "#302a2344",
-            LinesDefault = "#302a23",
-            DrawerText = "#f5ede0",
-            DrawerIcon = "#a89070",
-            AppbarText = "#f5ede0",
-        },
-        LayoutProperties = new LayoutProperties()
-        {
-            AppbarHeight = "80px",
-            DefaultBorderRadius = "6px",
+            return;
         }
-    };
+
+        _drawerOpen = false;
+        _pendingFocus = FocusTarget.MenuToggle;
+    }
+
+    // MudDrawer reports false when its overlay is clicked.
+    private void OnDrawerOpenChanged(bool open)
+    {
+        if (!open)
+        {
+            CloseDrawer();
+        }
+    }
+
+    private void OnDrawerKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Escape")
+        {
+            CloseDrawer();
+        }
+    }
+
+    // Following a link inside the drawer closes it; FocusOnNavigate then focuses the new page's h1.
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        if (!_drawerOpen)
+        {
+            return;
+        }
+
+        _drawerOpen = false;
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose() => Nav.LocationChanged -= OnLocationChanged;
 }

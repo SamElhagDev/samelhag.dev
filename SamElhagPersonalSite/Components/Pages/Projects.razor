@@ -1,55 +1,36 @@
 @page "/projects"
-@using MudBlazor
-@rendermode @(new InteractiveServerRenderMode(prerender: false))
 
+<Seo Title="Projects"
+     Description="Engineering software that bridges domains, featuring a real-time NACA 0012 heat-transfer simulation built with .NET 10, Blazor, and the Canvas API."
+     Path="/projects" />
 
-<PageTitle>Projects - Sam Elhag</PageTitle>
+<div class="container">
+    <PageHeader Eyebrow="~/projects" Title="Projects">
+        Engineering software that bridges domains.
+    </PageHeader>
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="mt-8">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true" Class="text-white-bold">
-        My Projects
-    </MudText>
-    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-10 text-muted-60">
-        Engineering software that bridges domains. More projects in progress.
-    </MudText>
+    @if (ProjectCatalog.Featured is { } featured)
+    {
+        <ProjectCard Project="featured" Featured="true" HeadingLevel="2" Eyebrow="Featured" />
+    }
 
-    <!-- Featured Project -->
-    <MudPaper Elevation="0" Class="glass-card glass-card--featured pa-8">
-        <MudGrid AlignItems="AlignItems.Center" Spacing="4">
-            <MudItem xs="12" md="2" Class="text-center">
-                <div class="icon-box icon-box--inline icon-box--xl icon-box--blue-cyan">
-                    <MudIcon Icon="@Icons.Material.Filled.Air" Style="color: white; font-size: 3.5rem;" />
-                </div>
-            </MudItem>
-            <MudItem xs="12" md="7">
-                <MudText Typo="Typo.overline" Class="text-overline-cyan">FEATURED</MudText>
-                <MudText Typo="Typo.h5" Class="mt-1 mb-2 text-white-bold">NACA 0012 Airfoil Heat Transfer Simulation</MudText>
-                <MudText Typo="Typo.body1" Class="mb-4" Style="color: rgba(255,255,255,0.75); line-height: 1.8;">
-                    Real-time computational fluid dynamics and transient heat transfer simulation.
-                    Built with .NET 10, Blazor Server, and the Canvas API. Uses finite difference methods
-                    on a 560×240 grid with 134,400 nodes, running live in the browser.
-                </MudText>
-                <MudChipSet T="string">
-                    <MudChip T="string" Size="Size.Small" Class="chip-blue-accent">.NET 10</MudChip>
-                    <MudChip T="string" Size="Size.Small" Class="chip-blue-accent">Blazor Server</MudChip>
-                    <MudChip T="string" Size="Size.Small" Class="chip-cyan-accent">Canvas API</MudChip>
-                    <MudChip T="string" Size="Size.Small" Class="chip-light-blue-accent">KaTeX</MudChip>
-                    <MudChip T="string" Size="Size.Small" Class="chip-blue-accent">CFD</MudChip>
-                </MudChipSet>
-            </MudItem>
-            <MudItem xs="12" md="3">
-                <MudStack Spacing="2">
-                    <MudButton Variant="Variant.Filled" Href="/projects/heat-transfer" FullWidth="true"
-                               Class="btn-gradient" Style="padding: 10px;">
-                        View Showcase
-                    </MudButton>
-                    <MudButton Variant="Variant.Outlined" Href="/heatsimulation" FullWidth="true"
-                               Class="btn-outlined-blue" Style="padding: 10px; border-width: 1px;">
-                        Launch Simulation
-                    </MudButton>
-                </MudStack>
-            </MudItem>
-        </MudGrid>
-    </MudPaper>
-</MudContainer>
+    @* New entries in ProjectCatalog appear here automatically. *@
+    <div class="grid-auto projects-grid">
+        @foreach (var project in ProjectCatalog.Others)
+        {
+            <ProjectCard Project="project" HeadingLevel="2" />
+        }
 
+        <article class="card card--dashed more-card" aria-labelledby="more-title">
+            <span class="icon-tile icon-tile--sm"><Icon Svg="@Icons.Custom.Brands.GitHub" /></span>
+            <div class="more-card__text">
+                <h2 id="more-title" class="more-card__title">More on the way</h2>
+                <p class="muted">New projects are in progress. In the meantime, browse my code on GitHub.</p>
+            </div>
+            <a class="btn btn--sm" href="@SiteInfo.GitHubUrl" target="_blank" rel="noopener noreferrer">
+                github.com/SamElhagDev
+                <Icon Svg="@Icons.Material.Outlined.OpenInNew" />
+            </a>
+        </article>
+    </div>
+</div>

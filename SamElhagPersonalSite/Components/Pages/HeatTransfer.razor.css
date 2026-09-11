@@ -1,0 +1,142 @@
+.sim-backlink {
+    margin: calc(-1 * var(--space-3)) 0 var(--space-5);
+    font-size: var(--text-sm);
+}
+
+.sim-backlink a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+}
+
+.sim-figure {
+    margin: 0;
+}
+
+.sim-frame {
+    overflow: hidden;
+    border: 1px solid var(--bc-border);
+    border-radius: var(--bc-radius-lg);
+    background: #000;
+}
+
+.sim-canvas {
+    width: 100%;
+    height: auto;
+    cursor: crosshair;
+}
+
+.sim-readout {
+    min-height: 1.5em;
+    margin-top: var(--space-3);
+    color: var(--bc-accent-light);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-align: center;
+}
+
+/* Small mono section labels ("Parameters", "Live statistics") */
+.sim-kicker {
+    margin-bottom: var(--space-4);
+    color: var(--bc-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 500;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+}
+
+.sim-panel {
+    margin-top: var(--space-5);
+}
+
+.controls {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+.control {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.control__label {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: var(--bc-text-body);
+    font-size: var(--text-sm);
+}
+
+.control__label output {
+    color: var(--bc-accent-light);
+    font-family: var(--font-mono);
+}
+
+.control input[type="range"] {
+    width: 100%;
+    accent-color: var(--bc-accent);
+    cursor: pointer;
+}
+
+.sim-actions {
+    margin-top: var(--space-5);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--bc-border);
+}
+
+.sim-stats-section {
+    margin-top: var(--space-6);
+}
+
+.sim-stats {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.sim-stats .stat {
+    --card-pad: var(--space-4);
+}
+
+.sim-stats .stat__value {
+    font-size: var(--text-xl);
+}
+
+.sim-math {
+    margin-top: var(--space-6);
+}
+
+.sim-math__title {
+    margin-bottom: var(--space-6);
+}
+
+.equation + .equation {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--bc-border);
+}
+
+.equation__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+}
+
+.equation__index {
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--bc-accent-border);
+    border-radius: var(--bc-radius-sm);
+    background: var(--bc-accent-dim);
+    color: var(--bc-accent-light);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+}

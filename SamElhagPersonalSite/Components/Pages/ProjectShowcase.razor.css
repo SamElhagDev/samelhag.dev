@@ -1,0 +1,86 @@
+.showcase-actions {
+    margin-bottom: var(--space-6);
+}
+
+.showcase {
+    display: grid;
+    gap: var(--space-5);
+}
+
+.showcase-equation {
+    margin-top: var(--space-5);
+}
+
+.showcase-caption {
+    margin-top: var(--space-2);
+    color: var(--bc-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    text-align: center;
+}
+
+.showcase-block {
+    padding-top: var(--space-5);
+}
+
+.showcase-block__title {
+    margin-bottom: var(--space-5);
+}
+
+.tech-grid {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+}
+
+.tech-item {
+    --card-pad: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.tech-item__name {
+    color: var(--bc-text-primary);
+    font-weight: 600;
+}
+
+.tech-item__why {
+    color: var(--bc-text-muted);
+    font-size: var(--text-sm);
+}
+
+.sim-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: center;
+}
+
+.sim-cta__text {
+    max-width: 62ch;
+    color: var(--bc-text-body);
+}
+
+.outcomes {
+    display: grid;
+    gap: var(--space-3);
+}
+
+/* The figure reads first visually; <dt> still precedes its <dd>s for screen readers. */
+.outcomes .stat__value {
+    order: -1;
+}
+
+.showcase-code-cta {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-3);
+}
+
+@media (min-width: 720px) {
+    .outcomes {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
