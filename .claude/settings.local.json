@@ -15,18 +15,25 @@
       "Bash(dotnet build:*)",
       "Bash(Select-String -Pattern \"About|error CS|error RZ\")",
       "mcp__Claude_Preview__preview_start",
-      "Bash(tasklist /FI \"IMAGENAME eq SamElhagPersonalSite.exe\" /FO CSV)",
+      "Bash(tasklist /FI \"IMAGENAME eq samelhag.dev.exe\" /FO CSV)",
       "Bash(findstr /i \"SamElhag\")",
-      "Bash(powershell -Command \"Get-Process -Name ''SamElhagPersonalSite'' -ErrorAction SilentlyContinue | Select-Object Id, ProcessName\")",
+      "Bash(powershell -Command \"Get-Process -Name ''samelhag.dev'' -ErrorAction SilentlyContinue | Select-Object Id, ProcessName\")",
       "Bash(powershell -Command \"Stop-Process -Id 71108 -Force -ErrorAction SilentlyContinue\")",
       "Bash(find 'C:\\\\Users\\\\Sam Elhag.EREF\\\\source\\\\repos\\\\SamElhagPersonalSite' -type f -name *.razor.css)",
       "Bash(taskkill //F //PID 91624)",
-      "Bash(taskkill //F //IM SamElhagPersonalSite.exe)",
+      "Bash(taskkill //F //IM samelhag.dev.exe)",
       "Read(//c/Users/Sam Elhag.EREF/source/repos/SamElhagPersonalSite/**)",
       "Bash(dotnet user-secrets:*)",
       "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} in %{time_total}s\\\\n\" --max-time 25 http://localhost:5264/)",
       "mcp__visualize__read_me",
-      "mcp__visualize__show_widget"
+      "mcp__visualize__show_widget",
+      "PowerShell(Get-Process | Where-Object { $_.ProcessName -match 'devenv|SamElhag|iisexpress|dotnet|MSBuild|VBCSCompiler|rider|Code$' } | Select-Object Id, ProcessName, Path | Format-Table -AutoSize | Out-String -Width 300)",
+      "PowerShell(Get-Process devenv, Code -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowTitle } | Select-Object Id, ProcessName, MainWindowTitle | Format-Table -AutoSize | Out-String -Width 300; \"---- ignored/untracked files mentioning the name ----\"; git status --ignored --porcelain | Out-String -Width 300)",
+      "PowerShell(git remote -v; \"---- csproj.user ----\"; Get-Content \"samelhag.dev/samelhag.dev.csproj.user\" -Raw; \"---- .vs contents ----\"; Get-ChildItem .vs -Force | Select-Object Mode, Name | Format-Table -AutoSize | Out-String; \"---- does github.com/SamElhagDev/samelhag.dev exist? ----\"; git ls-remote --heads https://github.com/SamElhagDev/samelhag.dev 2>&1 | Select-Object -First 3; \"exit: $LASTEXITCODE\")",
+      "PowerShell($scratch = 'C:\\\\temp\\\\claude\\\\C--Users-Sam-Elhag-EREF-source-repos-SamElhagPersonalSite\\\\7c36789b-b7b4-45ed-b637-a49c70c40bb4\\\\scratchpad'; $clone = Join-Path $scratch 'rename-test'; \"==== RENAME ====\"; pwsh -NoProfile -File \\(Join-Path $scratch 'rename-to-samelhag-dev.ps1'\\) -Root $clone; \"exit: $LASTEXITCODE\"; \"==== VERIFY ====\"; pwsh -NoProfile -File \\(Join-Path $scratch 'verify-rename.ps1'\\) -Root $clone; Set-Location $clone; \"==== top level now ====\"; \\(Get-ChildItem -Force -Name\\) -join '  '; \"==== BUILD \\(new names\\) ====\"; dotnet build samelhag.dev.slnx -tl:off -v:minimal -clp:Summary --nologo 2>&1 | Select-Object -Last 9)",
+      "PowerShell(Get-Process devenv -ErrorAction SilentlyContinue)",
+      "PowerShell(dotnet build samelhag.dev.slnx -tl:off -v:minimal -clp:Summary --nologo 2>&1 | Select-Object -Last 9; \"==== top level ====\"; \\(Get-ChildItem -Force -Name\\) -join '  '; \"==== git status summary ====\"; $s = git status --porcelain; \"staged renames: $\\(@\\($s | Where-Object { $_ -match '^R' }\\).Count\\)   unstaged edits: $\\(@\\($s | Where-Object { $_ -match '^.M' }\\).Count\\)   other: $\\(@\\($s | Where-Object { $_ -notmatch '^\\(R|.M\\)' }\\).Count\\)\"; $s | Where-Object { $_ -notmatch '^\\(R|.M\\)' })",
+      "PowerShell($out = 'C:\\\\temp\\\\claude\\\\C--Users-Sam-Elhag-EREF-source-repos-SamElhagPersonalSite\\\\7c36789b-b7b4-45ed-b637-a49c70c40bb4\\\\scratchpad\\\\publish-check'; dotnet publish ./samelhag.dev/samelhag.dev.csproj --configuration Release --output $out -tl:off -v:quiet --nologo 2>&1 | Select-Object -Last 3; \"publish exit: $LASTEXITCODE\"; \"---- web.config aspNetCore element ----\"; Select-String -Path \"$out\\\\web.config\" -Pattern '<aspNetCore' | ForEach-Object { $_.Line.Trim\\(\\) }; \"---- published files with the app name ----\"; \\(Get-ChildItem $out -File | Where-Object Name -match '^\\(samelhag|SamElhag\\)' | ForEach-Object Name\\) -join '  ')"
     ]
   }
 }

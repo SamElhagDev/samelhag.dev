@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components.Routing;
 using MudBlazor;
 
-namespace SamElhagPersonalSite.Data;
+namespace samelhag.dev.Data;
 
 /// <summary>
 /// Site-wide identity, contact details, and navigation. The layout, footer, SEO tags, and
@@ -28,7 +28,7 @@ public static class SiteInfo
     public const string LinkedInUrl = "https://www.linkedin.com/in/sam-elhag-b82312102/";
     public const string XUrl = "https://x.com/SamEElhag";
     public const string XHandle = "@SamEElhag";
-    public const string SourceUrl = "https://github.com/SamElhagDev/SamElhagPersonalSite";
+    public const string SourceUrl = "https://github.com/SamElhagDev/samelhag.dev";
 
     public static readonly IReadOnlyList<NavItem> Navigation =
     [

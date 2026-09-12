@@ -8,7 +8,7 @@
 ## 1. Start the App
 
 ```bash
-dotnet run --project SamElhagPersonalSite.AppHost
+dotnet run --project samelhag.dev.AppHost
 ```
 
 Navigate to the URL printed by Aspire (typically `https://localhost:7xxx`).

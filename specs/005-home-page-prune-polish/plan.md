@@ -4,7 +4,7 @@
 
 **Goal:** Make the home page surface real engineering signal in one scroll by rewriting the hero, replacing the 30-logo technology wall with three honest tiers, and promoting the live CFD simulation to directly under the hero.
 
-**Architecture:** Pure Razor markup edits to a single file ([Home.razor](../../SamElhagPersonalSite/Components/Pages/Home.razor)), reusing the existing Copper & Black design-system utility classes ([app.css](../../SamElhagPersonalSite/wwwroot/app.css)) and MudBlazor components. No new logic, dependencies, routes, or styles beyond what already exists. The deep pages (`ProjectShowcase.razor`, `HeatTransfer.razor`) and the maze background are left untouched.
+**Architecture:** Pure Razor markup edits to a single file ([Home.razor](../../samelhag.dev/Components/Pages/Home.razor)), reusing the existing Copper & Black design-system utility classes ([app.css](../../samelhag.dev/wwwroot/app.css)) and MudBlazor components. No new logic, dependencies, routes, or styles beyond what already exists. The deep pages (`ProjectShowcase.razor`, `HeatTransfer.razor`) and the maze background are left untouched.
 
 **Tech Stack:** .NET 10, Blazor Server (Interactive Server render mode), MudBlazor 8.x.
 
@@ -17,7 +17,7 @@
 ### Task 1: Rewrite the hero
 
 **Files:**
-- Modify: `SamElhagPersonalSite/Components/Pages/Home.razor` (the hero `MudContainer`, currently lines 9-33)
+- Modify: `samelhag.dev/Components/Pages/Home.razor` (the hero `MudContainer`, currently lines 9-33)
 
 - [ ] **Step 1: Replace the hero markup**
 
@@ -55,7 +55,7 @@ Notes: the `🚀` emoji and the generic "brings clarity to complexity" body are 
 
 - [ ] **Step 2: Build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors.
 
 - [ ] **Step 3: Visual check**
@@ -72,7 +72,7 @@ Leave changes in the working tree on `main`. Do not run `git commit`.
 ### Task 2: Promote the CFD featured band to directly under the hero
 
 **Files:**
-- Modify: `SamElhagPersonalSite/Components/Pages/Home.razor` (insert a new featured band immediately after the hero `MudContainer` from Task 1; the original featured section near the file end will be removed in Task 4)
+- Modify: `samelhag.dev/Components/Pages/Home.razor` (insert a new featured band immediately after the hero `MudContainer` from Task 1; the original featured section near the file end will be removed in Task 4)
 
 - [ ] **Step 1: Insert the promoted featured band**
 
@@ -118,11 +118,11 @@ Immediately **after** the closing `</MudContainer>` of the hero (end of Task 1's
 </MudContainer>
 ```
 
-Notes: metrics line values are sourced from the existing case study ([ProjectShowcase.razor:104-124](../../SamElhagPersonalSite/Components/Pages/ProjectShowcase.razor)) — keep them consistent. `Wrap="Wrap.Wrap"` plus `min-width: 240px` on the middle column lets the row reflow cleanly on small screens.
+Notes: metrics line values are sourced from the existing case study ([ProjectShowcase.razor:104-124](../../samelhag.dev/Components/Pages/ProjectShowcase.razor)) — keep them consistent. `Wrap="Wrap.Wrap"` plus `min-width: 240px` on the middle column lets the row reflow cleanly on small screens.
 
 - [ ] **Step 2: Build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors.
 
 - [ ] **Step 3: Visual check**
@@ -139,7 +139,7 @@ Leave changes in the working tree on `main`. Do not run `git commit`.
 ### Task 3: Replace the 30-logo technology wall with three honest tiers
 
 **Files:**
-- Modify: `SamElhagPersonalSite/Components/Pages/Home.razor` (the `<!-- Tech Stack Section -->` `MudContainer`, originally lines 35-230)
+- Modify: `samelhag.dev/Components/Pages/Home.razor` (the `<!-- Tech Stack Section -->` `MudContainer`, originally lines 35-230)
 
 - [ ] **Step 1: Replace the entire technologies grid**
 
@@ -196,11 +196,11 @@ Replace the whole `<!-- Tech Stack Section -->` block — from the `<!-- Tech St
 </MudContainer>
 ```
 
-Notes: this deletes the ~30 equal-weight glass cards and the peripheral entries (Google Earth API, SSRS, WinForms, WPF, Kubernetes, Terraform, GraphQL, IIS, SQLite, .NET Aspire, Razor, HTML/CSS, JavaScript). The `chip-blue-accent`, `chip-cyan-accent`, and `chip-silver` classes already exist in [app.css:244-249](../../SamElhagPersonalSite/wwwroot/app.css). The `MudChip T="string" Class="...">` usage matches the existing pattern in [ProjectShowcase.razor](../../SamElhagPersonalSite/Components/Pages/ProjectShowcase.razor) / [Projects.razor:32-38](../../SamElhagPersonalSite/Components/Pages/Projects.razor).
+Notes: this deletes the ~30 equal-weight glass cards and the peripheral entries (Google Earth API, SSRS, WinForms, WPF, Kubernetes, Terraform, GraphQL, IIS, SQLite, .NET Aspire, Razor, HTML/CSS, JavaScript). The `chip-blue-accent`, `chip-cyan-accent`, and `chip-silver` classes already exist in [app.css:244-249](../../samelhag.dev/wwwroot/app.css). The `MudChip T="string" Class="...">` usage matches the existing pattern in [ProjectShowcase.razor](../../samelhag.dev/Components/Pages/ProjectShowcase.razor) / [Projects.razor:32-38](../../samelhag.dev/Components/Pages/Projects.razor).
 
 - [ ] **Step 2: Build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors.
 
 - [ ] **Step 3: Visual check**
@@ -217,7 +217,7 @@ Leave changes in the working tree on `main`. Do not run `git commit`.
 ### Task 4: Remove the old bottom featured section and add a closing CTA
 
 **Files:**
-- Modify: `SamElhagPersonalSite/Components/Pages/Home.razor` (the original `<!-- Featured Projects Section -->` block, originally lines 232-269)
+- Modify: `samelhag.dev/Components/Pages/Home.razor` (the original `<!-- Featured Projects Section -->` block, originally lines 232-269)
 
 - [ ] **Step 1: Replace the old bottom featured section with a single closing CTA**
 
@@ -237,7 +237,7 @@ The featured project is now shown at the top (Task 2), so the original bottom `<
 
 - [ ] **Step 2: Build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors.
 
 - [ ] **Step 3: Visual check — full page order**
@@ -256,7 +256,7 @@ Leave changes in the working tree on `main`. Do not run `git commit`.
 
 - [ ] **Step 1: Clean build of the whole site**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 warnings introduced by these changes, 0 errors.
 
 - [ ] **Step 2: Responsive check**

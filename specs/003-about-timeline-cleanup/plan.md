@@ -57,7 +57,7 @@ specs/003-about-timeline-cleanup/
 ### Source Code (files to modify)
 
 ```text
-SamElhagPersonalSite/Components/Pages/
+samelhag.dev/Components/Pages/
 ├── About.razor          # Razor markup — rename CSS classes, remove scroll wrapper + connector divs
 ├── About.razor.css      # Full rewrite — conveyor → vertical timeline styles
 └── About.razor.cs       # Minor — add IsCurrent to tile class; GetCategoryClass() unchanged
@@ -191,8 +191,8 @@ No other files require changes.
 
 | File | Change Summary |
 |------|---------------|
-| `SamElhagPersonalSite/Components/Pages/About.razor` | Rename CSS classes; remove scroll wrapper + connector divs; add `is-current` to item div |
-| `SamElhagPersonalSite/Components/Pages/About.razor.css` | Full rewrite: conveyor styles → vertical timeline styles (same class name conventions) |
+| `samelhag.dev/Components/Pages/About.razor` | Rename CSS classes; remove scroll wrapper + connector divs; add `is-current` to item div |
+| `samelhag.dev/Components/Pages/About.razor.css` | Full rewrite: conveyor styles → vertical timeline styles (same class name conventions) |
 
 **Files NOT changing**: `About.razor.cs`, any other page, any `.js` file, any NuGet reference.
 
@@ -211,8 +211,8 @@ No other files require changes.
 
 ## Verification
 
-1. `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj` — must produce **0 errors, 0 warnings**.
-2. `dotnet run --project SamElhagPersonalSite.AppHost` — navigate to `/about`.
+1. `dotnet build samelhag.dev/samelhag.dev.csproj` — must produce **0 errors, 0 warnings**.
+2. `dotnet run --project samelhag.dev.AppHost` — navigate to `/about`.
 3. Follow `quickstart.md` checklist end-to-end.
 4. Resize to 375px — confirm no horizontal scrollbar, single-column rail still visible.
 5. Enable OS "Reduce Motion" — confirm pulsing dot animation stops.

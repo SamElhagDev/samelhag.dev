@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SamElhagPersonalSite.Models;
+namespace samelhag.dev.Models;
 
 public class ContactFormModel
 {

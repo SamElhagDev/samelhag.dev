@@ -1,4 +1,4 @@
-namespace SamElhagPersonalSite.Services;
+namespace samelhag.dev.Services;
 
 public class EmailSettings
 {

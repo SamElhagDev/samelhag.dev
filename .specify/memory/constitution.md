@@ -161,7 +161,7 @@ requires justification in the PR description. The codebase MUST remain buildable
 from a clean clone with a single command targeting the Aspire app host:
 
 ```
-dotnet run --project SamElhagPersonalSite.AppHost
+dotnet run --project samelhag.dev.AppHost
 ```
 
 **Rationale:** A personal site is maintained by one person. Complexity accumulates quickly;

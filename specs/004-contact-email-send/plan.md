@@ -52,7 +52,7 @@ specs/004-contact-email-send/
 ### Source Code (repository root)
 
 ```text
-SamElhagPersonalSite/
+samelhag.dev/
 ├── Components/
 │   └── Pages/
 │       └── Contact.razor          # MODIFY — replace Task.Delay stub with service call

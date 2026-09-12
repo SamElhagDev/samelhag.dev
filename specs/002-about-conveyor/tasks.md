@@ -18,8 +18,8 @@
 
 **Purpose**: Create the new CSS file and data model — both are shared by all three user stories and must exist before any story work begins.
 
-- [x] T001 Create `SamElhagPersonalSite/Components/Pages/About.razor.css` (empty file — Blazor CSS isolation for the conveyor belt section)
-- [x] T002 Add the `TimelineMilestone` private record and `_milestones` list to the `@code` block of `SamElhagPersonalSite/Components/Pages/About.razor`
+- [x] T001 Create `samelhag.dev/Components/Pages/About.razor.css` (empty file — Blazor CSS isolation for the conveyor belt section)
+- [x] T002 Add the `TimelineMilestone` private record and `_milestones` list to the `@code` block of `samelhag.dev/Components/Pages/About.razor`
 
 **T002 details — exact record and list to add in `@code`**:
 ```csharp
@@ -79,7 +79,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 
 **Purpose**: Replace the existing `MudTimeline` markup with the conveyor belt skeleton — the container divs and `@foreach` loop. This is the structural foundation that all three user stories render into.
 
-- [x] T003 In `SamElhagPersonalSite/Components/Pages/About.razor`, delete the entire `<MudTimeline>…</MudTimeline>` block (lines 194–272) and replace it with the conveyor belt container structure and `@foreach` loop rendering a `<div class="conveyor-tile">` per milestone
+- [x] T003 In `samelhag.dev/Components/Pages/About.razor`, delete the entire `<MudTimeline>…</MudTimeline>` block (lines 194–272) and replace it with the conveyor belt container structure and `@foreach` loop rendering a `<div class="conveyor-tile">` per milestone
 
 **T003 replacement markup**:
 ```razor
@@ -162,7 +162,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 
 **Independent Test**: Navigate to `/about`, scroll to "The Path So Far", and confirm five square-cornered tiles run left-to-right with a horizontal rail and right-facing chevrons between them.
 
-- [x] T004 [US1] Add track container + rail CSS to `SamElhagPersonalSite/Components/Pages/About.razor.css`
+- [x] T004 [US1] Add track container + rail CSS to `samelhag.dev/Components/Pages/About.razor.css`
 
 **T004 CSS to add**:
 ```css
@@ -213,7 +213,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 }
 ```
 
-- [x] T005 [US1] Add tile + notch accent CSS to `SamElhagPersonalSite/Components/Pages/About.razor.css`
+- [x] T005 [US1] Add tile + notch accent CSS to `samelhag.dev/Components/Pages/About.razor.css`
 
 **T005 CSS to add**:
 ```css
@@ -243,7 +243,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 }
 ```
 
-- [x] T006 [US1] Add tile paper (glassmorphism, 8 px radius, left accent stripe) CSS to `SamElhagPersonalSite/Components/Pages/About.razor.css`
+- [x] T006 [US1] Add tile paper (glassmorphism, 8 px radius, left accent stripe) CSS to `samelhag.dev/Components/Pages/About.razor.css`
 
 **T006 CSS to add**:
 ```css
@@ -273,7 +273,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 }
 ```
 
-- [x] T007 [US1] Add chevron connector CSS to `SamElhagPersonalSite/Components/Pages/About.razor.css`
+- [x] T007 [US1] Add chevron connector CSS to `samelhag.dev/Components/Pages/About.razor.css`
 
 **T007 CSS to add**:
 ```css
@@ -311,7 +311,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 
 **Independent Test**: Read a single tile and confirm it shows role, org, date, description, and a category chip with clear typographic hierarchy. No interaction required.
 
-- [x] T008 [P] [US2] Add tile content typography CSS (title, divider, org, date, description) to `SamElhagPersonalSite/Components/Pages/About.razor.css`
+- [x] T008 [P] [US2] Add tile content typography CSS (title, divider, org, date, description) to `samelhag.dev/Components/Pages/About.razor.css`
 
 **T008 CSS to add**:
 ```css
@@ -352,7 +352,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 }
 ```
 
-- [x] T009 [P] [US2] Add chip styling CSS to `SamElhagPersonalSite/Components/Pages/About.razor.css`
+- [x] T009 [P] [US2] Add chip styling CSS to `samelhag.dev/Components/Pages/About.razor.css`
 
 **T009 CSS to add**:
 ```css
@@ -383,7 +383,7 @@ private readonly List<TimelineMilestone> _milestones = new()
 
 **Independent Test**: Set DevTools to 768 px width — scroll horizontally within the section and confirm all five tiles are reachable without any tile being clipped by the viewport.
 
-- [x] T010 [US3] Add responsive media queries to `SamElhagPersonalSite/Components/Pages/About.razor.css`
+- [x] T010 [US3] Add responsive media queries to `samelhag.dev/Components/Pages/About.razor.css`
 
 **T010 CSS to add**:
 ```css
@@ -432,10 +432,10 @@ private readonly List<TimelineMilestone> _milestones = new()
 
 **Purpose**: Final consistency pass, dead-code removal, and quickstart verification.
 
-- [x] T011 [P] Remove the now-unused `@using MudBlazor` duplicate (if introduced) and verify `About.razor` has no commented-out `MudTimeline` blocks — `SamElhagPersonalSite/Components/Pages/About.razor`
+- [x] T011 [P] Remove the now-unused `@using MudBlazor` duplicate (if introduced) and verify `About.razor` has no commented-out `MudTimeline` blocks — `samelhag.dev/Components/Pages/About.razor`
 - [x] T012 [P] Verify `About.razor` line count stays at or below 300 (Principle 5) — 261 lines; code-behind extracted to `About.razor.cs`
 - [ ] T013 Run through every check in `specs/002-about-conveyor/quickstart.md` — desktop, tablet (768 px), mobile (375 px), DevTools console — and confirm all pass
-- [ ] T014 Run `dotnet run --project SamElhagPersonalSite.AppHost` and confirm no build errors, no Blazor circuit errors, and no CSS 404s in the browser network tab
+- [ ] T014 Run `dotnet run --project samelhag.dev.AppHost` and confirm no build errors, no Blazor circuit errors, and no CSS 404s in the browser network tab
 
 ---
 

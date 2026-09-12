@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="samelhag.dev.AppHost/samelhag.dev.AppHost.csproj" />
+  <Project Path="samelhag.dev.ServiceDefaults/samelhag.dev.ServiceDefaults.csproj" />
+  <Project Path="samelhag.dev/samelhag.dev.csproj" />
+</Solution>

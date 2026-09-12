@@ -2,9 +2,9 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using SamElhagPersonalSite.Models;
+using samelhag.dev.Models;
 
-namespace SamElhagPersonalSite.Services;
+namespace samelhag.dev.Services;
 
 public class EmailService(IOptions<EmailSettings> options, ILogger<EmailService> logger) : IEmailService
 {

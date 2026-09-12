@@ -11,8 +11,8 @@ so you can make the edits yourself and learn the codebase as you go.
 - **[P]**: Can be done in any order relative to other [P] tasks in the same phase
 - **[Story]**: US1 = smooth animation, US2 = stats consistency, US3 = no reload
 - All changes are in two files:
-  - `SamElhagPersonalSite/wwwroot/js/heatSimulation.js`
-  - `SamElhagPersonalSite/Components/Pages/HeatTransferMudBlazor.razor`
+  - `samelhag.dev/wwwroot/js/heatSimulation.js`
+  - `samelhag.dev/Components/Pages/HeatTransferMudBlazor.razor`
 
 ---
 
@@ -509,7 +509,7 @@ are rendered.
 - [ ] T013 **Run the app and do a full visual check** using `quickstart.md` as your checklist.
 
   ```bash
-  dotnet run --project SamElhagPersonalSite.AppHost
+  dotnet run --project samelhag.dev.AppHost
   ```
 
   Work through every verification step in `quickstart.md` in order:

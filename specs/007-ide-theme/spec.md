@@ -27,11 +27,11 @@ or technical document, not a marketing site.
 ## North star (already in the codebase)
 
 Two existing pieces are already in the target language and serve as the reference:
-- The **command palette** ([command-palette.js](../../SamElhagPersonalSite/wwwroot/js/command-palette.js)
-  + its styles in [app.css](../../SamElhagPersonalSite/wwwroot/app.css)): flat panel, hairline
+- The **command palette** ([command-palette.js](../../samelhag.dev/wwwroot/js/command-palette.js)
+  + its styles in [app.css](../../samelhag.dev/wwwroot/app.css)): flat panel, hairline
   border, monospace keycaps, a single solid copper accent.
 - The **About "Anatomy of a Sam.E" code blocks**
-  ([About.razor](../../SamElhagPersonalSite/Components/Pages/About.razor)): syntax-highlighted,
+  ([About.razor](../../samelhag.dev/Components/Pages/About.razor)): syntax-highlighted,
   monospace, IDE-flavored.
 
 The re-theme is, in effect, "make the rest of the site look like those two."

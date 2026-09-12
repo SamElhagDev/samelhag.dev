@@ -15,7 +15,7 @@ and all navigation continue to work unchanged.
 ## Architecture decision
 
 Implemented as a **single vanilla-JS module** loaded with a plain `<script>` tag (the same
-way [maze-background.js](../../SamElhagPersonalSite/wwwroot/js/maze-background.js) is
+way [maze-background.js](../../samelhag.dev/wwwroot/js/maze-background.js) is
 loaded), **not** as a Blazor component.
 
 Rationale: this is Blazor **Server**. A Razor component handling `@onkeydown`/`@bind` would
@@ -29,18 +29,18 @@ server-rendered action list (unnecessary wiring for ~11 static actions — YAGNI
 
 ## Files
 
-- **Create** `SamElhagPersonalSite/wwwroot/js/command-palette.js` — the entire feature:
+- **Create** `samelhag.dev/wwwroot/js/command-palette.js` — the entire feature:
   builds the overlay DOM on first open, the global `keydown` listener, fuzzy filtering,
   keyboard navigation, and action execution. Actions are defined as a static array in this
   file.
-- **Modify** `SamElhagPersonalSite/Components/App.razor` — add
+- **Modify** `samelhag.dev/Components/App.razor` — add
   `<script src="js/command-palette.js"></script>` alongside the existing scripts (after
   `maze-background.js`).
-- **Modify** `SamElhagPersonalSite/wwwroot/app.css` — palette styles, reusing existing
+- **Modify** `samelhag.dev/wwwroot/app.css` — palette styles, reusing existing
   design tokens (`--bc-bg-surface`, `--bc-bg-elevated`, `--bc-accent`, `--bc-border`,
   `--bc-text-*`, glass blur) and fonts (`Space Grotesk` for labels, `JetBrains Mono` for
   shortcut hints/keycaps).
-- **Modify** `SamElhagPersonalSite/Components/Layout/MainLayout.razor` — add a subtle,
+- **Modify** `samelhag.dev/Components/Layout/MainLayout.razor` — add a subtle,
   clickable `Ctrl K` hint chip in the `MudAppBar` (between the brand and the nav links, or
   just left of the nav group). Clicking it opens the palette. No existing app-bar element
   is removed.

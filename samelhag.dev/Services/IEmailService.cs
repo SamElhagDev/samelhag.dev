@@ -1,6 +1,6 @@
-using SamElhagPersonalSite.Models;
+using samelhag.dev.Models;
 
-namespace SamElhagPersonalSite.Services;
+namespace samelhag.dev.Services;
 
 public interface IEmailService
 {

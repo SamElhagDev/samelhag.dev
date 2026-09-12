@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SamElhagPersonalSite.ServiceDefaults\SamElhagPersonalSite.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\samelhag.dev.ServiceDefaults\samelhag.dev.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

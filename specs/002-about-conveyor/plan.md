@@ -46,7 +46,7 @@ keeps all new styles scoped. No JavaScript changes. No new NuGet packages.
 | P5 — Line limit | Standard pages ≤ 300 lines | ⚠️ Monitor | Current About.razor is 274 lines; new timeline section will replace ~80 lines with ~70 lines — stays within limit |
 | P5 — No dead code | No commented-out blocks in production | ✅ Pass | Old MudTimeline block fully removed, not commented out |
 | P5 — Minimal dependencies | New NuGet requires justification | ✅ Pass | No new packages |
-| P5 — Single build command | `dotnet run --project SamElhagPersonalSite.AppHost` | ✅ Pass | Unaffected |
+| P5 — Single build command | `dotnet run --project samelhag.dev.AppHost` | ✅ Pass | Unaffected |
 
 ---
 
@@ -67,7 +67,7 @@ specs/002-about-conveyor/
 ### Source Code (repository root)
 
 ```text
-SamElhagPersonalSite/
+samelhag.dev/
 └── Components/
     └── Pages/
         ├── About.razor          ← Primary file: replace MudTimeline section; add @code record

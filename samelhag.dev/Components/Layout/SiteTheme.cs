@@ -1,6 +1,6 @@
 using MudBlazor;
 
-namespace SamElhagPersonalSite.Components.Layout;
+namespace samelhag.dev.Components.Layout;
 
 /// <summary>
 /// MudBlazor theme mirroring the Copper &amp; Black tokens in wwwroot/app.css, so MudBlazor

@@ -1,6 +1,6 @@
 using MudBlazor.Services;
-using SamElhagPersonalSite.Components;
-using SamElhagPersonalSite.Services;
+using samelhag.dev.Components;
+using samelhag.dev.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();

@@ -14,7 +14,7 @@
 ### 1. Install the MailKit package
 
 ```bash
-cd SamElhagPersonalSite
+cd samelhag.dev
 dotnet add package MailKit
 ```
 
@@ -34,7 +34,7 @@ dotnet user-secrets set "EmailSettings:Password" "your-gmail-app-password-here"
 ### 4. Run the application
 
 ```bash
-dotnet run --project SamElhagPersonalSite.AppHost
+dotnet run --project samelhag.dev.AppHost
 ```
 
 ### 5. Test the contact form

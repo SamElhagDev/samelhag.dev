@@ -70,7 +70,7 @@ API endpoints. It is a pure client-side performance refactor.*
 ### Source Code (files modified)
 
 ```text
-SamElhagPersonalSite/
+samelhag.dev/
 └── wwwroot/
 │   └── js/
 │       └── heatSimulation.js        ← All 7 simulation optimisations
@@ -81,7 +81,7 @@ SamElhagPersonalSite/
 
 **Structure Decision**: This is a targeted refactor of two existing files within the
 established Blazor web project structure. No new directories, projects, or services are
-required. The single-project layout (`SamElhagPersonalSite/`) is unchanged.
+required. The single-project layout (`samelhag.dev/`) is unchanged.
 
 ## Phase 0: Research Findings Summary
 

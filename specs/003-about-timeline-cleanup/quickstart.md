@@ -3,7 +3,7 @@
 ## Run the App
 
 ```bash
-dotnet run --project SamElhagPersonalSite.AppHost
+dotnet run --project samelhag.dev.AppHost
 ```
 
 Navigate to: `http://localhost:[port]/about` — scroll past the Skills section to **"The Path So Far"**.
@@ -51,6 +51,6 @@ Navigate to: `http://localhost:[port]/about` — scroll past the Skills section 
 
 ### Build
 ```bash
-dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj
+dotnet build samelhag.dev/samelhag.dev.csproj
 ```
 - [ ] **0 errors, 0 warnings**

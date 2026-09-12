@@ -1,6 +1,6 @@
 using MudBlazor;
 
-namespace SamElhagPersonalSite.Data;
+namespace samelhag.dev.Data;
 
 /// <summary>Decorative artwork a featured project card can show beside its details.</summary>
 public enum ProjectIllustration

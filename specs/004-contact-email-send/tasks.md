@@ -6,7 +6,7 @@
 
 ## Phase 1: Setup
 
-- [x] **T1**: Add MailKit NuGet package to `SamElhagPersonalSite.csproj`
+- [x] **T1**: Add MailKit NuGet package to `samelhag.dev.csproj`
 - [x] **T2**: Add `EmailSettings` configuration section to `appsettings.json` (non-secret values only)
 - [x] **T3**: Add `EmailSettings` placeholder to `appsettings.Development.json`
 

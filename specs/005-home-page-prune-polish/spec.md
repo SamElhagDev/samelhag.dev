@@ -21,11 +21,11 @@ re-theme, no new interactive features, no new dependencies.
 
 The deep technical content **already exists and is excellent**:
 
-- `/projects/heat-transfer` ([ProjectShowcase.razor](../../SamElhagPersonalSite/Components/Pages/ProjectShowcase.razor))
+- `/projects/heat-transfer` ([ProjectShowcase.razor](../../samelhag.dev/Components/Pages/ProjectShowcase.razor))
   is a full case study: Problem Statement → Solution Approach (with governing PDE) →
   Technology Stack with rationale → live-sim CTA → Outcomes (Re 1.3M–20.5M, Mach 0.3,
   134,400 nodes) → Key Concepts → source link.
-- `/HeatSimulation` ([HeatTransfer.razor](../../SamElhagPersonalSite/Components/Pages/HeatTransfer.razor))
+- `/HeatSimulation` ([HeatTransfer.razor](../../samelhag.dev/Components/Pages/HeatTransfer.razor))
   is the live solver with six KaTeX-rendered equations and live Re/Pr/Nu statistics.
 
 Therefore **no new technical writing is required.** The entire job is hierarchy and copy
@@ -91,14 +91,14 @@ path; decide during implementation.
 - `HeatTransfer.razor` (`/HeatSimulation`) content, math, or simulation logic.
 - `ProjectShowcase.razor` (`/projects/heat-transfer`) content.
 - Routing / URLs.
-- The animated maze background ([maze-background.js](../../SamElhagPersonalSite/wwwroot/js/maze-background.js)).
+- The animated maze background ([maze-background.js](../../samelhag.dev/wwwroot/js/maze-background.js)).
 - Re-theming, glassmorphism overhaul, or a command palette (deferred — Approaches B & C
   from brainstorming were not selected).
 - The About page interface concept (`Anatomy of a Sam.E`) — already strong, leave it.
 
 ## Non-functional requirements
 
-- Preserve the Copper & Black design system ([app.css](../../SamElhagPersonalSite/wwwroot/app.css))
+- Preserve the Copper & Black design system ([app.css](../../samelhag.dev/wwwroot/app.css))
   and MudBlazor component usage.
 - No new NuGet or JS dependencies.
 - Maintain responsive behavior (xs/sm/md breakpoints) for the new hero, tiered stack, and

@@ -2,27 +2,27 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "SamElhagPersonalSite (HTTP)",
+      "name": "samelhag.dev (HTTP)",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite/SamElhagPersonalSite.csproj"],
+      "runtimeArgs": ["run", "--project", "samelhag.dev/samelhag.dev.csproj"],
       "port": 5264
     },
     {
-      "name": "SamElhagPersonalSite (HTTPS)",
+      "name": "samelhag.dev (HTTPS)",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite/SamElhagPersonalSite.csproj", "--launch-profile", "https"],
+      "runtimeArgs": ["run", "--project", "samelhag.dev/samelhag.dev.csproj", "--launch-profile", "https"],
       "port": 7063
     },
     {
-      "name": "SamElhagPersonalSite.AppHost (HTTP)",
+      "name": "samelhag.dev.AppHost (HTTP)",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite.AppHost/SamElhagPersonalSite.AppHost.csproj"],
+      "runtimeArgs": ["run", "--project", "samelhag.dev.AppHost/samelhag.dev.AppHost.csproj"],
       "port": 15258
     },
     {
-      "name": "SamElhagPersonalSite.AppHost (HTTPS)",
+      "name": "samelhag.dev.AppHost (HTTPS)",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "SamElhagPersonalSite.AppHost/SamElhagPersonalSite.AppHost.csproj", "--launch-profile", "https"],
+      "runtimeArgs": ["run", "--project", "samelhag.dev.AppHost/samelhag.dev.AppHost.csproj", "--launch-profile", "https"],
       "port": 17296
     }
   ]

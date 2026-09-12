@@ -17,11 +17,11 @@
 ### Task 1: Create the command-palette JS module
 
 **Files:**
-- Create: `SamElhagPersonalSite/wwwroot/js/command-palette.js`
+- Create: `samelhag.dev/wwwroot/js/command-palette.js`
 
 - [ ] **Step 1: Write the module**
 
-Create `SamElhagPersonalSite/wwwroot/js/command-palette.js` with exactly:
+Create `samelhag.dev/wwwroot/js/command-palette.js` with exactly:
 
 ```javascript
 (function () {
@@ -252,7 +252,7 @@ Create `SamElhagPersonalSite/wwwroot/js/command-palette.js` with exactly:
 
 - [ ] **Step 2: Build (confirms no syntax issues surface at app build)**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors. (JS isn't compiled, but this confirms the file landed and nothing else broke.)
 
 - [ ] **Step 3: Checkpoint (do NOT commit)**
@@ -264,7 +264,7 @@ Leave the new file in the working tree on `main`.
 ### Task 2: Register the script in App.razor
 
 **Files:**
-- Modify: `SamElhagPersonalSite/Components/App.razor` (script block near the end, after `maze-background.js` at line 48)
+- Modify: `samelhag.dev/Components/App.razor` (script block near the end, after `maze-background.js` at line 48)
 
 - [ ] **Step 1: Add the script tag**
 
@@ -282,7 +282,7 @@ Add immediately after it:
 
 - [ ] **Step 2: Build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors.
 
 - [ ] **Step 3: Visual check — palette opens (unstyled is fine here)**
@@ -298,11 +298,11 @@ Expected: `11` (the overlay built and rendered 11 actions). Then close: `window.
 ### Task 3: Add palette styles to app.css
 
 **Files:**
-- Modify: `SamElhagPersonalSite/wwwroot/app.css` (append at end of file)
+- Modify: `samelhag.dev/wwwroot/app.css` (append at end of file)
 
 - [ ] **Step 1: Append the styles**
 
-Append to the very end of `SamElhagPersonalSite/wwwroot/app.css`:
+Append to the very end of `samelhag.dev/wwwroot/app.css`:
 
 ```css
 /* ═══════════════════════════════════════════════════════
@@ -429,7 +429,7 @@ Append to the very end of `SamElhagPersonalSite/wwwroot/app.css`:
 
 - [ ] **Step 2: Build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors.
 
 - [ ] **Step 3: Visual check — themed palette**
@@ -444,7 +444,7 @@ Expected: a centered dark glass panel with copper accents, search input, 11 rows
 ### Task 4: Add the navbar trigger chip to MainLayout.razor
 
 **Files:**
-- Modify: `SamElhagPersonalSite/Components/Layout/MainLayout.razor` (the `MudAppBar`, lines 10-25)
+- Modify: `samelhag.dev/Components/Layout/MainLayout.razor` (the `MudAppBar`, lines 10-25)
 
 - [ ] **Step 1: Insert the chip between the spacer and the nav stack**
 
@@ -470,7 +470,7 @@ Notes: the chip is a plain `<button>` (not a MudButton) so the JS can attach its
 
 - [ ] **Step 2: Build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors.
 
 - [ ] **Step 3: Visual check — chip present and wired**
@@ -489,7 +489,7 @@ Expected: `{ present: true, keycap: "Ctrl K", bound: "1" }`. Then click it: `doc
 
 - [ ] **Step 1: Clean build**
 
-Run: `dotnet build SamElhagPersonalSite/SamElhagPersonalSite.csproj`
+Run: `dotnet build samelhag.dev/samelhag.dev.csproj`
 Expected: Build succeeded, 0 errors, no new warnings from the changed files.
 
 - [ ] **Step 2: Keyboard trigger + count**

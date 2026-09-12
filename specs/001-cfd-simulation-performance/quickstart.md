@@ -12,8 +12,8 @@ Only two files are modified:
 
 | File | Change Type |
 |---|---|
-| `SamElhagPersonalSite/wwwroot/js/heatSimulation.js` | Core optimisations (7 changes) |
-| `SamElhagPersonalSite/Components/Pages/HeatTransferMudBlazor.razor` | Remove reload hack |
+| `samelhag.dev/wwwroot/js/heatSimulation.js` | Core optimisations (7 changes) |
+| `samelhag.dev/Components/Pages/HeatTransferMudBlazor.razor` | Remove reload hack |
 
 No new dependencies, no new pages, no Blazor component changes beyond the reload removal.
 
@@ -30,7 +30,7 @@ No new dependencies, no new pages, no Blazor component changes beyond the reload
 ## Running the App Locally
 
 ```bash
-dotnet run --project SamElhagPersonalSite.AppHost
+dotnet run --project samelhag.dev.AppHost
 ```
 
 Navigate to the URL printed in the console (typically `https://localhost:7xxx`).
