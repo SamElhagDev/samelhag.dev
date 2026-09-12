@@ -96,7 +96,7 @@ See [PERFORMANCE.md](PERFORMANCE.md) for detailed optimization documentation.
 
 ## 📝 License
 
-This project is licensed under the GNU AFFERO GENERALLicense - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU AFFERO GENERAL License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
