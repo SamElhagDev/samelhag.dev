@@ -2,13 +2,13 @@
 @inject IJSRuntime JS
 
 <Seo Title="NACA 0012 Heat Transfer Simulation"
-     Description="Case study: a transient finite-difference heat-transfer solver around a NACA 0012 airfoil, 134,400 grid nodes rendered live in the browser."
+     Description="Case study of a transient finite-difference heat transfer solver around a NACA 0012 airfoil, with 134,400 grid nodes rendered live in the browser."
      Path="/projects/heat-transfer"
      OgType="article" />
 
 <div class="container">
     <PageHeader Eyebrow="~/projects/heat-transfer" Title="NACA 0012 Airfoil Heat Transfer Simulation">
-        Real-time computational fluid dynamics and transient heat transfer, rendered live in the browser via Blazor Server and the Canvas API.
+        Real-time computational fluid dynamics and transient heat transfer, rendered live in the browser with Blazor Server and the Canvas API.
     </PageHeader>
 
     <div class="cluster showcase-actions">
@@ -30,13 +30,13 @@
             </div>
             <div class="prose">
                 <p>
-                    Aerodynamic heat transfer governs the thermal limits of aircraft structures, turbine blades, and re-entry vehicles.
-                    Understanding how heat flows around a lifting surface at transonic speeds is fundamental to safe, efficient flight.
-                    Yet most visualisations of this phenomenon are locked behind expensive simulation software.
+                    Aerodynamic heat transfer sets the thermal limits for aircraft structures, turbine blades, and re-entry vehicles.
+                    Understanding how heat moves around a lifting surface is important for safe and efficient flight,
+                    but most visualizations of it require expensive simulation software.
                 </p>
                 <p>
-                    I built this simulation to bridge both disciplines — applying numerical methods from mechanical engineering coursework
-                    inside a modern, interactive web application accessible from any browser.
+                    I built this simulation to combine both fields, using numerical methods from my mechanical engineering coursework
+                    in an interactive web application that runs in any browser.
                 </p>
             </div>
         </section>
@@ -48,9 +48,9 @@
             </div>
             <div class="prose">
                 <p>
-                    The simulation discretises the heat conduction PDE over a 560×240 structured grid using an explicit Euler
-                    time integration scheme with a second-order central-difference Laplacian. The NACA 0012 airfoil geometry
-                    is computed analytically from its standard thickness equation, and flow velocities are derived from
+                    The simulation discretizes the heat conduction PDE over a 560×240 structured grid, using explicit Euler
+                    time integration and a second-order central-difference Laplacian. The NACA 0012 airfoil geometry
+                    is calculated from its standard thickness equation, and the flow velocities come from
                     potential flow theory scaled to Mach 0.3 freestream conditions.
                 </p>
             </div>
@@ -58,7 +58,7 @@
                 <div class="math-block">
                     <div class="math-formula">$$\frac{\partial T}{\partial t} = \alpha \nabla^2 T = \alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} \right)$$</div>
                 </div>
-                <figcaption class="showcase-caption">Transient heat conduction PDE — solved at each of the 134,400 grid nodes per time step</figcaption>
+                <figcaption class="showcase-caption">Transient heat conduction PDE, solved at each of the 134,400 grid nodes every time step</figcaption>
             </figure>
         </section>
 
@@ -117,7 +117,7 @@
 
         <section class="card showcase-code-cta" aria-labelledby="code-title">
             <h2 id="code-title" class="card__title">Interested in the code?</h2>
-            <p class="muted">The full source is on GitHub. Have a question about the implementation or want to collaborate?</p>
+            <p class="muted">The full source code is on GitHub. If you have questions about the implementation or want to collaborate, get in touch.</p>
             <div class="cluster">
                 <a class="btn" href="@SiteInfo.SourceUrl" target="_blank" rel="noopener noreferrer">
                     <Icon Svg="@Icons.Custom.Brands.GitHub" />
@@ -143,7 +143,7 @@
         new("Blazor", Icons.Material.Outlined.Web, "Server-side rendering"),
         new("MudBlazor", Icons.Material.Outlined.Palette, "Component library"),
         new("KaTeX", Icons.Material.Outlined.Functions, "Math typesetting"),
-        new("Canvas API", Icons.Material.Outlined.Draw, "GPU-accelerated render"),
+        new("Canvas API", Icons.Material.Outlined.Draw, "2D rendering"),
     ];
 
     private static readonly Outcome[] Outcomes =
@@ -155,14 +155,14 @@
 
     private static readonly Concept[] Concepts =
     [
-        new("Reynolds number — what is it?",
-            "The Reynolds number (Re) compares inertial forces to viscous forces in a fluid. A low Re means smooth, layered (laminar) flow; a high Re means chaotic, turbulent flow. For an aircraft wing, Re determines drag, boundary layer thickness, and heat transfer characteristics."),
-        new("Prandtl number — what is it?",
+        new("What is the Reynolds number?",
+            "The Reynolds number (Re) compares inertial forces to viscous forces in a fluid. A low Re means smooth, layered (laminar) flow, and a high Re means chaotic, turbulent flow. For an aircraft wing, Re affects drag, boundary layer thickness, and heat transfer."),
+        new("What is the Prandtl number?",
             "The Prandtl number (Pr) is the ratio of momentum diffusivity to thermal diffusivity. For air, Pr ≈ 0.71, meaning momentum spreads slightly faster than heat. This controls the relative thickness of the velocity and thermal boundary layers around the airfoil."),
-        new("Nusselt number — what is it?",
-            "The Nusselt number (Nu) measures how effective convection is compared to conduction at a surface. A high Nu means convection dominates, pulling heat away quickly. It drives the convective heat transfer coefficient shown in the simulation's stat cards."),
-        new("Finite difference method — how does it work?",
-            "The finite difference method replaces the continuous heat equation with a grid of discrete points. At each time step, the temperature at every node is updated based on its neighbours using a central-difference stencil. The explicit Euler scheme steps forward in time — simple and fast, requiring only a small time step for numerical stability."),
+        new("What is the Nusselt number?",
+            "The Nusselt number (Nu) measures how effective convection is compared to conduction at a surface. A high Nu means convection is doing most of the work and carries heat away quickly. The simulation calculates Nu from the Reynolds and Prandtl numbers and shows it in the live statistics."),
+        new("How does the finite difference method work?",
+            "The finite difference method replaces the continuous heat equation with a grid of discrete points. At each time step, the temperature at every node is updated from its neighbors using a central-difference stencil. The explicit Euler scheme then steps forward in time. It is simple and fast, but it needs a small time step to stay numerically stable."),
     ];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

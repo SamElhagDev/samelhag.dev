@@ -40,7 +40,7 @@
 
     [Parameter] public bool NoIndex { get; set; }
 
-    private string FullTitle => Path == "/" ? Title : $"{Title} — {SiteInfo.Name}";
+    private string FullTitle => Path == "/" ? Title : $"{Title} - {SiteInfo.Name}";
 
     private string CanonicalUrl => SiteInfo.BaseUrl + Path;
 }

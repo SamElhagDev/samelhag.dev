@@ -32,7 +32,7 @@ public static class ProjectCatalog
         new(
             Slug: "heat-transfer",
             Title: "NACA 0012 Airfoil Heat Transfer Simulation",
-            Summary: "A transient finite-difference heat-transfer solver — written from the governing PDE up and rendered live, not pre-recorded.",
+            Summary: "A transient finite-difference heat transfer solver, written from the governing PDE and rendered live in the browser.",
             Icon: Icons.Material.Outlined.Air,
             Metrics: ["134,400 nodes", "Re 1.3M–20.5M", "Mach 0.3", "live"],
             Tags: [".NET 10", "Blazor Server", "Canvas API", "KaTeX", "CFD"],

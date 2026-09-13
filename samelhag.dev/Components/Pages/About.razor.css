@@ -29,7 +29,6 @@
 .profile {
     display: grid;
     gap: var(--space-5);
-    max-width: 62rem;
     padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
     border: 1px solid var(--bc-accent-border);
     border-radius: var(--bc-radius);

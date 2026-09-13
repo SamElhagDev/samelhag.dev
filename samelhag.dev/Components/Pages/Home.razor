@@ -1,7 +1,7 @@
 @page "/"
 
-<Seo Title="@($"{SiteInfo.Name} — {SiteInfo.Role}")"
-     Description="Mechanical and software engineer in Pittsburgh, PA. Numerical methods and production .NET, including a real-time CFD solver that runs in your browser."
+<Seo Title="@($"{SiteInfo.Name} - {SiteInfo.Role}")"
+     Description="Mechanical and software engineer in Pittsburgh, PA, working on numerical methods and .NET software, including a real-time CFD solver that runs in the browser."
      Path="/" />
 
 <section class="hero" aria-labelledby="hero-title">
@@ -12,8 +12,8 @@
             <span class="role-flip" aria-hidden="true"><span class="role-flip__window"><span class="role-flip__sizer">Mechanical</span><span class="role-flip__stack"><span>Mechanical</span><span>Software</span><span>Mechanical</span></span></span><span class="role-flip__static">Mechanical / Software</span></span><span class="visually-hidden">Mechanical and Software</span> Engineer
         </p>
         <p class="lead hero__lead">
-            I move between numerical methods and production code: finite-difference CFD one day, a .NET service the next.
-            The CFD solver featured below runs live in your browser — not a screenshot.
+            I work on both numerical methods and production software, from finite-difference CFD to .NET services.
+            The CFD solver featured below runs live in your browser.
         </p>
         <div class="cluster hero__actions">
             <a class="btn btn--primary btn--lg" href="/projects">
@@ -35,8 +35,8 @@
             <header class="section-head">
                 <div>
                     <p class="eyebrow">Featured</p>
-                    <h2 id="featured-title" class="section-title">Real-time CFD, in your browser</h2>
-                    <p class="lead">Computational physics meets modern web development.</p>
+                    <h2 id="featured-title" class="section-title">Real-time CFD in your browser</h2>
+                    <p class="lead">A heat transfer simulation built using numerical methods and web development.</p>
                 </div>
             </header>
             <ProjectCard Project="featured" Featured="true" />
@@ -50,7 +50,7 @@
             <div>
                 <p class="eyebrow">Stack</p>
                 <h2 id="stack-title" class="section-title">Technologies &amp; tools</h2>
-                <p class="lead">An honest map of what I reach for — grouped by how often I actually use it.</p>
+                <p class="lead">The tools and technologies I use, grouped by how often I use them.</p>
             </div>
         </header>
 
@@ -82,10 +82,15 @@
     private sealed record StackTier(string Id, string Label, string TagClass, string[] Items);
 
     // Grouped by how often each tool is actually used, not by category.
+    // Each list is sized and ordered to wrap to the same number of rows on desktop, so the cards fill evenly;
+    // re-check the layout after adding, removing, or reordering items.
     private static readonly StackTier[] StackTiers =
     [
-        new("tier-daily", "Build with daily", "tag--accent", ["C#", ".NET", "Blazor", "ASP.NET", "SQL Server / T-SQL", "TypeScript", "Azure"]),
-        new("tier-comfortable", "Comfortable in", "tag--strong", ["Rust", "F#", "Angular", "EF Core", "Docker", "Redis"]),
-        new("tier-engineering", "Engineering side", "", ["MATLAB", "SolidWorks", "AutoCAD"]),
+        new("tier-daily", "Build with daily", "tag--accent",
+            ["C#", ".NET", "Blazor", "ASP.NET", "MudBlazor", "SQL Server / T-SQL", "SSMS", "TypeScript", "JavaScript", "Python", "Azure", "Visual Studio", "Git", "GitHub Actions", "PowerShell"]),
+        new("tier-comfortable", "Comfortable in", "tag--strong",
+            ["Rust", "F#", "Angular", ".NET MAUI", "Node.js", "D3.js", "EF Core", "SQLite", "Redis", "Docker", "IIS", "Aspire", "OpenTelemetry", "xUnit", "Playwright", "Power BI", "Gemini API", "Whisper"]),
+        new("tier-engineering", "Engineering side", "",
+            ["MATLAB", "SolidWorks", "AutoCAD", "NumPy", "Numerical methods", "CFD", "Heat transfer", "Thermodynamics", "Fluid mechanics", "Materials science", "Controls", "Arduino", "ESP32"]),
     ];
 }

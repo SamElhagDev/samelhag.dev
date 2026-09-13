@@ -3,13 +3,13 @@
 @inject IJSRuntime JS
 
 <Seo Title="Live Heat Transfer Simulation"
-     Description="Run the live NACA 0012 heat-transfer simulation: adjust thermal diffusivity, airspeed, surface temperature, and angle of attack in real time."
+     Description="Run the live NACA 0012 heat transfer simulation and adjust thermal diffusivity, airspeed, surface temperature, and angle of attack in real time."
      Path="/heatsimulation" />
 
 @* heatSimulation.js binds to the element ids below; keep them stable. *@
 <div class="container container--wide">
     <PageHeader Eyebrow="~/heatsimulation" Title="Transient heat transfer analysis">
-        NACA 0012 airfoil at Mach 0.3 — forced convection with thermal diffusion.
+        NACA 0012 airfoil at Mach 0.3 with forced convection and thermal diffusion.
     </PageHeader>
 
     <p class="sim-backlink">
@@ -94,9 +94,9 @@
                         <tr><th scope="row">k</th><td>Thermal conductivity [W/(m·K)]</td></tr>
                         <tr><th scope="row">ρ</th><td>Density [kg/m³]</td></tr>
                         <tr><th scope="row">c<sub>p</sub></th><td>Specific heat capacity [J/(kg·K)]</td></tr>
-                        <tr><th scope="row">∂T/∂t</th><td>Partial derivative of temperature with respect to time — how fast the temperature changes at a fixed point</td></tr>
-                        <tr><th scope="row">∂²T/∂x²</th><td>Second partial derivative in x — curvature of the temperature profile in the horizontal direction</td></tr>
-                        <tr><th scope="row">∂²T/∂y²</th><td>Second partial derivative in y — curvature of the temperature profile in the vertical direction</td></tr>
+                        <tr><th scope="row">∂T/∂t</th><td>Partial derivative of temperature with respect to time (how fast the temperature changes at a fixed point)</td></tr>
+                        <tr><th scope="row">∂²T/∂x²</th><td>Second partial derivative in x (curvature of the temperature profile in the horizontal direction)</td></tr>
+                        <tr><th scope="row">∂²T/∂y²</th><td>Second partial derivative in y (curvature of the temperature profile in the vertical direction)</td></tr>
                         <tr><th scope="row">Q̇</th><td>Volumetric heat generation rate [W/m³]</td></tr>
                     </tbody>
                 </table>
@@ -113,9 +113,9 @@
                     <tbody>
                         <tr><th scope="row">u</th><td>Velocity component in the x-direction (horizontal) [m/s]</td></tr>
                         <tr><th scope="row">v</th><td>Velocity component in the y-direction (vertical) [m/s]</td></tr>
-                        <tr><th scope="row">u · ∂T/∂x</th><td>Convective heat transport in x — rate at which the flow carries heat horizontally</td></tr>
-                        <tr><th scope="row">v · ∂T/∂y</th><td>Convective heat transport in y — rate at which the flow carries heat vertically</td></tr>
-                        <tr><th scope="row">α · ∇²T</th><td>Thermal diffusion (Laplacian) — heat spreading from hot to cold regions via molecular conduction</td></tr>
+                        <tr><th scope="row">u · ∂T/∂x</th><td>Convective heat transport in x (rate at which the flow carries heat horizontally)</td></tr>
+                        <tr><th scope="row">v · ∂T/∂y</th><td>Convective heat transport in y (rate at which the flow carries heat vertically)</td></tr>
+                        <tr><th scope="row">α · ∇²T</th><td>Thermal diffusion (Laplacian), the spread of heat from hot to cold regions through molecular conduction</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -150,12 +150,12 @@
             <div class="eq-legend-wrap">
                 <table class="eq-legend">
                     <tbody>
-                        <tr><th scope="row">Re</th><td>Reynolds number — ratio of inertial forces to viscous forces; indicates laminar vs. turbulent flow</td></tr>
+                        <tr><th scope="row">Re</th><td>Reynolds number (ratio of inertial forces to viscous forces), which indicates laminar or turbulent flow</td></tr>
                         <tr><th scope="row">U<sub>∞</sub></th><td>Freestream airspeed [m/s]</td></tr>
                         <tr><th scope="row">L</th><td>Characteristic length (chord length) [m]</td></tr>
                         <tr><th scope="row">μ</th><td>Dynamic viscosity of air [Pa·s]</td></tr>
-                        <tr><th scope="row">Pr</th><td>Prandtl number — ratio of momentum diffusivity to thermal diffusivity</td></tr>
-                        <tr><th scope="row">Nu</th><td>Nusselt number — ratio of convective to conductive heat transfer at the surface</td></tr>
+                        <tr><th scope="row">Pr</th><td>Prandtl number (ratio of momentum diffusivity to thermal diffusivity)</td></tr>
+                        <tr><th scope="row">Nu</th><td>Nusselt number (ratio of convective to conductive heat transfer at the surface)</td></tr>
                         <tr><th scope="row">h</th><td>Convective heat transfer coefficient [W/(m²·K)]</td></tr>
                     </tbody>
                 </table>
@@ -171,8 +171,8 @@
             <div class="eq-legend-wrap">
                 <table class="eq-legend">
                     <tbody>
-                        <tr><th scope="row">Re &lt; 5×10⁵</th><td>Laminar flow regime — smooth, ordered flow</td></tr>
-                        <tr><th scope="row">Re ≥ 5×10⁵</th><td>Turbulent flow regime — chaotic, enhanced mixing</td></tr>
+                        <tr><th scope="row">Re &lt; 5×10⁵</th><td>Laminar flow regime (smooth, ordered flow)</td></tr>
+                        <tr><th scope="row">Re ≥ 5×10⁵</th><td>Turbulent flow regime (chaotic flow with more mixing)</td></tr>
                         <tr><th scope="row">Re<sup>1/2</sup></th><td>Square-root dependence on Reynolds number (laminar boundary layer scaling)</td></tr>
                         <tr><th scope="row">Re<sup>4/5</sup></th><td>Near-linear dependence on Reynolds number (turbulent boundary layer scaling)</td></tr>
                         <tr><th scope="row">Pr<sup>1/3</sup></th><td>Cube-root dependence on Prandtl number (thermal boundary layer ratio)</td></tr>
@@ -192,8 +192,8 @@
                         <tr><th scope="row">y<sub>t</sub></th><td>Half-thickness of the airfoil at chordwise position x [m]</td></tr>
                         <tr><th scope="row">t</th><td>Maximum thickness ratio = 0.12 (12% of chord for NACA 0012)</td></tr>
                         <tr><th scope="row">x</th><td>Normalized chordwise coordinate (0 = leading edge, 1 = trailing edge)</td></tr>
-                        <tr><th scope="row">0.2969√x</th><td>Dominant term at leading edge — produces the characteristic rounded nose</td></tr>
-                        <tr><th scope="row">−0.1015x⁴</th><td>Dominant term at trailing edge — tapers the profile to a point</td></tr>
+                        <tr><th scope="row">0.2969√x</th><td>Dominant term at the leading edge, which gives the airfoil its rounded nose</td></tr>
+                        <tr><th scope="row">−0.1015x⁴</th><td>Dominant term at the trailing edge, which tapers the profile to a point</td></tr>
                     </tbody>
                 </table>
             </div>

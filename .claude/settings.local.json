@@ -42,7 +42,11 @@
       "Bash(dotnet test *)",
       "Bash(echo \"dotnet test exit code: $?\")",
       "Read(//c/temp/claude/C--Users-Sam-Elhag-EREF-source-repos-samelhag-dev/3d12706b-b5aa-486d-9540-74ed9741f6fd/scratchpad/publish/**)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Sam Elhag.EREF\\\\source\\\\repos\\\\samelhag.dev\" status --short)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Sam Elhag.EREF\\\\source\\\\repos\\\\samelhag.dev\" diff --stat)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Sam Elhag.EREF\\\\source\\\\repos\\\\samelhag.dev\" diff -- .claude/settings.local.json)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Sam Elhag.EREF\\\\source\\\\repos\\\\samelhag.dev\" diff --stat 2>$null)"
     ]
   }
 }

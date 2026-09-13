@@ -25,8 +25,8 @@
     { label: 'Interests',                  type: 'nav',      value: '/interests',              hint: 'Page',     icon: 'explore' },
     { label: 'Projects',                   type: 'nav',      value: '/projects',               hint: 'Page',     icon: 'folder' },
     { label: 'Contact',                    type: 'nav',      value: '/contact',                hint: 'Page',     icon: 'email' },
-    { label: 'Heat Transfer — Case Study', type: 'nav',      value: '/projects/heat-transfer', hint: 'Project',  icon: 'air' },
-    { label: 'Heat Transfer — Live Sim',   type: 'nav',      value: '/heatsimulation',         hint: 'Project',  icon: 'play' },
+    { label: 'Heat Transfer Case Study',   type: 'nav',      value: '/projects/heat-transfer', hint: 'Project',  icon: 'air' },
+    { label: 'Heat Transfer Simulation',   type: 'nav',      value: '/heatsimulation',         hint: 'Project',  icon: 'play' },
     { label: 'GitHub',                     type: 'external', value: 'https://github.com/SamElhagDev',                   hint: 'External', icon: 'github' },
     { label: 'LinkedIn',                   type: 'external', value: 'https://www.linkedin.com/in/sam-elhag-b82312102/', hint: 'External', icon: 'linkedin' },
     { label: 'X (Twitter)',                type: 'external', value: 'https://x.com/SamEElhag',                          hint: 'External', icon: 'x' },
@@ -180,7 +180,7 @@
       var done = function () {
         if (el) {
           var hint = el.querySelector('.cmdk-row-hint');
-          if (hint) hint.textContent = 'Copied!';
+          if (hint) hint.textContent = 'Copied';
           el.classList.add('cmdk-row--copied');
         }
         setTimeout(close, 650);

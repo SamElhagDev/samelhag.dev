@@ -7,12 +7,12 @@
 @inject ILogger<Contact> Logger
 
 <Seo Title="Contact"
-     Description="Have a project in mind or want to collaborate? Send Sam Elhag a message."
+     Description="Contact Sam Elhag about a project or collaboration."
      Path="/contact" />
 
 <div class="container">
     <PageHeader Eyebrow="~/contact" Title="Get in touch">
-        Have a project in mind or want to collaborate? I'd love to hear from you!
+        If you have a project in mind or want to collaborate, send me a message.
     </PageHeader>
 
     <div class="contact-layout">
@@ -97,7 +97,7 @@
 
         if (!_form.IsValid)
         {
-            Snackbar.Add("Please fix the validation errors.", Severity.Warning);
+            Snackbar.Add("Please fix the errors in the form.", Severity.Warning);
             return;
         }
 
@@ -106,7 +106,7 @@
         {
             await EmailService.SendContactEmailAsync(_model);
 
-            Snackbar.Add("Message sent successfully — I'll get back to you shortly!", Severity.Success);
+            Snackbar.Add("Message sent. I'll get back to you soon.", Severity.Success);
 
             _model = new ContactFormModel();
             await _form.ResetAsync();
@@ -114,7 +114,7 @@
         catch (Exception ex)
         {
             Logger.LogError(ex, "Failed to send contact email from {Email}", _model.Email);
-            Snackbar.Add("An error occurred. Please try again later.", Severity.Error);
+            Snackbar.Add("Something went wrong sending your message. Please try again later.", Severity.Error);
         }
         finally
         {

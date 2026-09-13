@@ -1,12 +1,12 @@
 @page "/projects"
 
 <Seo Title="Projects"
-     Description="Engineering software that bridges domains, featuring a real-time NACA 0012 heat-transfer simulation built with .NET 10, Blazor, and the Canvas API."
+     Description="Engineering and software projects by Sam Elhag, including a real-time NACA 0012 heat transfer simulation built with .NET 10, Blazor, and the Canvas API."
      Path="/projects" />
 
 <div class="container">
     <PageHeader Eyebrow="~/projects" Title="Projects">
-        Engineering software that bridges domains.
+        Projects that combine mechanical engineering and software development.
     </PageHeader>
 
     @if (ProjectCatalog.Featured is { } featured)
@@ -25,7 +25,7 @@
             <span class="icon-tile icon-tile--sm"><Icon Svg="@Icons.Custom.Brands.GitHub" /></span>
             <div class="more-card__text">
                 <h2 id="more-title" class="more-card__title">More on the way</h2>
-                <p class="muted">New projects are in progress. In the meantime, browse my code on GitHub.</p>
+                <p class="muted">New projects are in progress. In the meantime, you can see my code on GitHub.</p>
             </div>
             <a class="btn btn--sm" href="@SiteInfo.GitHubUrl" target="_blank" rel="noopener noreferrer">
                 github.com/SamElhagDev
