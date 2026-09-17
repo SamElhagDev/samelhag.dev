@@ -9,7 +9,7 @@
 
 <div class="container container--wide">
     <div class="about-head">
-        <PageHeader Eyebrow="~/about" Title="Anatomy of a Sam.E" />
+        <PageHeader Eyebrow="~/about" Title="Sam.E is" />
         <div class="segmented" role="group" aria-label="View">
             <button type="button" class="segmented__btn" aria-pressed="@(_showModel ? "false" : "true")" @onclick="() => _showModel = false">
                 <Icon Svg="@Icons.Material.Outlined.Description" />
@@ -93,8 +93,8 @@
 
     private static readonly (string Term, string Detail)[] Profile =
     [
-        ("Description", "Developer, Analyst, Engineer based in Pittsburgh, PA"),
-        ("Professional Summary", "I'm a software engineer with an interest in robotics. I have a Bachelor of Science in mechanical engineering and six years of experience in software development, mostly building full stack .NET web apps, SQL Server databases, and Power BI reports."),
+        ("Description", "Developer based in Pittsburgh, PA"),
+        ("Professional Summary", "I have a Bachelor of Science in mechanical engineering and six years of experience in software development, mostly building full stack .NET web apps, SQL Server databases, and Power BI reports."),
         ("Academic Interests", "Main interests include object-oriented programming, data analysis, materials science, and control system analysis. Also interested in thermodynamics, fluid mechanics, heat transfer, and numerical methods."),
         ("Programming Summary", "General strengths include proficiency in a wide scope of programming languages and frameworks, strong problem-solving skills, and demonstrated effectiveness on teams employing Agile methodologies. Experienced in full stack development, clean architecture, automated builds and deployments with GitHub Actions, and finding the root cause of issues using data."),
         ("Hobby Projects", "Hobby projects include US Vote Map, an interactive map of US election results and forecasts built with .NET and D3, and several Python Discord bots (voice recording and transcription, server moderation with AI fact-checking, and polls with ranked choice voting). This site and the bots are self-hosted in a home lab. Outside of programming, hobbies include electronics with Arduino and ESP32 microcontrollers, soldering, CAD modeling in SolidWorks, hi-fi audio, marksmanship, reloading, and PC gaming."),
@@ -142,7 +142,6 @@
             new("bool", "FollowsIncentives", true),
             new("bool", "DebateReady", true),
             new("string[]", "Topics", new[] { "Economics", "Trade", "Energy", "Tech" }),
-            new("string", "Philosophy", "It's About Incentives"),
             new("bool", "BigPictureThinker", true),
         ]),
         new("IGamer", Icons.Material.Outlined.SportsEsports, "g",
@@ -159,7 +158,7 @@
             new("bool", "AlwaysListening", true),
             new("bool", "CuratesPlaylists", true),
             new("bool", "AppreciatesBass", true),
-            new("string[]", "Genres", new[] { "Hip-Hop", "R&B", "Electronic" }),
+            new("string[]", "Genres", new[] { "IDM", "Drum&Bass", "Electronic" }),
             new("string", "Setup", "Open-Back + DAC/Amp"),
             new("bool", "HeadphonesOn", true),
         ]),
