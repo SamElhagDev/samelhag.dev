@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using MudBlazor.Services;
 using samelhag.dev.Components;
 using samelhag.dev.Services;
@@ -39,6 +40,11 @@ if (!app.Environment.IsDevelopment())
 // them too, since UseExceptionHandler clears the response on its way back out.
 app.Use(async (context, next) =>
 {
+    // A hash will not do for the inline import map: it embeds asset fingerprints, so it changes
+    // on any deploy that touches a collocated .razor.js file.
+    var nonce = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
+    context.Items[CspNonce.ItemKey] = nonce;
+
     var headers = context.Response.Headers;
 
     // script-src needs no 'unsafe-eval': that is a Blazor WebAssembly requirement, not Server.
@@ -46,7 +52,7 @@ app.Use(async (context, next) =>
     // both set styles directly on elements. jsdelivr is KaTeX, loaded on demand with SRI hashes.
     headers["Content-Security-Policy"] = string.Join("; ",
         "default-src 'self'",
-        "script-src 'self' https://cdn.jsdelivr.net",
+        $"script-src 'self' 'nonce-{nonce}' https://cdn.jsdelivr.net",
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
         "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
         "img-src 'self' data:",
