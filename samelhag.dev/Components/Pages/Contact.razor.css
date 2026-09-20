@@ -50,6 +50,17 @@
     color: var(--bc-accent-light);
 }
 
+/* Honeypot. Moved off-screen rather than display:none, because the simpler bots skip fields that
+   are explicitly hidden but happily fill ones that are merely positioned out of view. */
+.contact-form__decoy {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 .contact-social {
     --stack-gap: var(--space-2);
 }

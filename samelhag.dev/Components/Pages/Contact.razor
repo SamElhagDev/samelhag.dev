@@ -21,17 +21,25 @@
 
             <MudForm @ref="_form">
                 <div class="contact-form__grid">
-                    <MudTextField @bind-Value="_model.FirstName" Label="First name" Variant="Variant.Outlined"
+                    <MudTextField @bind-Value="_model.FirstName" Label="First name" Variant="Variant.Outlined" MaxLength="100"
                                   Required="true" RequiredError="First name is required" autocomplete="given-name" />
-                    <MudTextField @bind-Value="_model.LastName" Label="Last name" Variant="Variant.Outlined"
+                    <MudTextField @bind-Value="_model.LastName" Label="Last name" Variant="Variant.Outlined" MaxLength="100"
                                   Required="true" RequiredError="Last name is required" autocomplete="family-name" />
                     <MudTextField @bind-Value="_model.Email" Label="Email" Variant="Variant.Outlined" InputType="InputType.Email"
-                                  Required="true" RequiredError="Email is required" autocomplete="email" Class="span-full"
+                                  MaxLength="254" Required="true" RequiredError="Email is required" autocomplete="email" Class="span-full"
                                   Validation="@(new EmailAddressAttribute { ErrorMessage = "Invalid email address" })" />
-                    <MudTextField @bind-Value="_model.Subject" Label="Subject" Variant="Variant.Outlined"
+                    <MudTextField @bind-Value="_model.Subject" Label="Subject" Variant="Variant.Outlined" MaxLength="200"
                                   Required="true" RequiredError="Subject is required" Class="span-full" />
                     <MudTextField @bind-Value="_model.Message" Label="Message" Variant="Variant.Outlined" Lines="6" MaxLength="10000"
                                   Required="true" RequiredError="Message is required" Class="span-full" />
+                </div>
+
+                @* Decoy field: off-screen, untabbable, hidden from assistive tech, so only a bot
+                   filling inputs blindly will populate it. Never shown to a real visitor. *@
+                <div class="contact-form__decoy" aria-hidden="true">
+                    <label for="contact-website">Website</label>
+                    <input id="contact-website" name="website" type="text"
+                           tabindex="-1" autocomplete="off" @bind="_decoy" />
                 </div>
 
                 <button type="button" class="btn btn--primary btn--lg btn--block contact-form__submit"
@@ -87,9 +95,28 @@
 </div>
 
 @code {
+    // Nobody fills in a form this fast, so anything quicker than this is automation.
+    private static readonly TimeSpan MinimumFillTime = TimeSpan.FromSeconds(3);
+
     private MudForm? _form;
     private bool _isSubmitting;
     private ContactFormModel _model = new();
+
+    // Honeypot. Not part of ContactFormModel: it is an anti-bot artifact, not contact data, and
+    // keeping it out means the model EmailService validates stays exactly the submitted message.
+    private string _decoy = string.Empty;
+
+    // Set on the first interactive render, which prerendering does not reach, so this is the moment
+    // the form actually became usable in the browser.
+    private DateTimeOffset? _formReadyAt;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _formReadyAt = DateTimeOffset.UtcNow;
+        }
+    }
 
     private async Task SubmitAsync()
     {
@@ -101,24 +128,53 @@
             return;
         }
 
+        if (!string.IsNullOrWhiteSpace(_decoy))
+        {
+            // Logged rather than silent: if this ever fires on a genuine submission (an aggressive
+            // autofill, say), there is a record of the message having been dropped.
+            Logger.LogWarning("Contact form submission dropped: decoy field was populated.");
+            await ReportSentAsync();
+            return;
+        }
+
+        if (_formReadyAt is { } readyAt && DateTimeOffset.UtcNow - readyAt < MinimumFillTime)
+        {
+            Logger.LogWarning("Contact form submission dropped: submitted faster than a human can type.");
+            Snackbar.Add("That came through a little fast. Give it a moment and send again.", Severity.Warning);
+            return;
+        }
+
         _isSubmitting = true;
         try
         {
-            await EmailService.SendContactEmailAsync(_model);
+            var result = await EmailService.SendContactEmailAsync(_model);
 
-            Snackbar.Add("Message sent. I'll get back to you soon.", Severity.Success);
+            if (result == ContactSendResult.RateLimited)
+            {
+                Snackbar.Add("The form is busy right now. Please try again in a few minutes, or email me directly.", Severity.Warning);
+                return;
+            }
 
-            _model = new ContactFormModel();
-            await _form.ResetAsync();
+            await ReportSentAsync();
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, "Failed to send contact email from {Email}", _model.Email);
+            Logger.LogError(ex, "Failed to send contact email.");
             Snackbar.Add("Something went wrong sending your message. Please try again later.", Severity.Error);
         }
         finally
         {
             _isSubmitting = false;
         }
+    }
+
+    // Shown for a real send and for a dropped bot submission alike, so the filter is not discoverable.
+    private async Task ReportSentAsync()
+    {
+        Snackbar.Add("Message sent. I'll get back to you soon.", Severity.Success);
+
+        _model = new ContactFormModel();
+        _decoy = string.Empty;
+        await _form!.ResetAsync();
     }
 }

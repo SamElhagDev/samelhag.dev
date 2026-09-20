@@ -4,11 +4,19 @@ on:
   push:
     branches: [ "main" ]
 
+# Least privilege: this workflow only reads the repo. It deploys over the filesystem, not the API.
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v4
+      with:
+        # The runner is self-hosted and not ephemeral, so don't leave a token behind in
+        # .git/config once the job finishes.
+        persist-credentials: false
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
